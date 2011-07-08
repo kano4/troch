@@ -17,4 +17,7 @@ gem 'web-app-theme'
 gem 'therubyracer'
 group :development, :test do
   gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'webrat'
+  gem 'capybara'
 end
