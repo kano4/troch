@@ -20,4 +20,5 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'webrat'
   gem 'capybara'
+  gem 'guard-livereload'
 end
