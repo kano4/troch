@@ -15,6 +15,8 @@ gem 'haml-rails'
 gem 'web-app-theme'
 
 gem 'therubyracer'
+gem 'hpricot'
+gem 'ruby_parser'
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
