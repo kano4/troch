@@ -1,4 +1,6 @@
 Troch::Application.routes.draw do
+  resources :sites
+
   devise_for :users
 
   root :to => 'pages#index'

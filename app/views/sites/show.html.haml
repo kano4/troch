@@ -1,0 +1,47 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", sites_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_site_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", site_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.site.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @site.name
+      %p
+        %b
+          = t("activerecord.attributes.site.url", :default => t("activerecord.labels.url", :default => "Url"))
+          \:
+        = @site.url
+      %p
+        %b
+          = t("activerecord.attributes.site.content", :default => t("activerecord.labels.content", :default => "Content"))
+          \:
+        = @site.content
+      %p
+        %b
+          = t("activerecord.attributes.site.domain_url", :default => t("activerecord.labels.domain_url", :default => "Domain url"))
+          \:
+        = @site.domain_url
+      %p
+        %b
+          = t("activerecord.attributes.site.domain_expired", :default => t("activerecord.labels.domain_expired", :default => "Domain expired"))
+          \:
+        = @site.domain_expired
+      %p
+        %b
+          = t("activerecord.attributes.site.ssl_url", :default => t("activerecord.labels.ssl_url", :default => "Ssl url"))
+          \:
+        = @site.ssl_url
+      %p
+        %b
+          = t("activerecord.attributes.site.ssl_expired", :default => t("activerecord.labels.ssl_expired", :default => "Ssl expired"))
+          \:
+        = @site.ssl_expired
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_site_path(@site), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), site_path(@site), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')
