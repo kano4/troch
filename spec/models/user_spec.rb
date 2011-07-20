@@ -1,5 +1,15 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @attr = {
+      :email => "test@example.com",
+      :password => "passwd",
+      :password_confirmation => "passwd"
+    }
+  end
+
+  it "should require an email address" do
+    true
+  end
 end

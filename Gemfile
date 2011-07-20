@@ -21,7 +21,8 @@ gem 'devise'
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
-  gem 'webrat'
   gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'rails3-generators'
   gem 'guard-livereload'
 end
