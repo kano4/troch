@@ -3,7 +3,7 @@
   %head
     %title Troch
     = stylesheet_link_tag "web-app-theme/base", "web-app-theme/themes/warehouse/style", "web-app-theme/override", :cache => true
-    = javascript_include_tag :defaults, :cache => true
+    = javascript_include_tag :application
     = csrf_meta_tag
   %body
     #container
@@ -17,7 +17,7 @@
             %li
               %a{:href => "#"}= t("web-app-theme.settings", :default => "Settings")
             %li
-              %a.logout{:href => "/logout"}= t("web-app-theme.logout", :default => "Logout")
+              = link_to t("web-app-theme.logout", :default => "Logout"), destroy_user_session_path, :method => :delete
         #main-navigation
           %ul.wat-cf
             %li{ :class => (params[:controller] == "pages" ? "first active" : "first") }

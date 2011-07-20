@@ -17,6 +17,7 @@ gem 'web-app-theme'
 gem 'therubyracer'
 gem 'hpricot'
 gem 'ruby_parser'
+gem 'devise'
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
