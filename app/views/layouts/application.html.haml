@@ -22,7 +22,7 @@
           %ul.wat-cf
             %li{ :class => (params[:controller] == "pages" ? "first active" : "first") }
               = link_to "Dashboard", root_path
-            %li{ :class => (params[:controller] == "blog_entries" ? "active" : nil) }
+            %li{ :class => (params[:controller] == "sites" ? "active" : nil) }
               = link_to "Site", sites_path
       #wrapper.wat-cf
         .flash
