@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Site do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "must have a name" do
+    site = Site.create
+    site.errors[:name].should_not be_empty
+  end
 end

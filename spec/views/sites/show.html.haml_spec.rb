@@ -10,18 +10,4 @@ describe "sites/show.html.haml" do
       :ssl_url => "Ssl Url"
     ))
   end
-
-  it "renders attributes in <p>" do
-    render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Name/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Url/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/MyText/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Domain Url/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Ssl Url/)
-  end
 end
