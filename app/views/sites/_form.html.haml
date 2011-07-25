@@ -26,6 +26,11 @@
   = f.label :ssl_expired, t("activerecord.attributes.site.ssl_expired", :default => "Ssl expired"), :class => :label
   = f.date_select :ssl_expired, :class => 'date_select'
   %span.description Ex: a simple text
+.group
+= f.label :sites, :class => :label
+- User.all.each do |user|
+  = check_box_tag("id#{user.id}", user.id)
+  = user.email
 .group.navform.wat-cf
   %button.button{:type => "submit"}
     = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
