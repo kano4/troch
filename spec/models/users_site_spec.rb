@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe "Sites" do
+describe UsersSite do
 end

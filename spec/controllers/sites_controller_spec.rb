@@ -7,7 +7,10 @@ describe SitesController do
   end
 
   def valid_attributes
-    {:name => "hello"}
+    {
+      :name => "alice",
+      :url => "test@example.com"
+    }
   end
 
   describe "GET index" do
