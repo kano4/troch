@@ -87,4 +87,10 @@ class SitesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def get_html
+    @site = Site.find(params[:id])
+    Resque.enqueue(GetHtml)
+    render action: "show"
+  end
 end

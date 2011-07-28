@@ -1,5 +1,9 @@
 Troch::Application.routes.draw do
-  resources :sites
+  resources :sites do
+    member do
+      get 'get_html'
+    end
+  end
 
   devise_for :users
 

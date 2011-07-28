@@ -19,6 +19,8 @@ gem 'hpricot'
 gem 'ruby_parser'
 gem 'devise'
 gem 'mechanize'
+gem 'resque'
+gem 'daemon-spawn', :require => 'daemon_spawn'
 group :development, :test do
   gem 'forgery'
   gem 'spork', '~> 0.9.0.rc'
