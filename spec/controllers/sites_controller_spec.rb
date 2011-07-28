@@ -8,7 +8,7 @@ describe SitesController do
 
   def valid_attributes
     {
-      :name => "alice",
+      :name => "test",
       :url => "test@example.com"
     }
   end
