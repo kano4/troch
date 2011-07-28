@@ -18,6 +18,7 @@ gem 'therubyracer'
 gem 'hpricot'
 gem 'ruby_parser'
 gem 'devise'
+gem 'mechanize'
 group :development, :test do
   gem 'forgery'
   gem 'spork', '~> 0.9.0.rc'

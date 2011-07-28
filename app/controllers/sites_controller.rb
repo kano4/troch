@@ -15,6 +15,7 @@ class SitesController < ApplicationController
   # GET /sites/1.json
   def show
     @site = Site.find(params[:id])
+    @html = @site.get_html
 
     respond_to do |format|
       format.html # show.html.erb
