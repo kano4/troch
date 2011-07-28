@@ -41,6 +41,13 @@
           = t("activerecord.attributes.site.ssl_expired", :default => t("activerecord.labels.ssl_expired", :default => "Ssl expired"))
           \:
         = @site.ssl_expired
+      %p
+        %b
+          = t("activerecord.attributes.site.users", :default => t("activerecord.labels.users", :default => "Users"))
+          \:
+        - @site.users.each do |user|
+          %br
+          = user.email
       .wat-cf
         = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_site_path(@site), :class => "button"
         = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), site_path(@site), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"

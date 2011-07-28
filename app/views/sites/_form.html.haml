@@ -28,8 +28,8 @@
   %span.description Ex: a simple text
 .group
 = f.label :sites, :class => :label
-- User.all.each do |user|
-  = check_box_tag("id#{user.id}", user.id)
+- @users.each do |user|
+  = check_box_tag("site[user_ids][]", user.id, @site.users.include?(user))
   = user.email
 .group.navform.wat-cf
   %button.button{:type => "submit"}

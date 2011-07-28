@@ -89,8 +89,8 @@ describe SitesController do
         # specifies that the Site created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Site.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => site.id, :site => {'these' => 'params'}
+        Site.any_instance.should_receive(:update_attributes).with({'these' => 'params', 'user_ids' => []})
+        put :update, :id => site.id, :site => {'these' => 'params', 'user_ids' => []}
       end
 
       it "assigns the requested site as @site" do
