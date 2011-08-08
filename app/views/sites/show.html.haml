@@ -23,6 +23,11 @@
         = @site.watch_logs.last.content if @site.watch_logs != []
       %p
         %b
+          Response time
+          \:
+        = "#{@site.watch_logs.last.response_time} msec" if @site.watch_logs != []
+      %p
+        %b
           = t("activerecord.attributes.site.domain_url", :default => t("activerecord.labels.domain_url", :default => "Domain url"))
           \:
         = @site.domain_url

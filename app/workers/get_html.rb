@@ -4,7 +4,11 @@ class GetHtml
 
   def self.perform(site_id)
     site = Site.find(site_id)
-    site.watch_logs.build(:status => 'ok', :content => get_page_title(site.url))
+    start_time = Time.now
+    content = get_page_title(site.url)
+    end_time = Time.now
+    response_time = (end_time - start_time) * 1000
+    site.watch_logs.build(:status => 'ok', :content => content, :response_time => response_time)
     site.save
   end
 end

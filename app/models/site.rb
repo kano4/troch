@@ -20,4 +20,11 @@ protected
     end
   end
 
+  def self.get_html
+    sites = self.all
+    sites.each do |site|
+      Resque.enqueue(GetHtml, site.id)
+    end
+  end
+
 end
