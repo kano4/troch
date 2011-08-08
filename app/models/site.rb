@@ -1,19 +1,23 @@
 # coding: utf-8
 class Site < ActiveRecord::Base
+  has_many :watch_logs
   has_many :users_sites
   has_many :users, :through => :users_sites
   validates_presence_of :name, :url
 
 protected
-  require 'mechanize'
-  def get_html
-    agent = Mechanize.new
-    begin
-      agent.get(self.url)
-    rescue
-      return "URLが不正"
-    else
-      return agent.page.parser
+  require 'whois'
+  def self.check_domain
+    sites = self.find(:all, :conditions => ['domain_url NOT ?', nil])
+    sites.each do |site|
+      begin
+        client = Whois.query(site.domain_url)
+      rescue
+      else
+        site.domain_expired = client.expires_on
+        site.save
+      end
     end
   end
+
 end
