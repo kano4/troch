@@ -12,13 +12,6 @@ User.create(
   )
 }
 
-Site.create(
-  :name => 'Example Site',
-  :url => 'http://example.com'
-)
-10.times {
-  Site.create(
-    :name => Forgery::Name.full_name,
-    :url  => 'http://' + Forgery::Internet.domain_name
-  )
-}
+Site.create(:name => 'Google', :url => 'http://www.google.com/')
+Site.create(:name => 'Yahoo', :url => 'http://www.yahoo.co.jp/')
+Site.create(:name => 'msn', :url => 'http://jp.msn.com/')
