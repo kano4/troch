@@ -10,11 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110725065611) do
+ActiveRecord::Schema.define(:version => 20110808071539) do
 
   create_table "sites", :force => true do |t|
-    t.string   "name",           :null => false
-    t.string   "url",            :null => false
+    t.string   "name",                           :null => false
+    t.string   "url",                            :null => false
     t.text     "content"
     t.string   "domain_url"
     t.date     "domain_expired"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20110725065611) do
     t.date     "ssl_expired"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "watch_interval", :default => 15, :null => false
   end
 
   create_table "users", :force => true do |t|
