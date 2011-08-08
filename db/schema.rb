@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110808071539) do
+ActiveRecord::Schema.define(:version => 20110808082535) do
 
   create_table "sites", :force => true do |t|
     t.string   "name",                           :null => false
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(:version => 20110808071539) do
   create_table "users_sites", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "site_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "watch_logs", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "status"
+    t.text     "content"
+    t.integer  "response_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
