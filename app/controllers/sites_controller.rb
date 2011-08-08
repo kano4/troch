@@ -90,7 +90,7 @@ class SitesController < ApplicationController
 
   def get_html
     @site = Site.find(params[:id])
-    Resque.enqueue(GetHtml)
+    Resque.enqueue(GetHtml, @site.id)
     render action: "show"
   end
 end

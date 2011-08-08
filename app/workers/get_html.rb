@@ -1,11 +1,22 @@
+require 'mechanize'
 class GetHtml
   @queue = :default
 
-  def self.perform()
-    sleep 3
-    path = File.expand_path("log/get_html.log", Rails.root)
-    File.open(path, 'a') do |f|
-      f.puts "Hello! #{Time.now}"
-    end
+  def self.perform(site_id)
+    site = Site.find(site_id)
+    site.watch_logs.build(:status => 'ok', :content => get_page_title(site.url))
+    site.save
   end
+end
+
+def get_page_title(url)
+  agent = Mechanize.new
+  page = agent.get(url)
+  page.title
+end
+
+def get_page_body(url)
+  agent = Mechanize.new
+  page = agent.get(url)
+  page.body
 end
