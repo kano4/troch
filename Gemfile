@@ -19,6 +19,7 @@ gem 'hpricot'
 gem 'ruby_parser'
 gem 'devise'
 gem 'mechanize'
+gem 'whois'
 gem 'resque'
 gem 'daemon-spawn', :require => 'daemon_spawn'
 group :development, :test do
