@@ -18,6 +18,11 @@
         = @site.url
       %p
         %b
+          = t("activerecord.attributes.site.watch_interval", :default => t("activerecord.labels.watch_interval", :default => "Watch interval"))
+          \:
+        = "#{@site.watch_interval} min"
+      %p
+        %b
           = t("activerecord.attributes.site.content", :default => t("activerecord.labels.content", :default => "Content"))
           \:
         = @site.watch_logs.last.content if @site.watch_logs != []
