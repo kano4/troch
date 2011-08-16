@@ -14,7 +14,7 @@ gem 'sprockets'
 gem 'haml-rails'
 gem 'web-app-theme'
 
-gem 'therubyracer', :require => 'v8'
+gem 'therubyracer', "~> 0.8.2.pre"
 gem 'hpricot'
 gem 'ruby_parser'
 gem 'devise'
