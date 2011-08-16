@@ -1,6 +1,7 @@
 rvm:
-  - 1.8.7
   - 1.9.2
-
+  - 1.9.2-head
 script:
-  - "bundle exec rake db:migrate"
+  - "bundle exec rake db:drop db:create db:migrate test"
+env:
+  - DB=sqlite
