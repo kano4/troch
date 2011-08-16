@@ -10,9 +10,12 @@ protected
   def self.check_domain
     sites = self.find(:all, :conditions => ['domain_url NOT ?', nil])
     sites.each do |site|
+      trials = 0
       begin
         client = Whois.query(site.domain_url)
       rescue
+        trials += 1
+        retry if trials < 3
       else
         site.domain_expired = client.expires_on
         site.save
