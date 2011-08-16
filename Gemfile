@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails', '3.1.0.rc5'
 
 gem 'sqlite3'
 
@@ -10,7 +10,7 @@ gem 'uglifier'
 
 gem 'jquery-rails'
 
-gem 'sprockets', '= 2.0.0.beta.10'
+gem 'sprockets'
 gem 'haml-rails'
 gem 'web-app-theme'
 
@@ -22,6 +22,7 @@ gem 'mechanize'
 gem 'whois'
 gem 'resque'
 gem 'daemon-spawn', :require => 'daemon_spawn'
+gem 'whenever', :require => false
 group :development, :test do
   gem 'forgery'
   gem 'spork', '~> 0.9.0.rc'
