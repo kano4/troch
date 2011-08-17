@@ -14,7 +14,6 @@ gem 'sprockets'
 gem 'haml-rails'
 gem 'web-app-theme'
 
-gem 'therubyracer', ">= 0.9.2"
 gem 'hpricot'
 gem 'ruby_parser'
 gem 'devise'
