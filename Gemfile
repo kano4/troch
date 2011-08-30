@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc6'
+gem 'rails', '3.1.0.rc8'
 
 gem 'sqlite3'
 
@@ -14,9 +14,11 @@ gem 'sprockets'
 gem 'haml-rails'
 gem 'web-app-theme'
 
+gem 'therubyracer'
 gem 'hpricot'
 gem 'ruby_parser'
-gem 'devise'
+gem 'devise', :git => 'git://github.com/plataformatec/devise.git', :branch => 'master'
+gem 'bcrypt-ruby'
 gem 'mechanize'
 gem 'whois'
 gem 'resque'
