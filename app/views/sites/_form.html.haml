@@ -7,6 +7,12 @@
   = f.text_field :url, :class => 'text_field'
   %span.description Ex: a simple text
 .group
+  = f.label :watch_interval, t("activerecord.attributes.site.watch_interval", :default => "Watch Interval"), :class => :label
+  - [15, 30, 60].each do |interval|
+    = f.radio_button :watch_interval, interval
+    = f.label interval
+    min
+.group
   = f.label :content, t("activerecord.attributes.site.content", :default => "Content"), :class => :label
   = f.text_area :content, :class => 'text_area'
   %span.description Ex: a simple text

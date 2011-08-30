@@ -13,7 +13,8 @@
           %th.first ID
           %th
             = t("activerecord.attributes.site.name", :default => t("activerecord.labels.name", :default => "Name"))
-          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th= t("web-app-theme.watch_interval", :default => "Watch Interval")
+          %th= t("web-app-theme.response_time", :default => "Response Time")
           %th.last &nbsp;
         - @sites.each do |site|
           %tr{:class => cycle("odd", "even")}
@@ -22,7 +23,11 @@
             %td
               = link_to site.name, site_path(site)
             %td
-              = site.created_at
+              = site.watch_interval
+              min
+            %td
+              = site.watch_logs.last.response_time
+              msec
             %td.last
               = link_to "#{t("web-app-theme.show", :default => "Show")}", site_path(site)
               |
