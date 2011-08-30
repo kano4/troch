@@ -1,4 +1,4 @@
-# Troch
+# Troch [![Build Status](https://secure.travis-ci.org/kano4/troch.png)](http://travis-ci.org/kano4/troch)
 Troch is a website monitoring tool.
 
 # Requirements
