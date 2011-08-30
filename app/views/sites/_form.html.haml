@@ -13,10 +13,6 @@
     = f.label interval
     min
 .group
-  = f.label :content, t("activerecord.attributes.site.content", :default => "Content"), :class => :label
-  = f.text_area :content, :class => 'text_area'
-  %span.description Ex: a simple text
-.group
   = f.label :domain_url, t("activerecord.attributes.site.domain_url", :default => "Domain url"), :class => :label
   = f.text_field :domain_url, :class => 'text_field'
   %span.description Ex: a simple text
