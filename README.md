@@ -5,7 +5,7 @@ Troch is a website monitoring tool.
 - Ruby 1.9.2
 
 # Installation
-    git clone https://github.com/kano4/troch.git
+    git clone http://travis-ci.org/kano4/troch.png
     cd troch
     bundle
     rake db:setup
