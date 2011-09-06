@@ -1,0 +1,23 @@
+.block
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Watch Interval
+    .inner
+      %table.table
+        %tr
+          %th
+            = t("activerecord.attributes.site.name", :default => t("activerecord.labels.name", :default => "Name"))
+          %th= t("web-app-theme.watch_interval", :default => "Watch Interval")
+          - @sites.each do |site|
+            %tr{:class => cycle("odd", "even")}
+              %td
+                = link_to site.name, site_path(site)
+              %td
+                = form_for :site, :url => sites_path, :html => { :class => :form } do |f|
+                  - [15, 30, 60].each do |interval|
+                    = f.radio_button :watch_interval, interval, :checked => site.watch_interval.eql?(interval)
+                    = f.label interval
+                    min
+                  = f.radio_button :watch_interval, 99, :checked => site.watch_interval.eql?(99)
+                  = f.label "None"

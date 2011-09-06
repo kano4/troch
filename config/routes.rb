@@ -1,4 +1,11 @@
 Troch::Application.routes.draw do
+  resources :settings do
+    collection do
+      get 'index'
+      get 'watch_interval'
+    end
+  end
+
   resources :sites
 
   devise_for :users
