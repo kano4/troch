@@ -1,10 +1,6 @@
 Troch::Application.routes.draw do
-  resources :settings do
-    collection do
-      get 'index'
-      get 'watch_interval'
-    end
-  end
+  match '/settings/', :to => 'settings#index'
+  match '/settings/watch_interval', :to => 'settings#watch_interval'
 
   resources :sites
 

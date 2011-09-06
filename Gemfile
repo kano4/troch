@@ -31,6 +31,7 @@ group :development, :test do
   gem 'rb-inotify'
   gem 'rspec-rails'
   gem 'guard-rspec'
+  gem 'guard-spork'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'rails3-generators'

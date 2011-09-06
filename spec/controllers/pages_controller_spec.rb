@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe PagesController do
-  before(:each) do
-  end
-
   describe "GET 'index'" do
     it "should be successful" do
       @user = Factory(:user)

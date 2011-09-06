@@ -5,3 +5,5 @@ tmp/
 .sass-cache/
 vendor/bundle
 vendor/cache
+app/mailers/notice_mailer.rb
+config/environments/*.rb

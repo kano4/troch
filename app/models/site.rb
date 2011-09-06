@@ -33,4 +33,8 @@ protected
     end
   end
 
+  def self.sendmail
+    @mail = NoticeMailer.sendmail_alert.deliver
+  end
+
 end
