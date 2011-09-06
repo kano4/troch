@@ -25,9 +25,6 @@
             %td
               = site.watch_interval
               min
-            %td
-              = site.watch_logs.last.response_time
-              msec
             %td.last
               = link_to "#{t("web-app-theme.show", :default => "Show")}", site_path(site)
               |

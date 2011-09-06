@@ -37,4 +37,13 @@ protected
     @mail = NoticeMailer.sendmail_alert.deliver
   end
 
+  def self.send_summary
+    users = User.find(:all)
+    domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
+    ssl_sites    = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
+    users.each do |user|
+      NoticeMailer.sendmail_summary(user, domain_sites, ssl_sites).deliver
+    end
+  end
+
 end
