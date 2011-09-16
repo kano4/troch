@@ -1,3 +1,4 @@
+# coding: utf-8
 class SitesController < ApplicationController
   before_filter :authenticate_user!
   # GET /sites

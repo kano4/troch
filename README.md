@@ -3,6 +3,8 @@ Troch is a website monitoring tool.
 
 # Requirements
 - Ruby 1.9.2
+- crontab
+- OpenSSL
 - Redis
 
 # Installation

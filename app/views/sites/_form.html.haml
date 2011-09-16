@@ -17,16 +17,8 @@
   = f.text_field :domain_url, :class => 'text_field'
   %span.description Ex: a simple text
 .group
-  = f.label :domain_expired, t("activerecord.attributes.site.domain_expired", :default => "Domain expired"), :class => :label
-  = f.date_select :domain_expired, :class => 'date_select'
-  %span.description Ex: a simple text
-.group
   = f.label :ssl_url, t("activerecord.attributes.site.ssl_url", :default => "Ssl url"), :class => :label
   = f.text_field :ssl_url, :class => 'text_field'
-  %span.description Ex: a simple text
-.group
-  = f.label :ssl_expired, t("activerecord.attributes.site.ssl_expired", :default => "Ssl expired"), :class => :label
-  = f.date_select :ssl_expired, :class => 'date_select'
   %span.description Ex: a simple text
 .group
 = f.label :sites, :class => :label
