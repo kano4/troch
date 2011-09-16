@@ -2,14 +2,18 @@ require "spec_helper"
 
 describe NoticeMailer do
   describe "sendmail_alert" do
-    let(:mail) { NoticeMailer.sendmail_alert }
+    before(:each) do
+      @user = Factory(:user)
+    end
+
+    let(:mail) { NoticeMailer.sendmail_alert(@user) }
 
     it "renders the headers" do
       mail.subject.should eq("[Troch]Alert")
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Hi")
+      mail.body.encoded.should match("Alert Mail")
     end
   end
 

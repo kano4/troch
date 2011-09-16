@@ -1,3 +1,1 @@
-NoticeMailer#sendmail_alert
-
-Hi, find me in app/views/notice_mailer/sendmail_alert
+Alert Mail

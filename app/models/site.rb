@@ -33,8 +33,11 @@ protected
     end
   end
 
-  def self.sendmail
-    @mail = NoticeMailer.sendmail_alert.deliver
+  def self.send_alert
+    users = User.find(:all)
+    users.each do |user|
+      @mail = NoticeMailer.sendmail_alert(user).deliver
+    end
   end
 
   def self.send_summary
