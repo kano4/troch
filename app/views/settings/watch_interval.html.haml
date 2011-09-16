@@ -8,6 +8,6 @@
         - [15, 30, 60].each do |interval|
           = radio_button_tag 'interval', interval, (@cron_interval.to_i).eql?(interval)
           = label_tag "#{interval} min"
-        = radio_button_tag 'interval', 99999, @cron_interval.to_i.eql?(99999)
-        = label_tag 'None'
+        = radio_button_tag 'interval', 0, @cron_interval.to_i.eql?(0)
+        = label_tag '停止'
         = submit_tag
