@@ -8,3 +8,5 @@ vendor/bundle
 vendor/cache
 config/environments/development.rb
 config/environments/production.rb
+.rspec
+.rvmrc
