@@ -5,9 +5,8 @@
       Watch Interval
     .inner
       = form_tag do
-        - [15, 30, 60].each do |interval|
-          = radio_button_tag 'interval', interval, (@cron_interval.to_i).eql?(interval)
-          = label_tag "#{interval} min"
-        = radio_button_tag 'interval', 0, @cron_interval.to_i.eql?(0)
-        = label_tag '停止'
+        = radio_button_tag 'interval', 15, @cron_interval.to_i.eql?(15)
+        = label_tag "ON(起動)"
+        = radio_button_tag 'interval',  0, @cron_interval.to_i.eql?(0)
+        = label_tag 'OFF(停止)'
         = submit_tag

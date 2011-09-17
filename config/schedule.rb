@@ -16,7 +16,7 @@ else
 end
 
 if cron_interval > 0
-  every cron_interval.minute do
+  every 15.minute do
     runner "Site.get_html"
   end
 
