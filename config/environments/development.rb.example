@@ -20,6 +20,7 @@ Troch::Application.configure do
     :port => 25,
     :domain => 'examples.com'
   }
+  FROM_ADDR = 'test@example.com'
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
