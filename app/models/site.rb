@@ -43,11 +43,8 @@ protected
 
   def self.get_html
     sites = self.all
-    cron_time = Time.now.strftime("%M").to_i
     sites.each do |site|
-      if cron_time % site.watch_interval == 0
-        Resque.enqueue(GetHtml, site.id)
-      end
+      Resque.enqueue(GetHtml, site.id)
     end
   end
 
