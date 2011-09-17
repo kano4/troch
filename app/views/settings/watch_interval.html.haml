@@ -1,12 +1,15 @@
 .block
   .content
     %h2.title
-      = t("web-app-theme.all", :default => "All")
-      Watch Interval
+      サイト監視の起動/停止
     .inner
+      = @save_message
+      %br
       = form_tag do
         = radio_button_tag 'interval', 15, @cron_interval.to_i.eql?(15)
         = label_tag "ON(起動)"
         = radio_button_tag 'interval',  0, @cron_interval.to_i.eql?(0)
         = label_tag 'OFF(停止)'
-        = submit_tag
+        = submit_tag '設定保存'
+      %br
+      = link_to "設定全般に戻る", :action => 'index'

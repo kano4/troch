@@ -20,11 +20,12 @@ class SettingsController < ApplicationController
         in_file.close
       end
     else
+      @save_message = '保存しました'
       @cron_interval = params[:interval]
       out_file = File.open(Rails.root + "tmp/intervals/cron.dat", "w")
       out_file.write(params[:interval])
       out_file.close
-      `whenever --update troch --set environment=#{Rails.env}`
+      `whenever --update troch-#{Rails.env} --set environment=#{Rails.env}`
     end
   end
 

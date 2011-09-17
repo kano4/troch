@@ -2,6 +2,7 @@
   .content
     %h2.title Troch
     .inner
+      = link_to @cron_status, :controller => 'settings', :action => 'watch_interval'
       %table.table
         %tr
           %th Site Name
@@ -11,12 +12,12 @@
         - @watchlogs.each do |watchlog|
           %tr
             %td
-              = watchlog.site.name
+              = watchlog.site.name unless watchlog.site.name.nil?
             %td
-              = watchlog.status
+              = watchlog.status unless watchlog.status.nil?
             %td
-              = watchlog.response_time
+              = watchlog.response_time unless watchlog.response_time.nil?
               msec
             %td
-              = watchlog.updated_at
+              = watchlog.updated_at unless watchlog.updated_at.nil?
 - content_for :sidebar, render(:partial => 'sidebar')
