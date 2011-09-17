@@ -13,9 +13,12 @@
           %th.first ID
           %th
             = t("activerecord.attributes.site.name", :default => t("activerecord.labels.name", :default => "Name"))
-          %th= t("web-app-theme.watch_interval", :default => "Watch Interval")
-          %th= t("web-app-theme.response_time", :default => "Response Time")
-          %th.last &nbsp;
+          %th
+            = t("web-app-theme.url", :default => "URL")
+          %th
+            = t("web-app-theme.domain_url", :default => "DOMAIN")
+          %th.last
+            = t("web-app-theme.ssl_url", :default => "SSL_URL")
         - @sites.each do |site|
           %tr{:class => cycle("odd", "even")}
             %td
@@ -23,13 +26,11 @@
             %td
               = link_to site.name, site_path(site)
             %td
-              = site.watch_interval
-              min
-            %td.last
-              = link_to "#{t("web-app-theme.show", :default => "Show")}", site_path(site)
-              |
-              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_site_path(site)} |
-              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", site_path(site), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+              = site.url
+            %td
+              = site.domain_url
+            %td
+              = site.ssl_url
       .actions-bar.wat-cf
         .actions
 - content_for :sidebar, render(:partial => 'sidebar')

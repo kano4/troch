@@ -11,7 +11,7 @@ class SettingsController < ApplicationController
         in_file = File.open(Rails.root + "tmp/intervals/cron.dat", "r")
       rescue
         FileUtils.mkdir_p(Rails.root + "tmp/intervals")
-        out_file = File.open("tmp/intervals/cron.dat", "w")
+        out_file = File.open("#{Rails.root}/tmp/intervals/cron.dat", "w")
         out_file.write(15)
         out_file.close
         @cron_interval = 15

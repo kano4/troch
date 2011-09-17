@@ -9,9 +9,10 @@ class PagesController < ApplicationController
       in_file = File.open(Rails.root + "tmp/intervals/cron.dat", "r")
     rescue
       FileUtils.mkdir_p(Rails.root + "tmp/intervals")
-      out_file = File.open("tmp/intervals/cron.dat", "w")
+      out_file = File.open("#{Rails.root}/tmp/intervals/cron.dat", "w")
       out_file.write(15)
       out_file.close
+      `whenever --update troch-#{Rails.env} --set environment=#{Rails.env}`
       @cron_status = '起動中'
     else
       @cron_status = in_file.gets.to_i.eql?(0) ? '停止中' : '起動中'
