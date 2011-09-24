@@ -8,8 +8,6 @@ Troch is a website monitoring tool.
 - OpenSSL
 - Redis
 - Bundler
-- libxml2-dev
-- libxslt-dev
 
 # Installation
     git clone https://github.com/kano4/troch.git
@@ -18,3 +16,13 @@ Troch is a website monitoring tool.
     rake RAILS_ENV=production db:migrate
     rails server -d -e production
     RAILS_ENV=production script/troch_server start
+
+# Function
+- Watching Site's Status
+- Watching Domain Expired Date
+- Watching SSL Expired Date
+
+# Future Work
+- MySQL
+- Passenger
+- Watching SMTP
