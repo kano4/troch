@@ -17,4 +17,18 @@ describe NoticeMailer do
     end
   end
 
+  describe "sendmail_summary" do
+    before(:each) do
+      @user = Factory(:user)
+      @domain_sites = [Factory(:site)]
+      @ssl_sites    = [Factory(:site)]
+    end
+
+    let(:mail) { NoticeMailer.sendmail_summary(@user, @domain_sites, @ssl_sites) }
+
+    it "renders the headers" do
+      mail.subject.should eq("[Troch]Summary")
+    end
+
+  end
 end

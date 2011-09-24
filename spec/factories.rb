@@ -20,6 +20,13 @@ FactoryGirl.define do
     }
   end
 
+  factory :site, :class => Site do
+    name "Test Site"
+    url "http://www.test.com"
+    domain_url "test.com"
+    ssl_url "https://www.test.com"
+  end
+
   factory :yahoo, :class => Site do
     name "Yahoo!"
     url "http://www.yahoo.com"
