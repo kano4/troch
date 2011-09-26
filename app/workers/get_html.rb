@@ -38,10 +38,10 @@ class GetHtml
           site.watch_logs.build(:status => 'ok', :content => content, :response_time => response_time)
         else
           site.watch_logs.build(:status => 'diff', :content => content, :response_time => response_time)
-          users = User.find(site.users)
-          users.each do |user|
-            NoticeMailer.sendmail_alert(user, site, 'diff').deliver
-          end
+          #users = User.find(site.users)
+          #users.each do |user|
+          #  NoticeMailer.sendmail_alert(user, site, 'diff').deliver
+          #end
         end
       else
         site.watch_logs.build(:status => 'new', :content => content, :response_time => response_time)
