@@ -13,6 +13,7 @@ Troch is a website monitoring tool.
     git clone https://github.com/kano4/troch.git
     cd troch
     bundle install --without test development
+    rake RAILS_ENV=production db:create
     rake RAILS_ENV=production db:migrate
     rails server -d -e production
     RAILS_ENV=production script/troch_server start

@@ -18,11 +18,6 @@
         = @site.url
       %p
         %b
-          = t("activerecord.attributes.site.content", :default => t("activerecord.labels.content", :default => "Content"))
-          \:
-        = @site.watch_logs.last.content if @site.watch_logs != []
-      %p
-        %b
           = t("activerecord.attributes.site.domain_url", :default => t("activerecord.labels.domain_url", :default => "Domain url"))
           \:
         = @site.domain_url

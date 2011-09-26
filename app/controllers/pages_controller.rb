@@ -4,6 +4,8 @@ class PagesController < ApplicationController
 
   def index
     @watchlogs = WatchLog.find(:all, :limit => 10, :order => "updated_at DESC")
+    @domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
+    @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
 
     begin
       in_file = File.open(Rails.root + "tmp/intervals/cron.dat", "r")

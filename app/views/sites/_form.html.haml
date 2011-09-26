@@ -1,19 +1,19 @@
 .group
   = f.label :name, t("activerecord.attributes.site.name", :default => "Name"), :class => :label
   = f.text_field :name, :class => 'text_field'
-  %span.description Ex: a simple text
+  %span.description Ex: Example Site
 .group
   = f.label :url, t("activerecord.attributes.site.url", :default => "Url"), :class => :label
   = f.text_field :url, :class => 'text_field'
-  %span.description Ex: a simple text
+  %span.description Ex: http://www.example.com
 .group
   = f.label :domain_url, t("activerecord.attributes.site.domain_url", :default => "Domain url"), :class => :label
   = f.text_field :domain_url, :class => 'text_field'
-  %span.description Ex: a simple text
+  %span.description Ex: example.com
 .group
   = f.label :ssl_url, t("activerecord.attributes.site.ssl_url", :default => "Ssl url"), :class => :label
   = f.text_field :ssl_url, :class => 'text_field'
-  %span.description Ex: a simple text
+  %span.description Ex: ssl.example.com
 .group
 = f.label :sites, :class => :label
 - @users.each do |user|

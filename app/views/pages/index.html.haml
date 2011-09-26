@@ -1,8 +1,34 @@
 .block
   .content
-    %h2.title Troch
     .inner
-      = link_to @cron_status, :controller => 'settings', :action => 'watch_interval'
+      %p
+        = link_to @cron_status, :controller => 'settings', :action => 'watch_interval'
+
+      ドメイン有効期限30日以内
+      %table.table
+        %tr
+          %th Site Name
+          %th Domain Expired Date
+        - @domain_sites.each do |site|
+          %tr
+            %td
+              = site.name unless site.name.blank?
+            %td
+              = site.domain_expired unless site.domain_expired.blank?
+
+      SSL有効期限30日以内
+      %table.table
+        %tr
+          %th Site Name
+          %th SSL Expired Date
+        - @ssl_sites.each do |site|
+          %tr
+            %td
+              = site.name unless site.name.blank?
+            %td
+              = site.ssl_expired unless site.ssl_expired.blank?
+
+      最近のログ
       %table.table
         %tr
           %th Site Name
