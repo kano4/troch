@@ -12,12 +12,12 @@
         - @watchlogs.each do |watchlog|
           %tr
             %td
-              = watchlog.site.name unless watchlog.site.name.nil?
+              = watchlog.site.name unless watchlog.site.blank?
             %td
-              = watchlog.status unless watchlog.status.nil?
+              = watchlog.status unless watchlog.status.blank?
             %td
-              = watchlog.response_time unless watchlog.response_time.nil?
+              = watchlog.response_time unless watchlog.response_time.blank?
               msec
             %td
-              = watchlog.updated_at unless watchlog.updated_at.nil?
+              = watchlog.updated_at unless watchlog.updated_at.blank?
 - content_for :sidebar, render(:partial => 'sidebar')

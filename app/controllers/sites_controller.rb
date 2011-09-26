@@ -81,7 +81,11 @@ class SitesController < ApplicationController
   # DELETE /sites/1.json
   def destroy
     @site = Site.find(params[:id])
+    @watch_logs = @site.watch_logs.find(:all)
     @site.destroy
+    @watch_logs.each do |watch_log|
+      watch_log.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to sites_url }

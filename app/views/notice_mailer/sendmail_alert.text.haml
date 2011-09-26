@@ -1,4 +1,10 @@
-Alert Mail
-
 = @user.email + 'さん'
-～というサイトに差分がありました。
+%br
+
+= "Date   : #{@date}"
+= "Status : #{@status}"
+= "Site   : #{@site.name}"
+= "URL:   : #{@site.url}"
+%br
+
+上記のサイトに差分がありました。確認してください。

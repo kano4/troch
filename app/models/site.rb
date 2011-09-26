@@ -48,13 +48,6 @@ protected
     end
   end
 
-  def self.send_alert
-    users = User.find(:all)
-    users.each do |user|
-      @mail = NoticeMailer.sendmail_alert(user).deliver
-    end
-  end
-
   def self.send_summary
     users = User.find(:all)
     domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')

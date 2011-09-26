@@ -4,16 +4,14 @@ describe NoticeMailer do
   describe "sendmail_alert" do
     before(:each) do
       @user = Factory(:user)
+      @site = Factory(:site)
+      @status = 'status'
     end
 
-    let(:mail) { NoticeMailer.sendmail_alert(@user) }
+    let(:mail) { NoticeMailer.sendmail_alert(@user, @site, @status) }
 
     it "renders the headers" do
-      mail.subject.should eq("[Troch]Alert")
-    end
-
-    it "renders the body" do
-      mail.body.encoded.should match("Alert Mail")
+      mail.subject.should eq("[Troch]#{@status}:#{@site.name}")
     end
   end
 
@@ -29,6 +27,5 @@ describe NoticeMailer do
     it "renders the headers" do
       mail.subject.should eq("[Troch]Summary")
     end
-
   end
 end
