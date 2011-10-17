@@ -12,11 +12,6 @@ describe Site, "を生成するとき" do
     @site.should_not be_valid
   end
 
-  it "は、urlが空の場合バリデーションに失敗すること" do
-    @site = Site.new(:name => @name, :url => nil)
-    @site.should_not be_valid
-  end
-
   it "は、nameとurlが空でない場合バリデーションに成功すること" do
     @site = Site.new(:name => @name, :url => @url)
     @site.should be_valid
