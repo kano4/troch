@@ -3,9 +3,11 @@ class PagesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+#    @watchlogs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 10, :order => "updated_at DESC")
     @watchlogs = WatchLog.find(:all, :limit => 10, :order => "updated_at DESC")
     @domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
     @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
+    @last_log = WatchLog.last
 
     begin
       in_file = File.open(Rails.root + "tmp/intervals/cron.dat", "r")

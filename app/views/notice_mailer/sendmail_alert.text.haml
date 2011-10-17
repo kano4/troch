@@ -1,10 +1,9 @@
 = @user.email + 'さん'
-%br
 
 = "Date   : #{@date}"
 = "Status : #{@status}"
 = "Site   : #{@site.name}"
 = "URL:   : #{@site.url}"
-%br
+= "Diff   : #{@diff_html}" unless @diff_html.blank?
 
-上記のサイトに差分がありました。確認してください。
+上記のサイトを確認してください。

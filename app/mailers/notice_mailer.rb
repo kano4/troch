@@ -2,10 +2,11 @@
 class NoticeMailer < ActionMailer::Base
   default from: FROM_ADDR
 
-  def sendmail_alert(user, site, status)
+  def sendmail_alert(user, site, status, diff_html = '')
     @user = user
     @site = site
     @status = status
+    @diff_html = diff_html
     @date = Time.now.strftime('%Y/%m/%d %H:%M:%S')
 
     mail to: user.email,

@@ -3,6 +3,7 @@
     .inner
       %p
         = link_to @cron_status, :controller => 'settings', :action => 'watch_interval'
+        = @last_log.created_at unless @last_log.blank?
 
       ドメイン有効期限30日以内
       %table.table
@@ -12,7 +13,7 @@
         - @domain_sites.each do |site|
           %tr
             %td
-              = site.name unless site.name.blank?
+              = link_to site.name, site_path(site) unless site.name.blank?
             %td
               = site.domain_expired unless site.domain_expired.blank?
 
@@ -24,7 +25,7 @@
         - @ssl_sites.each do |site|
           %tr
             %td
-              = site.name unless site.name.blank?
+              = link_to site.name, site_path(site) unless site.name.blank?
             %td
               = site.ssl_expired unless site.ssl_expired.blank?
 
@@ -38,7 +39,7 @@
         - @watchlogs.each do |watchlog|
           %tr
             %td
-              = watchlog.site.name unless watchlog.site.blank?
+              = link_to watchlog.site.name, site_path(watchlog.site) unless watchlog.site.blank?
             %td
               = watchlog.status unless watchlog.status.blank?
             %td
