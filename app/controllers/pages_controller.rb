@@ -24,4 +24,21 @@ class PagesController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+    @sites = Site.find(:all)
+  end
+
+  def update
+    params[:user][:site_ids] ||= []
+    @sites = Site.find(:all) if @sites.nil?
+    @user = current_user
+
+    if @user.update_attributes(params[:user])
+      redirect_to edit_path, notice: "User's site was successfully updated."
+    else
+      render action: "edit"
+    end
+  end
+
 end

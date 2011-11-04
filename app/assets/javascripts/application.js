@@ -7,3 +7,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+$(function(){
+  $('#all').click(function(){
+    if(this.checked){
+      $('#check input').attr('checked','checked');
+    }else{
+      $('#check input').removeAttr('checked');
+    }
+  });
+});

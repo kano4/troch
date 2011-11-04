@@ -13,7 +13,7 @@
         #user-navigation
           %ul.wat-cf
             %li
-              %a{:href => "#"}= t("web-app-theme.profile", :default => "Profile")
+              = link_to t("web-app-theme.profile", :default => "Profile"), edit_path
             %li
               = link_to t("web-app-theme.settings", :default => "Settings"), settings_path
             %li

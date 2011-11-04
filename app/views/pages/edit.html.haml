@@ -1,0 +1,22 @@
+.block
+  .content
+    %h2.title
+      User
+    .inner
+      = form_for @user, :url => { :action => "update" } do |f|
+        .group
+          = f.label :sites, :class => :label
+          = check_box_tag("all")
+          All
+          #check
+            - @sites.each do |site|
+              = check_box_tag("user[site_ids][]", site.id, @user.sites.include?(site))
+              = site.name
+              %br
+          = f.hidden_field :email, :value => @user.email
+        .group.navform.wat-cf
+          %button.button{:type => "submit"}
+            = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
+            = t("web-app-theme.save", :default => "Save")
+          %span.text_button_padding= t("web-app-theme.or", :default => "or")
+          = link_to t("web-app-theme.cancel", :default => "Cancel"), edit_path, :class => "text_button_padding link_button"
