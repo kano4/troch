@@ -15,7 +15,7 @@
             %td
               = link_to site.name, site_path(site) unless site.name.blank?
             %td
-              = site.domain_expired unless site.domain_expired.blank?
+              = site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
 
       SSL有効期限30日以内
       %table.table
@@ -27,7 +27,7 @@
             %td
               = link_to site.name, site_path(site) unless site.name.blank?
             %td
-              = site.ssl_expired unless site.ssl_expired.blank?
+              = site.ssl_expired.strftime("%Y/%m/%d") unless site.ssl_expired.blank?
 
       最近のログ
       %table.table
@@ -46,5 +46,5 @@
               = watchlog.response_time unless watchlog.response_time.blank?
               msec
             %td
-              = watchlog.updated_at unless watchlog.updated_at.blank?
+              = watchlog.updated_at.strftime("%Y/%m/%d %H:%M:%S") unless watchlog.updated_at.blank?
 - content_for :sidebar, render(:partial => 'sidebar')
