@@ -3,8 +3,10 @@ class PagesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-#    @watchlogs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 10, :order => "updated_at DESC")
-    @watchlogs = WatchLog.find(:all, :limit => 10, :order => "updated_at DESC")
+    @watchlogs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 10, :order => "updated_at DESC")
+#    @watchlogs = WatchLog.find(:all, :limit => 10, :order => "updated_at DESC")
+    @sites = Site.find(:all)
+    @error_num = WatchLog.find(:all, :conditions => ['status <> "ok" and updated_at > ?', Time.now - 25.0 * 60.0]).length
     @domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
     @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
     @last_log = WatchLog.last

@@ -1,9 +1,23 @@
 .block
   .content
     .inner
-      %p
-        = link_to @cron_status, :controller => 'settings', :action => 'watch_interval'
-        = @last_log.created_at unless @last_log.blank?
+      サマリー
+      %table.table
+        %tr
+          %th 起動/停止
+          %th ステータス異常
+          %th 最終チェック日時
+          %th 監視対象サイト
+        %tr
+          %td
+            = link_to @cron_status, :controller => 'settings', :action => 'watch_interval'
+          %td
+            = @error_num
+          %td
+            = @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
+          %td
+            = @sites.length
+
 
       ドメイン有効期限30日以内
       %table.table

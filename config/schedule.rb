@@ -27,4 +27,12 @@ if cron_interval > 0
   every 1.day, :at => '8:00 am' do
     runner "Site.check_ssl"
   end
+
+  every 1.day, :at => '10:00 am' do
+    runner "Site.send_summary"
+  end
+
+  every 1.day, :at => '11:00 am' do
+    rake "log:clear"
+  end
 end

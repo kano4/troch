@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20110808082535) do
 
   create_table "sites", :force => true do |t|
     t.string   "name",                           :null => false
-    t.string   "url",                            :null => false
+    t.string   "url"
     t.string   "domain_url"
     t.date     "domain_expired"
     t.string   "ssl_url"

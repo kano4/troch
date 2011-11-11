@@ -3,9 +3,9 @@ Summary Mail
 = @user.email + 'さん'
 
 ＜ドメイン期限30日以内＞
-- @domain_sites.each do |site|
-  = site.name
+- @domain_sites.each_with_index do |site, i|
+  = "#{i+1} : #{site.name}"
 
 ＜SSL期限30日以内＞
-- @ssl_sites.each do |site|
-  = site.name
+- @ssl_sites.each_with_index do |site, i|
+  = "#{i+1} : #{site.name}"

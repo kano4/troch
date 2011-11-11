@@ -42,9 +42,9 @@ class GetHtml
             site.watch_logs.build(:status => 'ok',   :content => encoded_content, :response_time => response_time)
           else
             site.watch_logs.build(:status => 'diff', :content => encoded_content, :response_time => response_time)
-#            get_content  = Base64.decode64(last_log.content)
-#            last_content = Base64.decode64(encoded_content)
-#            diffs = Diff::LCS.sdiff(get_content, last_content)
+            get_content  = Base64.decode64(last_log.content)
+            last_content = Base64.decode64(encoded_content)
+            diffs = Diff::LCS.sdiff(get_content, last_content)
             diff_html = ''
 #            diffs.each do |d|
 #              if d.old_element != d.new_element
@@ -52,7 +52,7 @@ class GetHtml
 #                diff_html << "+#{d.new_element}\n" if d.new_element
 #              end
 #            end
-#
+
             users = User.find(site.users)
             users.each do |user|
               NoticeMailer.sendmail_alert(user, site, 'diff', diff_html).deliver
@@ -75,6 +75,6 @@ end
 
 def get_page_body(url)
   agent = Mechanize.new
-  page = agent.get(url)
-  page.body
+  agent.get(url)
+  agent.page.parser
 end

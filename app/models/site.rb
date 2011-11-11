@@ -10,7 +10,6 @@ protected
   require 'date/format'
 
   def self.check_domain
-#    sites = self.find(:all, :conditions => {'domain_url NOT ?', nil})
     sites = self.find(:all)
     sites.each do |site|
       unless site.domain_url.blank?
@@ -29,7 +28,6 @@ protected
   end
 
   def self.check_ssl
-#    sites = self.find(:all, :conditions => ['ssl_url NOT ?', nil])
     sites = self.find(:all)
 
     sites.each do |site|
@@ -49,7 +47,9 @@ protected
   def self.get_html
     sites = self.all
     sites.each do |site|
-      Resque.enqueue(GetHtml, site.id)
+      unless site.url.blank?
+        Resque.enqueue(GetHtml, site.id)
+      end
     end
   end
 
