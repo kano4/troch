@@ -6,7 +6,14 @@ class PagesController < ApplicationController
     @watchlogs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 10, :order => "updated_at DESC")
 #    @watchlogs = WatchLog.find(:all, :limit => 10, :order => "updated_at DESC")
     @sites = Site.find(:all)
-    @error_num = WatchLog.find(:all, :conditions => ['status <> "ok" and updated_at > ?', Time.now - 25.0 * 60.0]).length
+    @error_num = 0
+    @error_sites = []
+    @sites.each do |site|
+      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new"
+        @error_num += 1
+        @error_sites << site
+      end
+    end
     @domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
     @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
     @last_log = WatchLog.last

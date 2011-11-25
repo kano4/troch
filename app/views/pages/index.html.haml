@@ -18,6 +18,17 @@
           %td
             = @sites.length
 
+      ステータス異常サイト
+      %table.table
+        %tr
+          %th Site Name
+          %th Status
+        - @error_sites.each do |site|
+          %tr
+            %td
+              = link_to site.name, site_path(site) unless site.name.blank?
+            %td
+              = site.watch_logs.last.status unless site.watch_logs.last.status.blank?
 
       ドメイン有効期限30日以内
       %table.table
@@ -61,4 +72,3 @@
               msec
             %td
               = watchlog.updated_at.strftime("%Y/%m/%d %H:%M:%S") unless watchlog.updated_at.blank?
-- content_for :sidebar, render(:partial => 'sidebar')
