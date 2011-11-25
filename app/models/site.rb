@@ -45,10 +45,12 @@ protected
   end
 
   def self.get_html
-    sites = self.all
-    sites.each do |site|
-      unless site.url.blank?
-        Resque.enqueue(GetHtml, site.id)
+    if File.exist?("#{Rails.root}/tmp/intervals/cron.on")
+      sites = self.all
+      sites.each do |site|
+        unless site.url.blank?
+          Resque.enqueue(GetHtml, site.id)
+        end
       end
     end
   end

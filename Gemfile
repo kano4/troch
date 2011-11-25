@@ -25,8 +25,6 @@ gem 'resque'
 gem 'daemon-spawn', :require => 'daemon_spawn'
 gem 'whenever', :require => false
 group :development, :test do
-  gem 'thin'
-  gem 'sqlite3'
   gem 'forgery'
   gem 'spork', '~> 0.9.0.rc'
   gem 'libnotify'

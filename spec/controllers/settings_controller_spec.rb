@@ -13,9 +13,9 @@ describe SettingsController do
     end
   end
 
-  describe "GET 'watch_interval'" do
+  describe "GET 'watch_on_off'" do
     it "should be successful" do
-      get :watch_interval
+      get :watch_on_off
       response.should be_success
     end
   end

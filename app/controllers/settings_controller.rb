@@ -5,27 +5,26 @@ class SettingsController < ApplicationController
   def index
   end
 
-  def watch_interval
-    if params[:interval].nil?
-      begin
-        in_file = File.open(Rails.root + "tmp/intervals/cron.dat", "r")
-      rescue
-        FileUtils.mkdir_p(Rails.root + "tmp/intervals")
-        out_file = File.open("#{Rails.root}/tmp/intervals/cron.dat", "w")
-        out_file.write(15)
-        out_file.close
-        @cron_interval = 15
+  def watch_on_off
+    if params[:on_off].nil?
+      if File.exist?("#{Rails.root}/tmp/intervals/cron.on")
+        @cron_interval = true
       else
-        @cron_interval = in_file.gets
-        in_file.close
+        @cron_interval = false
       end
+    elsif params[:on_off] == "true"
+      if !File.exist?("#{Rails.root}/tmp/intervals/cron.on")
+        FileUtils.mkdir_p("#{Rails.root}/tmp/intervals")
+        File.open("#{Rails.root}/tmp/intervals/cron.on", "w").close
+        @save_message = '起動しました'
+      end
+      @cron_interval = true
     else
-      @save_message = '保存しました'
-      @cron_interval = params[:interval]
-      out_file = File.open(Rails.root + "tmp/intervals/cron.dat", "w")
-      out_file.write(params[:interval])
-      out_file.close
-      `whenever --update troch-#{Rails.env} --set environment=#{Rails.env}`
+      if File.exist?("#{Rails.root}/tmp/intervals/cron.on")
+        File.delete("#{Rails.root}/tmp/intervals/cron.on")
+        @save_message = '停止しました'
+      end
+      @cron_interval = false
     end
   end
 

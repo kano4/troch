@@ -1,6 +1,6 @@
 Troch::Application.routes.draw do
   match '/settings/', :to => 'settings#index'
-  match '/settings/watch_interval', :to => 'settings#watch_interval'
+  match '/settings/watch_on_off', :to => 'settings#watch_on_off'
 
   resources :sites
 

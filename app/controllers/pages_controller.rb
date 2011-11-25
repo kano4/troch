@@ -11,19 +11,7 @@ class PagesController < ApplicationController
     @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
     @last_log = WatchLog.last
 
-    begin
-      in_file = File.open(Rails.root + "tmp/intervals/cron.dat", "r")
-    rescue
-      FileUtils.mkdir_p(Rails.root + "tmp/intervals")
-      out_file = File.open("#{Rails.root}/tmp/intervals/cron.dat", "w")
-      out_file.write(15)
-      out_file.close
-      `whenever --update troch-#{Rails.env} --set environment=#{Rails.env}`
-      @cron_status = '起動中'
-    else
-      @cron_status = in_file.gets.to_i.eql?(0) ? '停止中' : '起動中'
-      in_file.close
-    end
+    @cron_status = File.exist?("#{Rails.root}/tmp/intervals/cron.on") ? '起動中' : '停止中'
   end
 
   def edit

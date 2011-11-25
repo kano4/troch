@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20110808082535) do
 
   create_table "sites", :force => true do |t|
-    t.string   "name",                           :null => false
+    t.string   "name",           :null => false
     t.string   "url"
     t.string   "domain_url"
     t.date     "domain_expired"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20110808082535) do
     t.date     "ssl_expired"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "watch_interval", :default => 15, :null => false
   end
 
   create_table "users", :force => true do |t|

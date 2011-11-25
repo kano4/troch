@@ -39,6 +39,8 @@ class GetHtml
 
         if last_log = site.watch_logs.find(:last)
           if last_log.content == encoded_content
+            last_log.conetent = ''
+            last_log.content.save
             site.watch_logs.build(:status => 'ok',   :content => encoded_content, :response_time => response_time)
           else
             site.watch_logs.build(:status => 'diff', :content => encoded_content, :response_time => response_time)
