@@ -11,7 +11,12 @@ class GetHtml
       trials = 0
       begin
         start_time = Time.now
-        content = get_page_body(site.url)
+        if site.watch_method == 'html_body'
+          content = get_page_body(site.url)
+        elsif site.watch_method == 'html_title'
+          content = get_page_title(site.url)
+        end
+
         end_time = Time.now
       rescue TimeoutError
         trials += 1
@@ -39,8 +44,8 @@ class GetHtml
 
         if last_log = site.watch_logs.find(:last)
           if last_log.content == encoded_content
-            last_log.conetent = ''
-            last_log.content.save
+            last_log.content = ''
+            last_log.save
             site.watch_logs.build(:status => 'ok',   :content => encoded_content, :response_time => response_time)
           else
             site.watch_logs.build(:status => 'diff', :content => encoded_content, :response_time => response_time)
@@ -69,14 +74,14 @@ class GetHtml
   end
 end
 
-def get_page_title(url)
-  agent = Mechanize.new
-  page = agent.get(url)
-  page.title
-end
-
 def get_page_body(url)
   agent = Mechanize.new
   agent.get(url)
   agent.page.parser
+end
+
+def get_page_title(url)
+  agent = Mechanize.new
+  page = agent.get(url)
+  page.title
 end

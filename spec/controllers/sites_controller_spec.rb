@@ -8,8 +8,9 @@ describe SitesController do
 
   def valid_attributes
     {
-      :name => "test",
-      :url => "test@example.com"
+      :name => "Test site",
+      :url => "http://example.com",
+      :watch_method => "html_body"
     }
   end
 

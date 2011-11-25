@@ -23,17 +23,20 @@ FactoryGirl.define do
   factory :site, :class => Site do
     name "Test Site"
     url "http://www.test.com"
+    watch_method 'html_body'
     domain_url "test.com"
     ssl_url "https://www.test.com"
   end
 
   factory :yahoo, :class => Site do
     name "Yahoo!"
+    watch_method 'html_body'
     url "http://www.yahoo.com"
   end
 
   factory :google, :class => Site do
     name "Google"
+    watch_method 'html_body'
     url "http://www.google.com"
   end
 end

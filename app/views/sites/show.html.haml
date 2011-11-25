@@ -18,6 +18,11 @@
         = @site.url
       %p
         %b
+          = t("activerecord.attributes.site.watch_method", :default => t("activerecord.labels.watch_method", :default => "Watch method"))
+          \:
+        = @site.watch_method
+      %p
+        %b
           = t("activerecord.attributes.site.domain_url", :default => t("activerecord.labels.domain_url", :default => "Domain url"))
           \:
         = @site.domain_url

@@ -7,6 +7,12 @@
   = f.text_field :url, :class => 'text_field'
   %span.description Ex: http://www.example.com
 .group
+  = f.label :watch_method, t("activerecord.attributes.site.url", :default => "Watch method"), :class => :label
+  = f.radio_button :watch_method, 'html_body',  :checked => (@site.watch_method == 'html_body' || @site.watch_method.nil?)
+  html(body)
+  = f.radio_button :watch_method, 'html_title', :checked => (@site.watch_method == 'html_title')
+  html(title)
+.group
   = f.label :domain_url, t("activerecord.attributes.site.domain_url", :default => "Domain url"), :class => :label
   = f.text_field :domain_url, :class => 'text_field'
   %span.description Ex: example.com

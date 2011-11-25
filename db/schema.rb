@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20110808082535) do
     t.date     "domain_expired"
     t.string   "ssl_url"
     t.date     "ssl_expired"
+    t.string   "watch_method",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -7,6 +7,7 @@ class CreateSites < ActiveRecord::Migration
       t.date :domain_expired
       t.string :ssl_url
       t.date :ssl_expired
+      t.string :watch_method, :null => false
 
       t.timestamps
     end
