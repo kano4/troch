@@ -3,27 +3,64 @@ Troch is a website monitoring tool.
 
 # Requirements
 - Ruby 1.9.2 or 1.9.3
-- SQLite3 or MySQL
+- MySQL
 - crontab
 - OpenSSL
 - Redis
 - Bundler
 
 # Installation
-    git clone https://github.com/kano4/troch.git
-    cd troch
-    bundle install --without test development
-    rake RAILS_ENV=production db:create
-    rake RAILS_ENV=production db:migrate
-    rails server -d -e production
-    RAILS_ENV=production script/troch_server start
+
+1. Download
+
+        git clone https://github.com/kano4/troch.git troch
+
+2. Install gems
+
+        cd troch
+        bundle install
+
+3. Set up database
+
+        cp config/database.example.yml config/database.yml
+
+    Edit config/database.yml . For example,
+
+        production:
+          adapter: mysql2
+          database: troch
+          username: root
+          password:
+          encoding: utf8
+          host: localhost
+          socket: /var/run/mysqld/mysqld.sock
+
+    Create database
+
+          rake db:create RAILS_ENV="production"
+          rake db:migrate RAILS_ENV="production"
+
+4. Set up crontab
+
+          whenever --update troch --set environment="production"
+
+5. Start web server
+
+          rails server -d -e production
+
+6. Start redis server
+
+          script/troch_server start RAILS_ENV="production"
+
 
 # Function
-- Watching Site's Status
+- Watching Site Status
+  - body
+  - title
+  - keyword
 - Watching Domain Expired Date
 - Watching SSL Expired Date
 
 # Future Work
-- MySQL
 - Passenger
 - Watching SMTP
