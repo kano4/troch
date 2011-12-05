@@ -13,16 +13,16 @@ Troch is a website monitoring tool.
 
 1. Download
 
-        git clone https://github.com/kano4/troch.git troch
+        $ git clone https://github.com/kano4/troch.git troch
 
 2. Install gems
 
-        cd troch
-        bundle install
+        $ cd troch
+        $ bundle install
 
 3. Set up database
 
-        cp config/database.example.yml config/database.yml
+        $ cp config/database.example.yml config/database.yml
 
     Edit config/database.yml . For example,
 
@@ -37,20 +37,20 @@ Troch is a website monitoring tool.
 
     Create database
 
-          rake db:create RAILS_ENV="production"
-          rake db:migrate RAILS_ENV="production"
+        $ rake db:create RAILS_ENV="production"
+        $ rake db:migrate RAILS_ENV="production"
 
 4. Set up crontab
 
-          whenever --update troch --set environment="production"
+        $ whenever --update troch --set environment="production"
 
 5. Start web server
 
-          rails server -d -e production
+        $ rails server -d -e production
 
 6. Start redis server
 
-          script/troch_server start RAILS_ENV="production"
+        $ script/troch_server start RAILS_ENV="production"
 
 
 # Function
