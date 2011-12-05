@@ -11,10 +11,13 @@ class GetHtml
       trials = 0
       begin
         start_time = Time.now
+
         if site.watch_method == 'html_body'
           content = get_page_body(site.url)
         elsif site.watch_method == 'html_title'
           content = get_page_title(site.url)
+        elsif site.watch_method == 'html_keyword' && !site.keyword.blank?
+          content = get_page_keyword(site.url, site.keyword)
         end
 
         end_time = Time.now
@@ -43,10 +46,12 @@ class GetHtml
         encoded_content = Base64.encode64(content)
 
         if last_log = site.watch_logs.find(:last)
-          if last_log.content == encoded_content
+          if last_log.content == encoded_content || content == site.keyword
             last_log.content = ''
             last_log.save
             site.watch_logs.build(:status => 'ok',   :content => encoded_content, :response_time => response_time)
+          elsif site.watch_method == 'html_keyword' && content != site.keyword
+            site.watch_logs.build(:status => 'keyword error', :content => content, :response_time => response_time)
           else
             site.watch_logs.build(:status => 'diff', :content => encoded_content, :response_time => response_time)
             get_content  = Base64.decode64(last_log.content)
@@ -76,12 +81,18 @@ end
 
 def get_page_body(url)
   agent = Mechanize.new
-  agent.get(url)
-  agent.page.parser
+  page = agent.get(url)
+  page.parser
 end
 
 def get_page_title(url)
   agent = Mechanize.new
   page = agent.get(url)
-  page.title
+  page.title || 'no title'
+end
+
+def get_page_keyword(url, keyword)
+  agent = Mechanize.new
+  page = agent.get(url)
+  page.parser.to_s.include?(keyword) ? keyword : "There is no #{keyword}. #{Time.now}"
 end

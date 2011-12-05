@@ -14,6 +14,8 @@
           %th
             = t("activerecord.attributes.site.name", :default => t("activerecord.labels.name", :default => "Name"))
           %th
+            = t("web-app-theme.watch_method", :default => "METHOD")
+          %th
             = t("web-app-theme.url", :default => "URL")
           %th
             = t("web-app-theme.domain_url", :default => "DOMAIN")
@@ -25,6 +27,8 @@
               = site.id
             %td
               = link_to site.name, site_path(site)
+            %td
+              = site.watch_method
             %td
               = site.url
             %td

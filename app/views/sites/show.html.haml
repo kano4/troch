@@ -21,6 +21,7 @@
           = t("activerecord.attributes.site.watch_method", :default => t("activerecord.labels.watch_method", :default => "Watch method"))
           \:
         = @site.watch_method
+        = @site.keyword if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
       %p
         %b
           = t("activerecord.attributes.site.domain_url", :default => t("activerecord.labels.domain_url", :default => "Domain url"))
