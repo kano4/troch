@@ -1,3 +1,14 @@
+production:
+  adapter: mysql2
+  database: troch
+  username: root
+  password:
+  encoding: utf8
+  host: localhost
+  reconnect: true
+  socket: /var/run/mysqld/mysqld.sock
+
+# for development
 development:
   adapter: mysql2
   database: troch_development
@@ -5,20 +16,12 @@ development:
   password:
   encoding: utf8
   host: localhost
+  reconnect: true
   socket: /var/run/mysqld/mysqld.sock
 
 test:
   adapter: mysql2
   database: troch_test
-  username: root
-  password:
-  encoding: utf8
-  host: localhost
-  socket: /var/run/mysqld/mysqld.sock
-
-production:
-  adapter: mysql2
-  database: troch
   username: root
   password:
   encoding: utf8

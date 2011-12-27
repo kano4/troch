@@ -40,17 +40,34 @@ Troch is a website monitoring tool.
         $ rake db:create RAILS_ENV="production"
         $ rake db:migrate RAILS_ENV="production"
 
-4. Set up crontab
+4. Set up smtp
+
+        $ cp config/environments/production.rb.example config/environments/production.rb
+
+    Edit config/environments/production.rb . For example,
+
+        config.action_mailer.smtp_settings = {
+          :address => 'smtp.example.com',
+          :port => 25,
+          :domain => 'example.com'
+        }
+        FROM_ADDR = 'test@example.com'
+
+5. Set up crontab
 
         $ whenever --update troch --set environment="production"
 
-5. Start web server
+6. Start web server (WEBrick)
 
         $ rails server -d -e production
 
-6. Start redis server
+    Or install passenger and edit apache config as below and restart apache (Passenger)
 
-        $ script/troch_server start RAILS_ENV="production"
+        DocumentRoot "/srv/troch/public"
+
+7. Start redis server
+
+        $ RAILS_ENV="production" script/troch_server start
 
 
 # Function
@@ -62,5 +79,4 @@ Troch is a website monitoring tool.
 - Watching SSL Expired Date
 
 # Future Work
-- Passenger
 - Watching SMTP
