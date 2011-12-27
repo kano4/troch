@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 3.2.0.rc1'
 
 gem 'mysql2'
 
@@ -14,10 +14,9 @@ gem 'sprockets'
 gem 'haml-rails'
 gem 'web-app-theme'
 
-gem 'therubyracer'
 gem 'hpricot'
 gem 'ruby_parser'
-gem 'devise', :git => 'git://github.com/plataformatec/devise.git', :branch => 'master'
+gem 'devise'
 gem 'bcrypt-ruby'
 gem 'mechanize'
 gem 'whois'
