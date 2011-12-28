@@ -45,7 +45,7 @@ class GetHtml
         response_time = (end_time - start_time) * 1000
         encoded_content = Base64.encode64(content)
 
-        if last_log = site.watch_logs.find(:last)
+        if last_log = site.watch_logs.find(:last, :conditions => {:status => ['ok', 'diff']})
           if last_log.content == encoded_content || content == site.keyword
             last_log.content = ''
             last_log.save
