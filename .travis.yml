@@ -1,9 +1,10 @@
 rvm:
   - "1.9.2"
   - "1.9.3"
+
 script:
-  - "bundle exec rake db:migrate db:test:clone spec"
-env:
-  - DB=sqlite
-  - DB=mysql
-  - DB=postgres
+  - "bundle exec rake db:create db:migrate db:test:clone spec"
+
+branches:
+  only:
+    - master

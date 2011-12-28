@@ -1,6 +1,7 @@
 # coding: utf-8
 class NoticeMailer < ActionMailer::Base
-  default from: FROM_ADDR
+  @@data = YAML.load_file("#{Rails.root}/config/email.yml")
+  default :from => @@data["default"]["from"]
 
   def sendmail_alert(user, site, status, diff_html = '')
     @user = user

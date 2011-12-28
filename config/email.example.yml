@@ -1,0 +1,7 @@
+default:
+  from: 'troch@example.jp'
+
+settings:
+  address: 'smtp.example.jp'
+  port: 25
+  domain: 'example.jp'

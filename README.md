@@ -42,16 +42,17 @@ Troch is a website monitoring tool.
 
 4. Set up smtp
 
-        $ cp config/environments/production.rb.example config/environments/production.rb
+        $ cp config/email.example.yml config/email.yml
 
-    Edit config/environments/production.rb . For example,
+    Edit config/email.yml . For example,
 
-        config.action_mailer.smtp_settings = {
-          :address => 'smtp.example.com',
-          :port => 25,
-          :domain => 'example.com'
-        }
-        FROM_ADDR = 'test@example.com'
+        default:
+          from: 'troch@example.jp'
+
+        settings:
+          address: 'smtp.example.jp'
+          port: 25
+          domain: 'example.jp'
 
 5. Set up crontab
 

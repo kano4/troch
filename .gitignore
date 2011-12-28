@@ -7,8 +7,7 @@ bin/
 .sass-cache/
 vendor/bundle
 vendor/cache
-config/environments/production.rb
-config/environments/development.rb
+config/email.yml
 config/database.yml
 .rspec
 .rvmrc
