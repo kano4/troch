@@ -6,26 +6,10 @@
     %th ステータス異常
     %th 監視対象サイト
   %tr
-    %td
-      = link_to @cron_status, :controller => 'settings', :action => 'watch_on_off'
-    %td
-      = @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
-    %td
-      = @error_num
-    %td
-      = @sites.length
-
-ステータス異常サイト
-%table.table
-  %tr
-    %th サイト名
-    %th ステータス
-  - @error_sites.each do |site|
-    %tr
-      %td
-        = link_to site.name, site_path(site) unless site.name.blank?
-      %td
-        = site.watch_logs.last.status unless site.watch_logs.last.status.blank?
+    %td= link_to(@cron_status, :controller => 'settings', :action => 'watch_on_off')
+    %td= @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
+    %td= link_to(@error_num, log_path)
+    %td= link_to(@sites.length, site_path)
 
 ドメイン有効期限30日以内
 %table#domainlist

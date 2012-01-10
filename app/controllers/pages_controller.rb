@@ -38,4 +38,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def log
+    @sites = Site.find(:all)
+    @error_sites = []
+    @sites.each do |site|
+      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new"
+        @error_sites << site
+      end
+    end
+  end
+
 end

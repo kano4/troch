@@ -8,6 +8,7 @@ Troch::Application.routes.draw do
 
   root :to => 'pages#index'
   get '/edit', :to => 'pages#edit'
+  get '/log', :to => 'pages#log'
   put '/update', :to => 'pages#update'
 
   # The priority is based upon order of creation:
