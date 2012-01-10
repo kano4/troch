@@ -2,38 +2,20 @@
 %html
   %head
     %title Troch
-    = stylesheet_link_tag "web-app-theme/base", "web-app-theme/themes/warehouse/style", "web-app-theme/override"
+    = stylesheet_link_tag 'adminiziolite_css/reset.css', :media => 'screen,projection'
+    = stylesheet_link_tag 'adminiziolite_css/main.css', :media => 'screen,projection'
+    = stylesheet_link_tag 'adminiziolite_css/2col.css', :media => 'screen,projection', :title => '2col'
+    = stylesheet_link_tag 'adminiziolite_css/style.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'adminiziolite_css/mystyle.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'datatables/table_jui.css', :media => 'screen, projection'
     = javascript_include_tag :application
+    = javascript_include_tag 'datatables/jquery.dataTables.js'
     = csrf_meta_tag
   %body
-    #container
-      #header
-        %h1
-          %a{:href => "/"} Troch
-        #user-navigation
-          %ul.wat-cf
-            %li
-              = link_to t("web-app-theme.profile", :default => "Profile"), edit_path
-            %li
-              = link_to t("web-app-theme.settings", :default => "Settings"), settings_path
-            %li
-              = link_to t("web-app-theme.logout", :default => "Logout"), destroy_user_session_path, :method => :delete
-        #main-navigation
-          %ul.wat-cf
-            %li{ :class => (params[:controller] == "pages" ? "first active" : "first") }
-              = link_to "Dashboard", root_path
-            %li{ :class => (params[:controller] == "sites" ? "active" : nil) }
-              = link_to "Site", sites_path
-      #wrapper.wat-cf
-        .flash
-          - flash.each do |type, message|
-            %div{:class => "message #{type}"}
-              %p= message
-        #main
+    #main
+      = render :partial => 'shared/header'
+      #cols.box
+        = render :partial => 'shared/sidebar'
+        #content.box
           = yield
-          #footer
-            .block
-              %p
-                Copyright &copy; #{Time.now.year} Troch.
-        #sidebar
-          = render :partial => 'shared/sidebar'
+      = render :partial => 'shared/footer'

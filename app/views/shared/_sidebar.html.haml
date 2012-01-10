@@ -1,11 +1,4 @@
-.block.notice
-  %h3 Sidebar
-  .content
-    %p some content
-.block
-  %h3 Links
-  %ul.navigation
-    %li
-      %a{:href => "#"} Link 1
-    %li
-      %a{:href => "#"} Link 2
+#aside.box
+  %ul.box
+    %li= link_to 'ダッシュボード', :root
+    %li= link_to '監視サイト', :sites

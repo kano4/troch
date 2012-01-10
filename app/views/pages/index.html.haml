@@ -1,74 +1,52 @@
-.block
-  .content
-    .inner
-      サマリー
-      %table.table
-        %tr
-          %th 起動/停止
-          %th ステータス異常
-          %th 最終チェック日時
-          %th 監視対象サイト
-        %tr
-          %td
-            = link_to @cron_status, :controller => 'settings', :action => 'watch_on_off'
-          %td
-            = @error_num
-          %td
-            = @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
-          %td
-            = @sites.length
+サマリー
+%table.table
+  %tr
+    %th 起動/停止
+    %th 最終チェック日時
+    %th ステータス異常
+    %th 監視対象サイト
+  %tr
+    %td
+      = link_to @cron_status, :controller => 'settings', :action => 'watch_on_off'
+    %td
+      = @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
+    %td
+      = @error_num
+    %td
+      = @sites.length
 
-      ステータス異常サイト
-      %table.table
-        %tr
-          %th Site Name
-          %th Status
-        - @error_sites.each do |site|
-          %tr
-            %td
-              = link_to site.name, site_path(site) unless site.name.blank?
-            %td
-              = site.watch_logs.last.status unless site.watch_logs.last.status.blank?
+ステータス異常サイト
+%table.table
+  %tr
+    %th サイト名
+    %th ステータス
+  - @error_sites.each do |site|
+    %tr
+      %td
+        = link_to site.name, site_path(site) unless site.name.blank?
+      %td
+        = site.watch_logs.last.status unless site.watch_logs.last.status.blank?
 
-      ドメイン有効期限30日以内
-      %table.table
-        %tr
-          %th Site Name
-          %th Domain Expired Date
-        - @domain_sites.each do |site|
-          %tr
-            %td
-              = link_to site.name, site_path(site) unless site.name.blank?
-            %td
-              = site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
+ドメイン有効期限30日以内
+%table#domainlist
+  %tr
+    %th ドメイン
+    %th 有効期限
+  - @domain_sites.each do |site|
+    %tr
+      %td
+        = link_to site.domain_url, site_path(site) unless site.domain_url.blank?
+      %td
+        = site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
 
-      SSL有効期限30日以内
-      %table.table
-        %tr
-          %th Site Name
-          %th SSL Expired Date
-        - @ssl_sites.each do |site|
-          %tr
-            %td
-              = link_to site.name, site_path(site) unless site.name.blank?
-            %td
-              = site.ssl_expired.strftime("%Y/%m/%d") unless site.ssl_expired.blank?
-
-      最近のログ
-      %table.table
-        %tr
-          %th Site Name
-          %th Status
-          %th Response Time
-          %th Watched Date
-        - @watchlogs.each do |watchlog|
-          %tr
-            %td
-              = link_to watchlog.site.name, site_path(watchlog.site) unless watchlog.site.blank?
-            %td
-              = watchlog.status unless watchlog.status.blank?
-            %td
-              = watchlog.response_time unless watchlog.response_time.blank?
-              msec
-            %td
-              = watchlog.updated_at.strftime("%Y/%m/%d %H:%M:%S") unless watchlog.updated_at.blank?
+SSL有効期限30日以内
+%table.table
+  %tr
+    %th ドメイン
+    %th SSL有効期限
+  - @ssl_sites.each do |site|
+    %tr
+      %td
+        = link_to site.name, site_path(site) unless site.name.blank?
+      %td
+        = site.ssl_expired.strftime("%Y/%m/%d") unless site.ssl_expired.blank?
