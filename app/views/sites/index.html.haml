@@ -20,7 +20,7 @@
       %tr
         %td= site.id
         %td= link_to site.name, site_path(site)
-        %td= site.watch_logs.last.status unless site.watch_logs.last.status.blank?
+        %td= site.watch_logs.last.status unless site.watch_logs.last.blank?
         %td= site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
         %td= site.ssl_expired.strftime("%Y/%m/%d") unless site.ssl_expired.blank?
         %td= site.watch_method

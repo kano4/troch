@@ -4,7 +4,7 @@
     %td= @site.name
   %tr
     %td ステータス
-    %td= @site.watch_logs.last.status unless @site.watch_logs.last.status.blank?
+    %td= @site.watch_logs.last.status unless @site.watch_logs.last.blank?
   %tr
     %td URL(チェック先)
     %td= @site.url
