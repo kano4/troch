@@ -6,7 +6,6 @@ production:
   encoding: utf8
   host: localhost
   reconnect: true
-  socket: /var/run/mysqld/mysqld.sock
 
 # for development
 development:
@@ -17,7 +16,6 @@ development:
   encoding: utf8
   host: localhost
   reconnect: true
-  socket: /var/run/mysqld/mysqld.sock
 
 test:
   adapter: mysql2
@@ -26,4 +24,3 @@ test:
   password:
   encoding: utf8
   host: localhost
-  socket: /var/run/mysqld/mysqld.sock
