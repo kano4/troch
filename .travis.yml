@@ -7,7 +7,7 @@ before_script:
   - "mv config/email.example.yml config/email.yml"
 
 script:
-  - "bundle exec rake db:create db:migrate db:test:clone spec"
+  - "bundle exec rake db:create db:migrate db:test:prepare spec"
 
 branches:
   only:
