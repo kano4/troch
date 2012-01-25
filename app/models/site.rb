@@ -1,5 +1,6 @@
 # coding: utf-8
 class Site < ActiveRecord::Base
+  belongs_to :group
   has_many :watch_logs
   has_many :users_sites
   has_many :users, :through => :users_sites

@@ -24,6 +24,9 @@
     %td SSL有効期限
     %td= @site.ssl_expired
   %tr
+    %td グループ
+    %td= @site.group.name unless @site.group.blank?
+  %tr
     %td 担当者
     %td
       - @site.users.each do |user|
