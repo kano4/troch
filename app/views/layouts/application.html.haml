@@ -17,5 +17,6 @@
       #cols.box
         = render :partial => 'shared/sidebar'
         #content.box
-          = yield
+          %div{:"data-pjax-container" => "true"}
+            = yield
       = render :partial => 'shared/footer'
