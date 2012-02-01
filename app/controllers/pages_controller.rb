@@ -22,6 +22,8 @@ class PagesController < ApplicationController
   end
 
   def edit
+    redirect_to action: "edit" if request.headers["X-PJAX"]
+
     @user = current_user
     @groups = Group.find(:all)
     @nogroup_sites = Site.find(:all)

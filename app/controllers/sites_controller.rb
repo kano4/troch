@@ -4,9 +4,9 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
-
     redirect_to :sites if request.headers["X-PJAX"]
+
+    @sites = Site.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @sites }
