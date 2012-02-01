@@ -4,6 +4,16 @@
     %h2.title User
     .inner
       = form_for @user, :url => { :action => "update" } do |f|
+        サマリー通知
+        %br
+        = f.radio_button :summary, true
+        有り
+        = f.radio_button :summary, false
+        無し
+        %br
+        %br
+        監視サイト
+        %br
         - @groups.each do |group|
           .parent
             %h3
@@ -19,6 +29,7 @@
           = site.name
           %br
         = f.hidden_field :email, :value => @user.email
+        %br
 
         .group.navform.wat-cf
           %button.button{:type => "submit"}
