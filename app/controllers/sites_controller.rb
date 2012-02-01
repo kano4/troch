@@ -45,7 +45,6 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
-    params[:site][:user_ids] ||= []
     @site = Site.new(params[:site])
 
     respond_to do |format|
@@ -62,7 +61,6 @@ class SitesController < ApplicationController
   # PUT /sites/1
   # PUT /sites/1.json
   def update
-    params[:site][:user_ids] ||= []
     @site = Site.find(params[:id])
 
     respond_to do |format|

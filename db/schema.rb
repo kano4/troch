@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120201084356) do
     t.date     "ssl_expired"
     t.string   "watch_method",   :null => false
     t.string   "keyword"
+    t.text     "note"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "group_id"

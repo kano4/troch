@@ -9,6 +9,7 @@ class CreateSites < ActiveRecord::Migration
       t.date :ssl_expired
       t.string :watch_method, :null => false
       t.string :keyword
+      t.text :note
 
       t.timestamps
     end

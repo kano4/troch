@@ -27,11 +27,8 @@
     %td グループ
     %td= @site.group.name unless @site.group.blank?
   %tr
-    %td 担当者
-    %td
-      - @site.users.each do |user|
-        = user.email
-        %br
+    %td 備考
+    %td= @site.note
 
 .wat-cf
   = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_site_path(@site), :class => "button"

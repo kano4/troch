@@ -28,6 +28,9 @@
 .group
   = f.label :group_id, 'グループ'
   = f.collection_select(:group_id, Group.find(:all), :id, :name, :include_blank => true)
+.group
+  = f.label :note, '備考'
+  = f.text_area :note, :size => '40x5'
 .group.navform.wat-cf
   %button.button{:type => "submit"}
     = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
