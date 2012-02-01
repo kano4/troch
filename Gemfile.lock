@@ -28,7 +28,6 @@ GEM
     activesupport (3.2.1)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.2.6)
     arel (3.0.0)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
@@ -47,17 +46,14 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     daemon-spawn (0.4.2)
+    database_cleaner (0.7.1)
     devise (2.0.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
       warden (~> 1.1)
     diff-lcs (1.1.3)
-    em-websocket (0.3.6)
-      addressable (>= 2.1.1)
-      eventmachine (>= 0.12.9)
     erubis (2.7.0)
-    eventmachine (0.12.10)
     execjs (1.3.0)
       multi_json (~> 1.0)
     factory_girl (2.5.0)
@@ -67,18 +63,6 @@ GEM
       railties (>= 3.0.0)
     ffi (1.0.11)
     forgery (0.5.0)
-    guard (1.0.0)
-      ffi (>= 0.5.0)
-      thor (~> 0.14.6)
-    guard-livereload (0.4.0)
-      em-websocket (>= 0.2.0)
-      guard (>= 0.10.0)
-      multi_json (~> 1.0.3)
-    guard-rspec (0.6.0)
-      guard (>= 0.10.0)
-    guard-spork (0.5.1)
-      guard (>= 0.10.0)
-      spork (>= 0.8.4)
     haml (3.1.4)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -93,7 +77,6 @@ GEM
       railties (>= 3.2.0.beta, < 5.0)
       thor (~> 0.14)
     json (1.6.5)
-    libnotify (0.7.2)
     libv8 (3.3.10.4)
     mail (2.4.1)
       i18n (>= 0.4.0)
@@ -114,6 +97,9 @@ GEM
     pjax-rails (0.1.4)
       jquery-rails
     polyglot (0.3.3)
+    prefetch-rspec (0.1.5)
+      rspec (> 2.0.0)
+      rspec (>= 2.0.0)
     rack (1.4.1)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -141,8 +127,6 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2.2)
-    rb-inotify (0.8.8)
-      ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
     redis (2.2.2)
@@ -184,7 +168,6 @@ GEM
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
       tilt (~> 1.3, >= 1.3.3)
-    spork (0.9.0)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -220,27 +203,23 @@ DEPENDENCIES
   capybara
   coffee-script
   daemon-spawn
+  database_cleaner
   devise
   factory_girl_rails
   forgery
-  guard-livereload
-  guard-rspec
-  guard-spork
   haml-rails
   hpricot
   jquery-rails
-  libnotify
   mechanize (~> 2.0.1)
   mysql2
   pjax-rails
+  prefetch-rspec
   rails (~> 3.2.0)
   rails3-generators
-  rb-inotify
   resque
   rspec-rails
   ruby_parser
   sass-rails
-  spork (~> 0.9.0.rc)
   sprockets
   therubyracer
   uglifier

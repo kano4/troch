@@ -1,0 +1,13 @@
+%p#notice= notice
+
+%p
+  %b 名前:
+  = @group.name
+%p
+  %b サイト
+  - @group.sites.each do |site|
+    = site.name
+
+= link_to 'Edit', edit_group_path(@group)
+\|
+= link_to 'Back', groups_path

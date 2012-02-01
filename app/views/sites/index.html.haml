@@ -11,6 +11,7 @@
       %th 監視方法
       %th 更新日
       %th 最終チェック日時
+      %th グループ
       %th 詳細
       %th 編集
       %th 担当者
@@ -26,6 +27,7 @@
         %td= site.watch_method
         %td= site.updated_at.strftime("%Y/%m/%d")
         %td= site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless site.watch_logs.last.blank?
+        %td= site.group.name unless site.group.blank?
         %td= link_to('詳細', site_path(site))
         %td= link_to('編集', edit_site_path(site))
         %td= link_to('担当者', '#')

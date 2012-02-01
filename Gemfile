@@ -24,15 +24,11 @@ gem 'resque'
 gem 'daemon-spawn', :require => 'daemon_spawn'
 gem 'whenever', :require => false
 group :development, :test do
-  gem 'forgery'
-  gem 'spork', '~> 0.9.0.rc'
-  gem 'libnotify'
-  gem 'rb-inotify'
+  gem 'prefetch-rspec'
   gem 'rspec-rails'
-  gem 'guard-rspec'
-  gem 'guard-spork'
   gem 'capybara'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'forgery'
   gem 'rails3-generators'
-  gem 'guard-livereload'
 end

@@ -26,6 +26,8 @@
   = f.text_field :ssl_url, :class => 'text_field'
   %span.description Ex: ssl.example.com
 .group
+  = f.collection_select(:group_id, Group.find(:all), :id, :name)
+.group
 = f.label :sites, :class => :label
 - @users.each do |user|
   = check_box_tag("site[user_ids][]", user.id, @site.users.include?(user))

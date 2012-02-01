@@ -6,14 +6,26 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require pjax
-$(function(){
-  $('#all').click(function(){
-    if(this.checked){
-      $('#check input').attr('checked','checked');
-    }else{
-      $('#check input').removeAttr('checked');
+//= require_tree .
+$(document).ready(function() {
+  var $tgt_parent = $("input.check-parent");
+  var $tgt_child = $("input.check-child");
+
+  $tgt_parent.click(function(){
+    $(this).parents("div.parent").find('ul li input.check-child').attr('checked', this.checked);
+  });
+
+  $tgt_child.click(function(){
+    var checkNum = $(this).parents('ul').find('li input.check-child:checked').length;
+    var listNum = $(this).parents('ul').find('li').length;
+
+    if(checkNum < listNum){
+      $(this).parents("div.parent").find("input.check-parent:checkbox").removeAttr('checked');
+    }
+
+    if(checkNum == listNum){
+      $(this).parents("div.parent").find("input.check-parent:checkbox").attr('checked','checked');
     }
   });
 });
