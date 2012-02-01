@@ -14,7 +14,6 @@
       %th グループ
       %th 詳細
       %th 編集
-      %th 担当者
       %th 削除
   %tbody
     - @sites.each do |site|
@@ -30,5 +29,4 @@
         %td= site.group.name unless site.group.blank?
         %td= link_to('詳細', site_path(site))
         %td= link_to('編集', edit_site_path(site))
-        %td= link_to('担当者', '#')
         %td= link_to('削除', site_path(site), :method => "delete")

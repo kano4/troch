@@ -6,8 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require pjax
 //= require_tree .
+//= require pjax
 $(document).ready(function() {
   var $tgt_parent = $("input.check-parent");
   var $tgt_child = $("input.check-child");
