@@ -23,7 +23,11 @@ class PagesController < ApplicationController
 
   def edit
     @user = current_user
-    @sites = Site.find(:all)
+    @groups = Group.find(:all)
+    @nogroup_sites = Site.find(:all)
+    @groups.each do |group|
+      @nogroup_sites -= group.sites
+    end
   end
 
   def update
