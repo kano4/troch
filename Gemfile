@@ -25,6 +25,7 @@ gem 'daemon-spawn', :require => 'daemon_spawn'
 gem 'whenever', :require => false
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 group :development, :test do
+  gem 'thin'
   gem 'prefetch-rspec'
   gem 'rspec-rails'
   gem 'capybara'
