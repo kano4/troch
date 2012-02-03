@@ -3,9 +3,7 @@
 = "Date   : #{@date}"
 = "Status : #{@status}"
 = "Site   : #{@site.name}"
-= "URL:   : #{@site.url}"
-= "Diff   : " unless @diff_html.blank?
-- @diff_html.each do |diff_html|
-  = diff_html
+= "URL    : #{@site.url}"
+= "Diff   : #{@diff_html}" unless @diff_html.blank?
 
 上記のサイトを確認してください。

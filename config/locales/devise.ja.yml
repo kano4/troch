@@ -41,7 +41,7 @@ ja:
       send_instructions: '登録方法を数分以内にメールでご連絡します。'
       confirmed: 'アカウントを登録しました。'
     registrations:
-      signed_up: 'アカウント登録を受け付けました。確認のメールをお送りします。'
+      signed_up: 'アカウントを登録しました。'
       updated: 'アカウントを更新しました。'
       destroyed: 'アカウントを削除しました。またのご利用をお待ちしております。'
     unlocks:

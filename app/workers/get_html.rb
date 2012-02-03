@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'mechanize'
 require 'base64'
 require 'diff/lcs'
@@ -57,7 +58,7 @@ class GetHtml
             get_content  = Base64.decode64(last_log.content)
             last_content = Base64.decode64(encoded_content)
             diffs = Diff::LCS.sdiff(get_content, last_content)
-            diff_html = ''
+            diff_html = ""
 #            diffs.each do |d|
 #              if d.old_element != d.new_element
 #                diff_html << "-#{d.old_element}\n" if d.old_element
