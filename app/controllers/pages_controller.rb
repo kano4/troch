@@ -20,8 +20,6 @@ class PagesController < ApplicationController
   end
 
   def edit
-    redirect_to action: "edit" if request.headers["X-PJAX"]
-
     @user = current_user
     @groups = Group.find(:all)
     @nogroup_sites = Site.find(:all)
@@ -36,15 +34,13 @@ class PagesController < ApplicationController
     @user = current_user
 
     if @user.update_attributes(params[:user])
-      redirect_to edit_path, notice: "User's site was successfully updated."
+      redirect_to edit_path, notice: "ユーザ情報を更新しました。"
     else
       render action: "edit"
     end
   end
 
   def log
-    redirect_to action: "edit" if request.headers["X-PJAX"]
-
     @watch_logs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 200, :order => "updated_at DESC")
   end
 

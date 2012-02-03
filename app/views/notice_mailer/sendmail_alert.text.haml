@@ -4,6 +4,8 @@
 = "Status : #{@status}"
 = "Site   : #{@site.name}"
 = "URL:   : #{@site.url}"
-= "Diff   : #{@diff_html}" unless @diff_html.blank?
+= "Diff   : " unless @diff_html.blank?
+- @diff_html.each do |diff_html|
+  = diff_html
 
 上記のサイトを確認してください。

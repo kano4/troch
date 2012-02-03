@@ -2,32 +2,39 @@
   = @site.name
 %table.confirm
   %tr
-    %td 現在のステータス
+    %th 現在のステータス
     %td= @site.watch_logs.last.status unless @site.watch_logs.last.blank?
   %tr
-    %td URL(チェック先)
+    %th 最終チェック日時
+    %td= @site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless @site.watch_logs.last.blank?
+  %tr
+    %th URL(チェック先)
     %td
       =link_to @site.url, @site.url
   %tr
-    %td 監視方法
-    %td= @site.watch_method "(キーワード): #{@site.keyword}" if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
+    %th 監視方法
+    %td
+      = "HTML監視" if @site.watch_method == 'html_body'
+      = "TITLEタグ監視" if @site.watch_method == 'html_title'
+      = "キーワード監視: " if @site.watch_method == 'html_keyword'
+      = @site.keyword if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
   %tr
-    %td ドメイン名
+    %th ドメイン名
     %td= @site.domain_url
   %tr
-    %td ドメイン有効期限
+    %th ドメイン有効期限
     %td= @site.domain_expired
   %tr
-    %td SSLドメイン名
+    %th SSLドメイン名
     %td= @site.ssl_url
   %tr
-    %td SSL有効期限
+    %th SSL有効期限
     %td= @site.ssl_expired
   %tr
-    %td グループ
+    %th グループ
     %td= link_to(@site.group.name, site_path(@site.group)) unless @site.group.blank?
   %tr
-    %td 備考
+    %th 備考
     %td= @site.note
 
 .wat-cf
