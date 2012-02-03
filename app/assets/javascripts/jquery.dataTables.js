@@ -8840,7 +8840,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "次へ",
 			
 			
 				/**
@@ -8861,7 +8861,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "前へ"
 			},
 		
 			/**
@@ -8903,7 +8903,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "_TOTAL_件中 _START_から_END_件目を表示",
 		
 		
 			/**
@@ -9023,7 +9023,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": "ページあたりの件数 _MENU_",
 		
 		
 			/**
@@ -9097,7 +9097,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "検索:",
 		
 		
 			/**
