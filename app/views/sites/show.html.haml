@@ -2,7 +2,7 @@
   = @site.name
 %table.confirm
   %tr
-    %td ステータス
+    %td 現在のステータス
     %td= @site.watch_logs.last.status unless @site.watch_logs.last.blank?
   %tr
     %td URL(チェック先)
