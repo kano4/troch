@@ -8,7 +8,7 @@
     %th
       = f.label :url, 'URL（チェック先）'
     %td
-      = f.text_field :url
+      = f.text_field :url, :value => (@site.url || "http://")
       %span.description 例：http://examle.com
   %tr
     %th{:rowspan => "3"}
