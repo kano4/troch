@@ -1,6 +1,6 @@
 .block
   .content
-    = link_to 'パスワード変更', {:controller=>"devise/registrations", :action=>"edit"}
+    = link_to 'アカウント情報の変更', {:controller=>"devise/registrations", :action=>"edit"}
     %h2.title User
     .inner
       = form_for @user, :url => { :action => "update" } do |f|

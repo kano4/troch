@@ -1,6 +1,7 @@
-%h1 Troch
+%h1
+  = link_to 'Troch', :root
 .block#block-signup
-  %h2 Sign up
+  %h2 新規登録
   .content
     .flash
       - flash.each do |type, message|
@@ -10,16 +11,15 @@
       .group
         = f.label :email, :class => "label"
         = f.text_field :email, :class => "text_field"
-        %span.description Ex. test@example.com
       .group
         = f.label :password, :class => "label"
         = f.password_field :password, :class => "text_field"
-        %span.description must be at least 6 characters
+        %span.description 6文字以上
       .group
-        = f.label :password_confirmation, "Re-enter Password", :class => "label"
+        = f.label :password_confirmation, :class => "label"
         = f.password_field :password_confirmation, :class => "text_field"
       .group.wat-cf
         %button.button{ :type => "submit" }
           = image_tag "web-app-theme/icons/tick.png"
-          Sign up
+          新規登録
     = render :partial => "devise/shared/links"

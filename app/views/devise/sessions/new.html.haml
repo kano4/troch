@@ -1,6 +1,7 @@
-%h1 Troch
+%h1
+  = link_to 'Troch', :root
 .block#block-login
-  %h2 Sign in
+  %h2 ログイン
   .content.login
     .flash
       - flash.each do |type, message|
@@ -22,5 +23,5 @@
         .right
           %button.button{ :type => "submit" }
             = image_tag "web-app-theme/icons/key.png"
-            Login
+            ログイン
     = render :partial => "devise/shared/links"
