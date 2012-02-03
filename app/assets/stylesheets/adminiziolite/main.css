@@ -12,7 +12,7 @@ HTML - styles
 
 body {font:0.8em/1.5 "arial", sans-serif;}
 h1, h4, h5, h6, address, blockquote, dl, fieldset, ol, p, table, ul {margin:15px 0;}
-h2 {margin:15px 0 0 0;}
+h2 {margin:0 0 0 0;}
 #content h1 {font-size:180%;}
 #content h2 {font-size:160%;}
 #content h4 {font-size:120%;}
@@ -20,8 +20,10 @@ h2 {margin:15px 0 0 0;}
 #content table {margin:0 0 10px 0; border-collapse:collapse;}
 #content table.width100 {width:100%;}
 #content table th {text-align:left; vertical-align:middle; font-weight:bold;}
-#content ul {margin:15px 0; list-style:none;}
-#content ul li {padding-left:15px; background:url("design/ul.gif") 0 4px no-repeat;}
+#content ul {margin:0 0; list-style:none;}
+#content ul li {padding-left:10px;}
+#content .sites_list ul {margin: 0 0 20px;}
+#content .sites_list ul li {padding-left:20px;}
 #content ul ul {margin:0 0 0 10px;}
 #content ul ul li {padding-left:15px; background:url("design/ul-ul.gif") 0 4px no-repeat;}
 #content ol {margin:15px 0 15px 30px; list-style-type:decimal;}

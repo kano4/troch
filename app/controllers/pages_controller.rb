@@ -3,8 +3,6 @@ class PagesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @watchlogs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 10, :order => "updated_at DESC")
-#    @watchlogs = WatchLog.find(:all, :limit => 10, :order => "updated_at DESC")
     @sites = Site.find(:all)
     @error_num = 0
     @error_sites = []
@@ -45,6 +43,12 @@ class PagesController < ApplicationController
   end
 
   def log
+    redirect_to action: "edit" if request.headers["X-PJAX"]
+
+    @watch_logs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 200, :order => "updated_at DESC")
+  end
+
+  def alert
     @sites = Site.find(:all)
     @error_sites = []
     @sites.each do |site|

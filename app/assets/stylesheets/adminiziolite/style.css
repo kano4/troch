@@ -13,15 +13,15 @@ HTML - styles
 body {background-color:#eaeaea; color:#303030;}
 a {color:#0085cc;}
 a:hover, a:active, a:focus {color:#df0000;}
-#content h2 {color:#0085cc;}
-#content table {border:2px solid #cfcfcf;}
-#content table th {padding:3px 10px; border-right:1px solid #0074B3; background-color:#0085cc; color:#fff;}
-#content table td {padding:3px 10px; border:1px solid #cfcfcf;}
+#content h2 {color:#000000;}
+#content table {border:2px solid #4f4f4f;}
+#content table th {padding:10px 10px; border-right:1px solid #4f4f4f; background-color:#214B73; color:#fff; border: 1px solid #8F8F8f}
+#content table td {padding:3px 10px; border:1px solid #4f4f4f; vertical-align: middle;}
 #content table tr.bg td {background-color:#e8f6ff;}
 #content dl dt {color:#df0000;}
 #content fieldset {border:1px solid #ccc;}
 #content legend {background:#FFF; color:#0085cc;}
-#content acronym, #content abbr, #content .help {border-bottom:1px dotted #cfcfcf;}
+#content acronym, #content abbr, #content .help {border-bottom:1px dotted #9f9f9f;}
 
 /* =============================================================================
 HTML - without styles

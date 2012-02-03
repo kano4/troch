@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  $("#logs_table").dataTable({ "bStateSave": true });
+} );
+
+$(document).ready(function() {
   var $tgt_parent = $("input.check-parent");
   var $tgt_child = $("input.check-child");
 

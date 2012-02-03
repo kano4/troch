@@ -1,13 +1,16 @@
-%p#notice= notice
-
-%p
-  %b 名前:
+%h2
   = @group.name
-%p
-  %b サイト
+%br
+%h3
+  サイト一覧
+%ul
   - @group.sites.each do |site|
-    = site.name
+    %li
+      = link_to site.name, site_path(site)
+%br
 
-= link_to 'Edit', edit_group_path(@group)
-\|
-= link_to 'Back', groups_path
+.wat-cf
+  = link_to image_tag("web-app-theme/icons/application_edit.png") + " 編集", edit_group_path(@group), :class => "button"
+  = link_to image_tag("web-app-theme/icons/cross.png") + " 削除", group_path(@group), :method => "delete", :class => "button", :confirm => "削除してよろしいですか？"
+%br
+= link_to '戻る', sites_path

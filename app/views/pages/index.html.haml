@@ -1,4 +1,4 @@
-サマリー
+%h3 サマリー
 %table.table
   %tr
     %th ステータス
@@ -8,10 +8,10 @@
   %tr
     %td= link_to(@cron_status, :controller => 'settings', :action => 'watch_on_off')
     %td= @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
-    %td= link_to(@error_num, log_path)
+    %td= link_to(@error_num, alert_path)
     %td= link_to(@sites.length, site_path)
 
-ドメイン有効期限30日以内
+%h3 ドメイン有効期限30日以内
 %table#domainlist
   %tr
     %th ドメイン
@@ -23,7 +23,7 @@
       %td
         = site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
 
-SSL有効期限30日以内
+%h3 SSL有効期限30日以内
 %table.table
   %tr
     %th ドメイン

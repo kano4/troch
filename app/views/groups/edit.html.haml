@@ -1,7 +1,7 @@
-%h1 Editing group
-
-= render 'form'
-
-= link_to 'Show', @group
-\|
-= link_to 'Back', groups_path
+.block
+  .content
+    %h2 グループ編集
+    %br
+    .inner
+      = form_for @group, :url => group_path(@group), :html => { :class => :form } do |f|
+        = render :partial => "form", :locals => {:f => f}

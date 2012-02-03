@@ -1,8 +1,7 @@
 .block
   .content
-    %h2.title
-      = t("web-app-theme.new", :default => "New")
-      Site
+    %h2 サイト登録
+    %br
     .inner
       = form_for :site, :url => sites_path, :html => { :class => :form } do |f|
         = render :partial => "form", :locals => {:f => f}

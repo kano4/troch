@@ -18,5 +18,9 @@
         = render :partial => 'shared/sidebar'
         #content.box
           %div{:"data-pjax-container" => "true"}
+            .flash
+              - flash.each do |type, message|
+                %div{ :class => "message #{type}" }
+                  %p= message
             = yield
       = render :partial => 'shared/footer'

@@ -19,5 +19,7 @@
     %i (現在のパスワードを入力してください)
     %br/
     = f.password_field :current_password
-  %p= f.submit "更新"
-= link_to "戻る", edit_path
+  %button{:type => "submit"}
+    = image_tag("web-app-theme/icons/tick.png")
+    更新
+  = link_to 'キャンセル', edit_path

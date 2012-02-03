@@ -1,10 +1,14 @@
 .block
   .content
+    %h2.title ユーザ情報
+    %br
+    ・
     = link_to 'アカウント情報の変更', {:controller=>"devise/registrations", :action=>"edit"}
-    %h2.title User
+    %br
+    %br
     .inner
       = form_for @user, :url => { :action => "update" } do |f|
-        サマリー通知
+        ・サマリー通知
         %br
         = f.radio_button :summary, true
         有り
@@ -12,28 +16,27 @@
         無し
         %br
         %br
-        監視サイト
-        %br
-        - @groups.each do |group|
-          .parent
-            %h3
-              %input.check-parent{:type => "checkbox"}>/
-              = group.name
-            %ul
-              - group.sites.each do |site|
-                %li
-                  = check_box_tag("user[site_ids][]", site.id, @user.sites.include?(site), :class => 'check-child')
-                  = site.name
-        - @nogroup_sites.each do |site|
-          = check_box_tag("user[site_ids][]", site.id, @user.sites.include?(site))
-          = site.name
+        ・監視サイト
+        .sites_list
+          - @groups.each do |group|
+            .parent
+              %h3
+                %input.check-parent{:type => "checkbox"}>/
+                = group.name
+              %ul
+                - group.sites.each do |site|
+                  %li
+                    = check_box_tag("user[site_ids][]", site.id, @user.sites.include?(site), :class => 'check-child')
+                    = site.name
+          - @nogroup_sites.each do |site|
+            = check_box_tag("user[site_ids][]", site.id, @user.sites.include?(site))
+            = site.name
+            %br
+          = f.hidden_field :email, :value => @user.email
           %br
-        = f.hidden_field :email, :value => @user.email
-        %br
 
-        .group.navform.wat-cf
-          %button.button{:type => "submit"}
-            = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
-            = t("web-app-theme.save", :default => "Save")
-          %span.text_button_padding= t("web-app-theme.or", :default => "or")
-          = link_to t("web-app-theme.cancel", :default => "Cancel"), edit_path, :class => "text_button_padding link_button"
+.wat-cf
+  %button{:type => "submit"}
+    = image_tag("web-app-theme/icons/tick.png")
+    保存
+  = link_to 'キャンセル', edit_path

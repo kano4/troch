@@ -1,5 +1,7 @@
-%h1 New group
-
-= render 'form'
-
-= link_to 'Back', groups_path
+.block
+  .content
+    %h2 グループ登録
+    %br
+    .inner
+      = form_for :site, :url => sites_path, :html => { :class => :form } do |f|
+        = render :partial => "form", :locals => {:f => f}

@@ -1,13 +1,11 @@
-= form_for @group do |f|
-  -if @group.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
-      %ul
-        - @group.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit 'Save'
+%table
+  %tr
+    %th
+      = f.label :name, 'グループ名'
+    %td
+      = f.text_field :name
+.wat-cf
+  %button{:type => "submit"}
+    = image_tag("web-app-theme/icons/tick.png")
+    保存
+  = link_to 'キャンセル', groups_path

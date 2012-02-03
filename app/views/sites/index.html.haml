@@ -1,6 +1,9 @@
-%h3 監視サイト
+%h2 監視サイト
 %br
-= link_to '新規サイトの追加', new_site_path
+・
+= link_to '新規サイトの登録', new_site_path
+%br
+%br
 %table#sites_table
   %thead
     %tr
@@ -15,7 +18,6 @@
       %th グループ
       %th 詳細
       %th 編集
-      %th 削除
   %tbody
     - @sites.each do |site|
       %tr
@@ -27,7 +29,6 @@
         %td= site.watch_method
         %td= site.updated_at.strftime("%Y/%m/%d")
         %td= site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless site.watch_logs.last.blank?
-        %td= site.group.name unless site.group.blank?
+        %td= link_to(site.group.name, group_path(site.group)) unless site.group.blank?
         %td= link_to('詳細', site_path(site))
         %td= link_to('編集', edit_site_path(site))
-        %td= link_to('削除', site_path(site), :method => "delete")
