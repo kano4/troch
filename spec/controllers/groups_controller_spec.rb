@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe GroupsController do
+  before(:each) do
+    @user = Factory(:user)
+    sign_in @user
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Group. As you add validations to Group, be sure to
