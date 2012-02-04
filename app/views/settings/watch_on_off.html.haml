@@ -3,11 +3,14 @@
     %h2.title
       サイト監視の起動/停止
     .inner
-      = @save_message
+      .flash
+        - unless @save_message.blank?
+          %div{ :class => "message notice" }
+            = @save_message
       %br
       = form_tag do
         = radio_button_tag :on_off, true, @cron_interval
-        = label_tag "ON(起動)"
+        = label_tag "ON(監視)"
         = radio_button_tag :on_off, false, !@cron_interval
         = label_tag 'OFF(停止)'
         = submit_tag '設定保存'

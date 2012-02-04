@@ -1,16 +1,4 @@
-/* =============================================================================
-
-	2COL.CSS
-	version: 1.7
-	updated: 2009-03-14, 12:44 GMT+1
-
-============================================================================= */
-
-/* =============================================================================
-LAYOUT
-============================================================================= */
-
-#cols {position:relative; margin:15px 0; padding-right:15px; background:url("design/content.gif") 230px 0 repeat-y;}
+#cols {position:relative; margin:15px 0; padding-right:15px;}
 #aside {float:left; width:130px; margin-right:0;}
 #content {margin-left:232px; overflow:visible;}
 #tray .ico-col2 {display:none;}
