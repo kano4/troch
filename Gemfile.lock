@@ -252,7 +252,7 @@ DEPENDENCIES
   haml-rails
   hpricot
   jquery-rails
-  mechanize (~> 2.0.1)
+  mechanize
   mysql2
   pjax-rails
   prefetch-rspec

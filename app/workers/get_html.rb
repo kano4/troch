@@ -57,14 +57,14 @@ class GetHtml
             site.watch_logs.build(:status => 'diff', :content => encoded_content, :response_time => response_time)
             get_content  = Base64.decode64(last_log.content)
             last_content = Base64.decode64(encoded_content)
-            diffs = Diff::LCS.sdiff(get_content, last_content)
+            diffs = Diff::LCS.sdiff(get_content.split, last_content.split)
             diff_html = ""
-#            diffs.each do |d|
-#              if d.old_element != d.new_element
-#                diff_html << "-#{d.old_element}\n" if d.old_element
-#                diff_html << "+#{d.new_element}\n" if d.new_element
-#              end
-#            end
+            diffs.each do |d|
+              if d.old_element != d.new_element
+                diff_html << "-#{d.old_element}\n" if d.old_element
+                diff_html << "+#{d.new_element}\n" if d.new_element
+              end
+            end
 
             users = User.find(site.users)
             users.each do |user|
@@ -83,7 +83,7 @@ end
 def get_page_body(url)
   agent = Mechanize.new
   page = agent.get(url)
-  page.parser
+  page.body
 end
 
 def get_page_title(url)
@@ -95,5 +95,5 @@ end
 def get_page_keyword(url, keyword)
   agent = Mechanize.new
   page = agent.get(url)
-  page.parser.to_s.include?(keyword) ? keyword : "There is no #{keyword}. #{Time.now}"
+  page.body.to_s.include?(keyword) ? keyword : "There is no keyword '#{keyword}'. #{Time.now}"
 end
