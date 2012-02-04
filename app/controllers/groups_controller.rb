@@ -1,5 +1,6 @@
 # coding: utf-8
 class GroupsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /groups
   # GET /groups.json
   def index

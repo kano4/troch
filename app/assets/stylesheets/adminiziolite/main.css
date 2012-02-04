@@ -1,12 +1,4 @@
 /* =============================================================================
-
-	MAIN.CSS
-	version: 1.7
-	updated: 2009-03-14, 12:44 GMT+1
-
-============================================================================= */
-
-/* =============================================================================
 HTML - styles
 ============================================================================= */
 
@@ -52,11 +44,15 @@ LAYOUT
 ============================================================================= */
 
 #main {min-width:980px; width:expression(document.body.clientWidth < 980? "980px" : "auto" );}
-#tray {padding:12px 15px; background:url("design/tray.gif") 0 0 repeat-x;}
+#tray {padding:5px 15px; background:url("design/tray.gif") 0 0 repeat-x;}
+
+
+
 #tray p {margin:0;}
 #tray p.f-left {width:50%;}
-#tray p.f-left a {font-size:16px; font-weight:bold; text-decoration:none;}
+#tray p.f-left a {font-size:24px; font-weight:bold; text-decoration:none;}
 #tray p.f-right a {text-decoration:none;}
+#tray p.f-right {line-height:34px;}
 #tray #logout {padding-left:18px; background:url("design/tray-logout.gif") 0 50% no-repeat; text-transform:uppercase;}
 #tray #switcher {margin-right:15px;}
 #tray #switcher img {display:block; float:left; width:16px; height:16px; border:0;}
