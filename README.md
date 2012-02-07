@@ -1,6 +1,14 @@
 # Troch [![Build Status](https://secure.travis-ci.org/kano4/troch.png)](http://travis-ci.org/kano4/troch)
 Troch is a website monitoring tool.
 
+# Function
+- Watching Site Status
+  - body
+  - title
+  - keyword
+- Watching Domain Expired Date
+- Watching SSL Expired Date
+
 # Requirements
 - Ruby 1.9.2 or 1.9.3
 - MySQL
@@ -69,12 +77,3 @@ Troch is a website monitoring tool.
 7. Start redis server
 
         $ RAILS_ENV="production" script/troch_server start
-
-
-# Function
-- Watching Site Status
-  - body
-  - title
-  - keyword
-- Watching Domain Expired Date
-- Watching SSL Expired Date

@@ -11,7 +11,7 @@ describe NoticeMailer do
     let(:mail) { NoticeMailer.sendmail_alert(@user, @site, @status) }
 
     it "renders the headers" do
-      mail.subject.should eq("[Troch]#{@status}:#{@site_name}")
+      mail.subject.should eq("[Troch]#{@status}:#{@site.name}")
     end
   end
 
