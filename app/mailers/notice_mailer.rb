@@ -12,7 +12,7 @@ class NoticeMailer < ActionMailer::Base
     @date = Time.now.strftime('%Y/%m/%d %H:%M:%S').force_encoding("UTF-8")
 
     mail to: user.email,
-         subject: "[Troch]#{@status}:#{@site.name}"
+         subject: "[Troch]#{@status}:#{@site_name}"
   end
 
   def sendmail_summary(user, domain_sites, ssl_sites)
