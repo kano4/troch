@@ -20,7 +20,21 @@ Troch is a website monitoring tool.
         $ cd troch
         $ bundle install
 
-3. Set up database
+3. Set up smtp
+
+        $ cp config/email.example.yml config/email.yml
+
+    Edit config/email.yml . For example,
+
+        default:
+          from: 'troch@example.jp'
+
+        settings:
+          address: 'smtp.example.jp'
+          port: 25
+          domain: 'example.jp'
+
+4. Set up database
 
         $ cp config/database.example.yml config/database.yml
 
@@ -37,30 +51,16 @@ Troch is a website monitoring tool.
 
     Create database
 
-        $ rake db:create RAILS_ENV="production"
-        $ rake db:migrate RAILS_ENV="production"
-
-4. Set up smtp
-
-        $ cp config/email.example.yml config/email.yml
-
-    Edit config/email.yml . For example,
-
-        default:
-          from: 'troch@example.jp'
-
-        settings:
-          address: 'smtp.example.jp'
-          port: 25
-          domain: 'example.jp'
+        $ RAILS_ENV="production" bundle exec rake db:create
+        $ RAILS_ENV="production" bundle exec rake db:migrate
 
 5. Set up crontab
 
-        $ whenever --update troch --set environment="production"
+        $ bundle exec whenever --update troch --set environment="production"
 
 6. Start web server (WEBrick)
 
-        $ rails server -d -e production
+        $ bundle exec rails server -d -e production
 
     Or install passenger and edit apache config as below and restart apache (Passenger)
 
@@ -78,6 +78,3 @@ Troch is a website monitoring tool.
   - keyword
 - Watching Domain Expired Date
 - Watching SSL Expired Date
-
-# Future Work
-- Watching SMTP
