@@ -5,11 +5,14 @@ class PagesController < ApplicationController
   def index
     @sites = Site.find(:all)
     @error_num = 0
-    @error_sites = []
+    @maintenance_num = 0
     @sites.each do |site|
       if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new"
-        @error_num += 1
-        @error_sites << site
+        if site.watch_logs.last.status == "maintanance"
+          @maintenance_num += 1
+        else
+          @error_num += 1
+        end
       end
     end
     @domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
@@ -52,7 +55,7 @@ class PagesController < ApplicationController
     @sites = Site.find(:all)
     @error_sites = []
     @sites.each do |site|
-      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new"
+      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new" && site.watch_logs.last.status != "maintanance"
         @error_sites << site
       end
     end

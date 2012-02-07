@@ -3,12 +3,14 @@
   %tr
     %th ステータス
     %th 最終チェック日時
-    %th 異常サイト
+    %th 異常
+    %th メンテナンス
     %th 監視対象サイト
   %tr
     %td= link_to(@cron_status, :controller => 'settings', :action => 'watch_on_off')
     %td= @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
     %td= link_to(@error_num, alert_path)
+    %td= link_to(@maintenance_num, site_path)
     %td= link_to(@sites.length, site_path)
 
 %h3 ドメイン有効期限30日以内
