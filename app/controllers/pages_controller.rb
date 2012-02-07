@@ -41,10 +41,14 @@ class PagesController < ApplicationController
   end
 
   def log
+    redirect_to action: "log" if request.headers["X-PJAX"]
+
     @watch_logs = WatchLog.find(:all, :conditions => ['status <> "ok"'], :limit => 200, :order => "updated_at DESC")
   end
 
   def alert
+    redirect_to action: "alert" if request.headers["X-PJAX"]
+
     @sites = Site.find(:all)
     @error_sites = []
     @sites.each do |site|

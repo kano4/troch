@@ -4,7 +4,7 @@ require 'base64'
 require 'diff/lcs'
 
 class GetHtml
-  @queue = :default
+  @queue = :troch_worker
 
   def self.perform(site_id)
     site = Site.find(site_id)

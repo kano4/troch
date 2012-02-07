@@ -5,7 +5,7 @@ Rails.application.require_environment!
 
 class ResqueWorkerDaemon < DaemonSpawn::Base
   def start(args)
-    @worker = Resque::Worker.new('default')
+    @worker = Resque::Worker.new('troch_worker')
     @worker.verbose = true
     @worker.work
   end

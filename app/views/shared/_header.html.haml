@@ -3,6 +3,8 @@
     = link_to 'Troch', :root
   %p.f-right
     %strong
-      = link_to(current_user.email, edit_path)
+      = current_user.email
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to('個人設定', edit_path)
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     =link_to 'ログアウト', destroy_user_session_path, :method => :delete, :id => 'logout'

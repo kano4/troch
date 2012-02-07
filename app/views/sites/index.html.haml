@@ -36,8 +36,3 @@
         %td= link_to(site.group.name, group_path(site.group)) unless site.group.blank?
         %td= link_to('詳細', site_path(site))
         %td= link_to('編集', edit_site_path(site))
-
-:javascript
-  $(document).ready(function() {
-    $("#sites_table").dataTable({ "bStateSave": true });
-  } );

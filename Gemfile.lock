@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/sferik/rails_admin.git
-  revision: 2ff00c25d89d41f1d9f5569299b86b474db82019
+  revision: 8048e7d844c2bcf438037ac793dd9677ed6d4042
   specs:
     rails_admin (0.0.1)
       bbenezech-nested_form (~> 0.0)
-      bootstrap-sass (~> 1.4, >= 1.4.1)
+      bootstrap-sass (~> 2.0)
       builder (~> 3.0)
       coffee-rails (~> 3.1)
       haml (~> 3.1)
@@ -13,6 +13,7 @@ GIT
       rack-pjax (~> 0.5)
       rails (~> 3.1)
       remotipart (~> 1.0)
+      sass-rails (~> 3.1)
 
 GEM
   remote: http://rubygems.org/
@@ -47,8 +48,7 @@ GEM
     arel (3.0.0)
     bbenezech-nested_form (0.0.2)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (1.4.4)
-      sass-rails (~> 3.1)
+    bootstrap-sass (2.0.0)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -57,7 +57,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    childprocess (0.3.0)
+    childprocess (0.3.1)
       ffi (~> 1.0.6)
     chronic (0.6.7)
     coffee-rails (3.2.2)
@@ -68,7 +68,7 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     daemon-spawn (0.4.2)
-    daemons (1.1.6)
+    daemons (1.1.7)
     database_cleaner (0.7.1)
     devise (2.0.0)
       bcrypt-ruby (~> 3.0)
@@ -76,11 +76,13 @@ GEM
       railties (~> 3.1)
       warden (~> 1.1)
     diff-lcs (1.1.3)
+    domain_name (0.5.2)
+      unf (~> 0.0.3)
     erubis (2.7.0)
     eventmachine (0.12.10)
     execjs (1.3.0)
       multi_json (~> 1.0)
-    factory_girl (2.5.0)
+    factory_girl (2.5.1)
       activesupport
     factory_girl_rails (1.6.0)
       factory_girl (~> 2.5.0)
@@ -111,17 +113,20 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mechanize (2.0.1)
+    mechanize (2.1.1)
+      domain_name (~> 0.5, >= 0.5.1)
       net-http-digest_auth (~> 1.1, >= 1.1.1)
-      net-http-persistent (~> 1.8)
+      net-http-persistent (~> 2.4, >= 2.4.1)
       nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.17.2)
     multi_json (1.0.4)
     mysql2 (0.3.11)
     net-http-digest_auth (1.2)
-    net-http-persistent (1.9)
+    net-http-persistent (2.4.1)
     nokogiri (1.5.0)
+    ntlm-http (0.1.1)
     orm_adapter (0.0.6)
     pjax-rails (0.1.4)
       jquery-rails
@@ -165,7 +170,7 @@ GEM
     redis (2.2.2)
     redis-namespace (1.0.3)
       redis (< 3.0.0)
-    remotipart (1.0.1)
+    remotipart (1.0.2)
     resque (1.19.0)
       multi_json (~> 1.0)
       redis-namespace (~> 1.0.2)
@@ -187,7 +192,7 @@ GEM
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
     rubyzip (0.9.5)
-    sass (3.1.12)
+    sass (3.1.14)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -221,6 +226,9 @@ GEM
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    unf (0.0.4)
+      unf_ext
+    unf_ext (0.0.4)
     unicorn (4.2.0)
       kgio (~> 2.6)
       rack
@@ -233,7 +241,7 @@ GEM
     whenever (0.7.2)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
-    whois (2.2.0)
+    whois (2.3.0)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 

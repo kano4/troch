@@ -49,7 +49,7 @@ protected
     if File.exist?("#{Rails.root}/tmp/intervals/cron.on")
       sites = self.all
       sites.each do |site|
-        unless site.url.blank?
+        unless site.url.blank? || site.url == "http://"
           Resque.enqueue(GetHtml, site.id)
         end
       end
