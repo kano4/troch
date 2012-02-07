@@ -87,7 +87,8 @@ end
 def get_page_body(url)
   agent = Mechanize.new
   page = agent.get(url)
-  page.body
+#  page.body
+  page.parser
 end
 
 def get_page_title(url)
