@@ -2,6 +2,7 @@
 require 'mechanize'
 require 'base64'
 require 'diff/lcs'
+require 'nkf'
 
 class GetHtml
   @queue = :troch_worker
@@ -87,18 +88,18 @@ end
 def get_page_body(url)
   agent = Mechanize.new
   page = agent.get(url)
-#  page.body
-  page.parser
+  # page.body
+  NKF.nkf('-wm0', page.parser)
 end
 
 def get_page_title(url)
   agent = Mechanize.new
   page = agent.get(url)
-  page.title || 'no title'
+  NKF.nkf('-wm0', page.title) || 'no title'
 end
 
 def get_page_keyword(url, keyword)
   agent = Mechanize.new
   page = agent.get(url)
-  page.body.to_s.include?(keyword) ? keyword : "There is no keyword '#{keyword}'. #{Time.now}"
+  NKF.nkf('-wm0', page.body).to_s.include?(keyword) ? keyword : "There is no keyword '#{keyword}'. #{Time.now}"
 end
