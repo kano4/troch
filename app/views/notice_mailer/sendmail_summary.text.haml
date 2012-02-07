@@ -4,8 +4,8 @@ Summary Mail
 
 ＜ドメイン期限30日以内＞
 - @domain_sites.each_with_index do |site, i|
-  = "#{i+1} : #{site.name}"
+  = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
 
 ＜SSL期限30日以内＞
 - @ssl_sites.each_with_index do |site, i|
-  = "#{i+1} : #{site.name}"
+  = "#{i+1} : #{site.name.force_encoding("UTF-8")}"

@@ -1,9 +1,10 @@
 = @user.email + 'さん'
 
-= "Date   : #{@date}"
-= "Status : #{@status}"
-= "Site   : #{@site.name}"
-= "URL    : #{@site.url}"
-= "Diff   : #{@diff_html}" unless @diff_html.blank?
+= "Date   : #{@date.force_encoding("UTF-8")}"
+= "Status : #{@status.force_encoding("UTF-8")}"
+= "Site   : #{@site.name.force_encoding("UTF-8")}"
+= "URL    : #{@site.url.force_encoding("UTF-8")}"
+= "Diff   : " unless @diff_html.blank?
+= "#{@diff_html.force_encoding("UTF-8")}" unless @diff_html.blank?
 
 上記のサイトを確認してください。
