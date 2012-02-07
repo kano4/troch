@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class Object - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/workers/get_html.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">BasicObject
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-get_page_body">#get_page_body</a>
+    
+    <li><a href="#method-i-get_page_keyword">#get_page_keyword</a>
+    
+    <li><a href="#method-i-get_page_title">#get_page_title</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./GetHtml.html">GetHtml</a>
+  
+    <li><a href="./Group.html">Group</a>
+  
+    <li><a href="./GroupsController.html">GroupsController</a>
+  
+    <li><a href="./GroupsHelper.html">GroupsHelper</a>
+  
+    <li><a href="./NoticeMailer.html">NoticeMailer</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./PagesController.html">PagesController</a>
+  
+    <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./SettingsController.html">SettingsController</a>
+  
+    <li><a href="./SettingsHelper.html">SettingsHelper</a>
+  
+    <li><a href="./Site.html">Site</a>
+  
+    <li><a href="./SitesController.html">SitesController</a>
+  
+    <li><a href="./SitesHelper.html">SitesHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersSite.html">UsersSite</a>
+  
+    <li><a href="./WatchLog.html">WatchLog</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Object</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-get_page_body" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_page_body</span><span
+            class="method-args">(url)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_page_body-source">
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_page_body</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-comment"># page.body</span>
+  <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">nkf</span>(<span class="ruby-string">'-wm0'</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">parser</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_page_body-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_page_body-method -->
+
+    
+      <div id="method-i-get_page_keyword" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_page_keyword</span><span
+            class="method-args">(url, keyword)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_page_keyword-source">
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_page_keyword</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">keyword</span>)
+  <span class="ruby-identifier">agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">nkf</span>(<span class="ruby-string">'-wm0'</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">body</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">keyword</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">keyword</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;There is no keyword '#{keyword}'. #{Time.now}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_page_keyword-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_page_keyword-method -->
+
+    
+      <div id="method-i-get_page_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_page_title</span><span
+            class="method-args">(url)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_page_title-source">
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_page_title</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">nkf</span>(<span class="ruby-string">'-wm0'</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">title</span>) <span class="ruby-operator">||</span> <span class="ruby-string">'no title'</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_page_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_page_title-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
