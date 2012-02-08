@@ -19,7 +19,7 @@ class PagesController < ApplicationController
     @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
     @last_log = WatchLog.last
 
-    @cron_status = File.exist?("#{Rails.root}/tmp/intervals/cron.on") ? '監視' : '停止'
+    @cron_status = File.exist?("#{Rails.root}/tmp/cron/cron.on") ? '監視' : '停止'
   end
 
   def edit

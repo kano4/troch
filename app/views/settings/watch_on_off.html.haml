@@ -9,9 +9,9 @@
             = @save_message
       %br
       = form_tag do
-        = radio_button_tag :on_off, true, @cron_interval
+        = radio_button_tag :on_off, true, @cron_on
         = label_tag "ON(監視)"
-        = radio_button_tag :on_off, false, !@cron_interval
+        = radio_button_tag :on_off, false, !@cron_on
         = label_tag 'OFF(停止)'
         = submit_tag '設定保存'
       %br

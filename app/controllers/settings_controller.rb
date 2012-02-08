@@ -7,24 +7,24 @@ class SettingsController < ApplicationController
 
   def watch_on_off
     if params[:on_off].nil?
-      if File.exist?("#{Rails.root}/tmp/intervals/cron.on")
-        @cron_interval = true
+      if File.exist?("#{Rails.root}/tmp/cron/cron.on")
+        @cron_on = true
       else
-        @cron_interval = false
+        @cron_on = false
       end
     elsif params[:on_off] == "true"
-      if !File.exist?("#{Rails.root}/tmp/intervals/cron.on")
-        FileUtils.mkdir_p("#{Rails.root}/tmp/intervals")
-        File.open("#{Rails.root}/tmp/intervals/cron.on", "w").close
+      if !File.exist?("#{Rails.root}/tmp/cron/cron.on")
+        FileUtils.mkdir_p("#{Rails.root}/tmp/cron")
+        File.open("#{Rails.root}/tmp/cron/cron.on", "w").close
         @save_message = '起動しました'
       end
-      @cron_interval = true
+      @cron_on = true
     else
-      if File.exist?("#{Rails.root}/tmp/intervals/cron.on")
-        File.delete("#{Rails.root}/tmp/intervals/cron.on")
+      if File.exist?("#{Rails.root}/tmp/cron/cron.on")
+        File.delete("#{Rails.root}/tmp/cron/cron.on")
         @save_message = '停止しました'
       end
-      @cron_interval = false
+      @cron_on = false
     end
   end
 
