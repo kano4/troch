@@ -74,9 +74,9 @@ def sendmail_alert(site, response_code, diff_html = '')
 end
 
 def get_diff(old_content, new_content)
-  get_content  = Base64.decode64(old_content)
-  last_content = Base64.decode64(new_content)
-  diffs = Diff::LCS.sdiff(get_content.split, last_content.split)
+  old_content  = Base64.decode64(old_content).split
+  new_content = Base64.decode64(new_content).split
+  diffs = Diff::LCS.sdiff(old_content, new_content)
   diff_html = ""
   diffs.each do |d|
     if d.old_element != d.new_element
@@ -90,7 +90,7 @@ end
 def get_page_body(url)
   agent = Mechanize.new
   page = agent.get(url)
-  NKF.nkf('-wm0', page.parser)
+  NKF.nkf('-wm0', page.parser) || 'no body'
 end
 
 def get_page_title(url)
