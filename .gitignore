@@ -9,5 +9,4 @@ vendor/bundle
 vendor/cache
 config/email.yml
 config/database.yml
-.rspec
 .rvmrc

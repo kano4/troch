@@ -12,41 +12,23 @@ class GetHtml
 
     if site.url.blank? || site.url == "http://"
       site.watch_logs.build(:status => "maintanance", :content => "", :response_time => 0)
-      site.save
     else
       trials = 0
       begin
         start_time = Time.now
-
-        if site.watch_method == 'html_body'
-          content = get_page_body(site.url)
-        elsif site.watch_method == 'html_title'
-          content = get_page_title(site.url)
-        elsif site.watch_method == 'html_keyword' && !site.keyword.blank?
-          content = get_page_keyword(site.url, site.keyword)
-        end
-
+        content = get_html_content(site)
         end_time = Time.now
       rescue TimeoutError
         trials += 1
         retry if trials < 3
 
         site.watch_logs.build(:status => 'timeout', :content => "", :response_time => 0)
-        site.save
       rescue Mechanize::ResponseCodeError => ex
-        users = User.find(site.users)
-        users.each do |user|
-          NoticeMailer.sendmail_alert(user, site, ex.response_code).deliver
-        end
+        sendmail_alert(site, ex.response_code)
         site.watch_logs.build(:status => ex.response_code, :content => "", :response_time => 0)
-        site.save
       rescue
-        users = User.find(site.users)
-        users.each do |user|
-          NoticeMailer.sendmail_alert(user, site, "invalid url").deliver
-        end
+        sendmail_alert(site, 'invalid url')
         site.watch_logs.build(:status => "invalid url", :content => "", :response_time => 0)
-        site.save
       else
         response_time = (end_time - start_time) * 1000
         encoded_content = Base64.encode64(content)
@@ -60,35 +42,54 @@ class GetHtml
             site.watch_logs.build(:status => 'keyword error', :content => content, :response_time => response_time)
           else
             site.watch_logs.build(:status => 'diff', :content => encoded_content, :response_time => response_time)
-            get_content  = Base64.decode64(last_log.content)
-            last_content = Base64.decode64(encoded_content)
-            diffs = Diff::LCS.sdiff(get_content.split, last_content.split)
-            diff_html = ""
-            diffs.each do |d|
-              if d.old_element != d.new_element
-                diff_html << "-#{d.old_element}\n" if d.old_element
-                diff_html << "+#{d.new_element}\n" if d.new_element
-              end
-            end
 
-            users = User.find(site.users)
-            users.each do |user|
-              NoticeMailer.sendmail_alert(user, site, 'diff', diff_html).deliver
-            end
+            diff_html = get_diff(last_log.content, encoded_content)
+
+            sendmail_alert(site, 'diff', diff_html)
           end
         else
           site.watch_logs.build(:status => 'new', :content => encoded_content, :response_time => response_time)
         end
-        site.save
       end
     end
+    site.save
   end
+end
+
+def get_html_content(site)
+  if site.watch_method == 'html_body'
+    get_page_body(site.url)
+  elsif site.watch_method == 'html_title'
+    get_page_title(site.url)
+  elsif site.watch_method == 'html_keyword' && !site.keyword.blank?
+    get_page_keyword(site.url, site.keyword)
+  end
+end
+
+def sendmail_alert(site, response_code, diff_html = '')
+  users = User.find(site.users)
+  users.each do |user|
+    NoticeMailer.sendmail_alert(user, site, response_code, diff_html).deliver
+  end
+end
+
+def get_diff(old_content, new_content)
+  get_content  = Base64.decode64(old_content)
+  last_content = Base64.decode64(new_content)
+  diffs = Diff::LCS.sdiff(get_content.split, last_content.split)
+  diff_html = ""
+  diffs.each do |d|
+    if d.old_element != d.new_element
+      diff_html << "-#{d.old_element}\n" if d.old_element
+      diff_html << "+#{d.new_element}\n" if d.new_element
+    end
+  end
+  diff_html
 end
 
 def get_page_body(url)
   agent = Mechanize.new
   page = agent.get(url)
-  # page.body
   NKF.nkf('-wm0', page.parser)
 end
 
