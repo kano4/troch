@@ -25,7 +25,9 @@ FactoryGirl.define do
     url "http://www.test.com"
     watch_method 'html_body'
     domain_url "test.com"
+    domain_expired "2012-02-01"
     ssl_url "https://www.test.com"
+    ssl_expired "2012-02-01"
   end
 
   factory :yahoo, :class => Site do

@@ -66,7 +66,8 @@ Troch is a website monitoring tool.
 
         $ bundle exec rails server -d -e production
 
-    Or install passenger and edit apache config or nginx config.
+    View at: http://localhost:3000/
+    Or install passenger and edit apache or nginx config.
 
 6. Start worker
 
