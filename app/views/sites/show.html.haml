@@ -8,9 +8,12 @@
     %th 最終チェック日時
     %td= @site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless @site.watch_logs.last.blank?
   %tr
+    %th レスポンスタイム
+    %td= "#{@site.watch_logs.last.response_time} msec" unless @site.watch_logs.last.response_time.blank?
+  %tr
     %th URL(チェック先)
     %td
-      =link_to @site.url, @site.url
+      =link_to @site.url, @site.url unless @site.url.blank? || @site.url == "http://"
   %tr
     %th 監視方法
     %td

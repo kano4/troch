@@ -10,9 +10,11 @@
       %th 日時
       %th サイト名
       %th ステータス
-    %tbody
-      - @error_sites.each do |site|
-        %tr
-          %td= site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless site.watch_logs.last.blank?
-          %td= link_to site.name, site_path(site) unless site.name.blank?
-          %td= site.watch_logs.last.status unless site.watch_logs.last.status.blank?
+      %th レスポンスタイム
+  %tbody
+    - @error_sites.each do |site|
+      %tr
+        %td= site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless site.watch_logs.last.blank?
+        %td= link_to site.name, site_path(site) unless site.name.blank?
+        %td= site.watch_logs.last.status unless site.watch_logs.last.status.blank?
+        %td= "#{site.watch_logs.last.response_time} msec" unless site.watch_logs.last.response_time.blank?

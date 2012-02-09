@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     @maintenance_num = 0
     @sites.each do |site|
       if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new"
-        if site.watch_logs.last.status == "maintanance"
+        if site.watch_logs.last.status == "maintenance"
           @maintenance_num += 1
         else
           @error_num += 1
@@ -55,7 +55,7 @@ class PagesController < ApplicationController
     @sites = Site.find(:all)
     @error_sites = []
     @sites.each do |site|
-      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new" && site.watch_logs.last.status != "maintanance"
+      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new" && site.watch_logs.last.status != "maintenance"
         @error_sites << site
       end
     end
