@@ -84,3 +84,7 @@ table.detail {
   border: 1px solid #ddf;
   background-color: #eef;
 }
+
+#content table#domain_list th, #content table#ssl_list th {
+  width: 160px;
+}

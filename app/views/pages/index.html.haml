@@ -15,8 +15,9 @@
     %td= link_to(@maintenance_num, site_path)
     %td= link_to(@sites.length, site_path)
 
+%br
 %h3 ドメイン有効期限30日以内
-%table#domainlist
+%table#domain_list
   %tr
     %th サイト名
     %th ドメイン
@@ -30,8 +31,9 @@
       %td
         = site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
 
+%br
 %h3 SSL有効期限30日以内
-%table.table
+%table#ssl_list
   %tr
     %th サイト名
     %th SSLドメイン
