@@ -15,6 +15,7 @@ class PagesController < ApplicationController
         end
       end
     end
+    @normal_num = @sites.size - @maintenance_num - @error_num
     @domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
     @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
     @last_log = WatchLog.last

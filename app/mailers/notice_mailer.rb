@@ -17,7 +17,6 @@ class NoticeMailer < ActionMailer::Base
 
   def sendmail_summary(user, domain_sites, ssl_sites)
     @cron_status = File.exist?("#{Rails.root}/tmp/cron/cron.on") ? '監視' : '停止'
-    @user_email = user.email.force_encoding("UTF-8")
     @domain_sites = domain_sites
     @ssl_sites    = ssl_sites
     mail to: user.email,
