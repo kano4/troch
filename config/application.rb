@@ -41,8 +41,8 @@ module Troch
     config.encoding = "utf-8"
 
     config.to_prepare do
-      Devise::SessionsController.layout "sign"
-      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "sign" }
+      Devise::SessionsController.layout "devise"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "devise" }
     end
 
     # Configure sensitive parameters which will be filtered from the log file.
