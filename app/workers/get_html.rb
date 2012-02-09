@@ -11,7 +11,7 @@ class GetHtml
     site = Site.find(site_id)
 
     if site.url.blank? || site.url == "http://"
-      site.watch_logs.build(:status => "maintanance", :content => "", :response_time => 0)
+      site.watch_logs.build(:status => "maintenance", :content => "", :response_time => 0)
     else
       trials = 0
       begin
@@ -37,7 +37,11 @@ class GetHtml
           if last_log.content == encoded_content || content == site.keyword
             last_log.content = ''
             last_log.save
-            site.watch_logs.build(:status => 'ok',   :content => encoded_content, :response_time => response_time)
+            if response_time > 10 * 1000
+              site.watch_logs.build(:status => 'delay', :content => encoded_content, :response_time => response_time)
+            else
+              site.watch_logs.build(:status => 'ok',    :content => encoded_content, :response_time => response_time)
+            end
           elsif site.watch_method == 'html_keyword' && content != site.keyword
             site.watch_logs.build(:status => 'keyword error', :content => content, :response_time => response_time)
           else

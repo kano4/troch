@@ -97,6 +97,10 @@
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
+    <li><a href="./CheckDomain.html">CheckDomain</a>
+  
+    <li><a href="./CheckSsl.html">CheckSsl</a>
+  
     <li><a href="./GetHtml.html">GetHtml</a>
   
     <li><a href="./Group.html">Group</a>
@@ -181,42 +185,24 @@
   <span class="ruby-identifier">site</span> = <span class="ruby-constant">Site</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">site_id</span>)
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;http://&quot;</span>
-    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;maintanance&quot;</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;maintenance&quot;</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">trials</span> = <span class="ruby-value">0</span>
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">start_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
-
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">'html_body'</span>
-        <span class="ruby-identifier">content</span> = <span class="ruby-identifier">get_page_body</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>)
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">'html_title'</span>
-        <span class="ruby-identifier">content</span> = <span class="ruby-identifier">get_page_title</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>)
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">'html_keyword'</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">site</span>.<span class="ruby-identifier">keyword</span>.<span class="ruby-identifier">blank?</span>
-        <span class="ruby-identifier">content</span> = <span class="ruby-identifier">get_page_keyword</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">keyword</span>)
-      <span class="ruby-keyword">end</span>
-
+      <span class="ruby-identifier">content</span> = <span class="ruby-identifier">get_html_content</span>(<span class="ruby-identifier">site</span>)
       <span class="ruby-identifier">end_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">TimeoutError</span>
       <span class="ruby-identifier">trials</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
       <span class="ruby-keyword">retry</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">trials</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>
 
       <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'timeout'</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Mechanize</span><span class="ruby-operator">::</span><span class="ruby-constant">ResponseCodeError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
-      <span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">users</span>)
-      <span class="ruby-identifier">users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
-        <span class="ruby-constant">NoticeMailer</span>.<span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">site</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">response_code</span>).<span class="ruby-identifier">deliver</span>
-      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">response_code</span>)
       <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">response_code</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-keyword">rescue</span>
-      <span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">users</span>)
-      <span class="ruby-identifier">users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
-        <span class="ruby-constant">NoticeMailer</span>.<span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;invalid url&quot;</span>).<span class="ruby-identifier">deliver</span>
-      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">'invalid url'</span>)
       <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;invalid url&quot;</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">response_time</span> = (<span class="ruby-identifier">end_time</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start_time</span>) * <span class="ruby-value">1000</span>
       <span class="ruby-identifier">encoded_content</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64</span>(<span class="ruby-identifier">content</span>)
@@ -225,33 +211,26 @@
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_log</span>.<span class="ruby-identifier">content</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">encoded_content</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">content</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">keyword</span>
           <span class="ruby-identifier">last_log</span>.<span class="ruby-identifier">content</span> = <span class="ruby-string">''</span>
           <span class="ruby-identifier">last_log</span>.<span class="ruby-identifier">save</span>
-          <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ok'</span>,   <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encoded_content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">response_time</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span> * <span class="ruby-value">1000</span>
+            <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'delay'</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encoded_content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ok'</span>,    <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encoded_content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
+          <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">'html_keyword'</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">content</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">keyword</span>
           <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'keyword error'</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
         <span class="ruby-keyword">else</span>
           <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'diff'</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encoded_content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
-          <span class="ruby-identifier">get_content</span>  = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">last_log</span>.<span class="ruby-identifier">content</span>)
-          <span class="ruby-identifier">last_content</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">encoded_content</span>)
-          <span class="ruby-identifier">diffs</span> = <span class="ruby-constant">Diff</span><span class="ruby-operator">::</span><span class="ruby-constant">LCS</span>.<span class="ruby-identifier">sdiff</span>(<span class="ruby-identifier">get_content</span>.<span class="ruby-identifier">split</span>, <span class="ruby-identifier">last_content</span>.<span class="ruby-identifier">split</span>)
-          <span class="ruby-identifier">diff_html</span> = <span class="ruby-string">&quot;&quot;</span>
-          <span class="ruby-identifier">diffs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span>
-            <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">old_element</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">new_element</span>
-              <span class="ruby-identifier">diff_html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;-#{d.old_element}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">old_element</span>
-              <span class="ruby-identifier">diff_html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;+#{d.new_element}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">new_element</span>
-            <span class="ruby-keyword">end</span>
-          <span class="ruby-keyword">end</span>
 
-          <span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">users</span>)
-          <span class="ruby-identifier">users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
-            <span class="ruby-constant">NoticeMailer</span>.<span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">site</span>, <span class="ruby-string">'diff'</span>, <span class="ruby-identifier">diff_html</span>).<span class="ruby-identifier">deliver</span>
-          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">diff_html</span> = <span class="ruby-identifier">get_diff</span>(<span class="ruby-identifier">last_log</span>.<span class="ruby-identifier">content</span>, <span class="ruby-identifier">encoded_content</span>)
+
+          <span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">'diff'</span>, <span class="ruby-identifier">diff_html</span>)
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'new'</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encoded_content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
       <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- perform-source -->
           

@@ -10,9 +10,11 @@
       %th 日時
       %th サイト名
       %th ステータス
+      %th レスポンスタイム
   %tbody
     - @watch_logs.each do |watch_log|
       %tr
         %td= watch_log.created_at.strftime("%Y/%m/%d %H:%M:%S") unless watch_log.blank?
         %td= link_to watch_log.site.name, site_path(watch_log.site) unless watch_log.site.name.blank?
         %td= watch_log.status unless watch_log.status.blank?
+        %td= "#{watch_log.response_time} msec" unless watch_log.response_time.blank?

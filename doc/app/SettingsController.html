@@ -99,6 +99,10 @@
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
+    <li><a href="./CheckDomain.html">CheckDomain</a>
+  
+    <li><a href="./CheckSsl.html">CheckSsl</a>
+  
     <li><a href="./GetHtml.html">GetHtml</a>
   
     <li><a href="./Group.html">Group</a>
@@ -210,24 +214,24 @@
             <pre><span class="ruby-comment"># File app/controllers/settings_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">watch_on_off</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:on_off</span>].<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/intervals/cron.on&quot;</span>)
-      <span class="ruby-ivar">@cron_interval</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>)
+      <span class="ruby-ivar">@cron_on</span> = <span class="ruby-keyword">true</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@cron_interval</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-ivar">@cron_on</span> = <span class="ruby-keyword">false</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:on_off</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/intervals/cron.on&quot;</span>)
-      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/intervals&quot;</span>)
-      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/intervals/cron.on&quot;</span>, <span class="ruby-string">&quot;w&quot;</span>).<span class="ruby-identifier">close</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>)
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron&quot;</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>, <span class="ruby-string">&quot;w&quot;</span>).<span class="ruby-identifier">close</span>
       <span class="ruby-ivar">@save_message</span> = <span class="ruby-string">'起動しました'</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@cron_interval</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-ivar">@cron_on</span> = <span class="ruby-keyword">true</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/intervals/cron.on&quot;</span>)
-      <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/intervals/cron.on&quot;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>)
       <span class="ruby-ivar">@save_message</span> = <span class="ruby-string">'停止しました'</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@cron_interval</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-ivar">@cron_on</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- watch_on_off-source -->

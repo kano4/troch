@@ -8,13 +8,14 @@ class PagesController < ApplicationController
     @maintenance_num = 0
     @sites.each do |site|
       if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new"
-        if site.watch_logs.last.status == "maintanance"
+        if site.watch_logs.last.status == "maintenance"
           @maintenance_num += 1
         else
           @error_num += 1
         end
       end
     end
+    @normal_num = @sites.size - @maintenance_num - @error_num
     @domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
     @ssl_sites = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
     @last_log = WatchLog.last
@@ -55,7 +56,7 @@ class PagesController < ApplicationController
     @sites = Site.find(:all)
     @error_sites = []
     @sites.each do |site|
-      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new" && site.watch_logs.last.status != "maintanance"
+      if !site.watch_logs.last.nil? && site.watch_logs.last.status != "ok" && site.watch_logs.last.status != "new" && site.watch_logs.last.status != "maintenance"
         @error_sites << site
       end
     end
