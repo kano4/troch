@@ -4,7 +4,6 @@ require 'spec_helper.rb'
 describe GetHtml do
   before(:each) do
     @url = "http://www.yahoo.co.jp"
-    @invalid_url = "http://hogemoge"
   end
 
   describe "get_page_title" do
