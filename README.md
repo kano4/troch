@@ -51,8 +51,8 @@ Troch is a website monitoring tool.
         production:
           adapter: mysql2
           database: troch
-          username: root
-          password:
+          username: troch
+          password: troch
           encoding: utf8
           host: localhost
           socket: /var/run/mysqld/mysqld.sock
@@ -62,18 +62,12 @@ Troch is a website monitoring tool.
         $ RAILS_ENV="production" bundle exec rake db:create
         $ RAILS_ENV="production" bundle exec rake db:migrate
 
-5. Set up crontab
-
-        $ bundle exec whenever --update troch --set environment="production"
-
-6. Start web server (WEBrick)
+5. Start web server
 
         $ bundle exec rails server -d -e production
 
-    Or install passenger and edit apache config as below and restart apache (Passenger)
+    Or install passenger and edit apache config or nginx config.
 
-        DocumentRoot "/srv/troch/public"
-
-7. Start redis server
+6. Start worker
 
         $ RAILS_ENV="production" script/troch_server start

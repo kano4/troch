@@ -70,11 +70,17 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-i-get_diff">#get_diff</a>
+    
+    <li><a href="#method-i-get_html_content">#get_html_content</a>
+    
     <li><a href="#method-i-get_page_body">#get_page_body</a>
     
     <li><a href="#method-i-get_page_keyword">#get_page_keyword</a>
     
     <li><a href="#method-i-get_page_title">#get_page_title</a>
+    
+    <li><a href="#method-i-sendmail_alert">#sendmail_alert</a>
     
   </ul>
 </nav>
@@ -100,6 +106,10 @@
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./CheckDomain.html">CheckDomain</a>
+  
+    <li><a href="./CheckSsl.html">CheckSsl</a>
   
     <li><a href="./GetHtml.html">GetHtml</a>
   
@@ -164,6 +174,82 @@
       <h3 class="section-header">Public Instance Methods</h3>
 
     
+      <div id="method-i-get_diff" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_diff</span><span
+            class="method-args">(old_content, new_content)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_diff-source">
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_diff</span>(<span class="ruby-identifier">old_content</span>, <span class="ruby-identifier">new_content</span>)
+  <span class="ruby-identifier">old_content</span>  = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">old_content</span>).<span class="ruby-identifier">split</span>
+  <span class="ruby-identifier">new_content</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">new_content</span>).<span class="ruby-identifier">split</span>
+  <span class="ruby-identifier">diffs</span> = <span class="ruby-constant">Diff</span><span class="ruby-operator">::</span><span class="ruby-constant">LCS</span>.<span class="ruby-identifier">sdiff</span>(<span class="ruby-identifier">old_content</span>, <span class="ruby-identifier">new_content</span>)
+  <span class="ruby-identifier">diff_html</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">diffs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">old_element</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">new_element</span>
+      <span class="ruby-identifier">diff_html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;-#{d.old_element}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">old_element</span>
+      <span class="ruby-identifier">diff_html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;+#{d.new_element}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">new_element</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">diff_html</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_diff-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_diff-method -->
+
+    
+      <div id="method-i-get_html_content" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_html_content</span><span
+            class="method-args">(site)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_html_content-source">
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_html_content</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">'html_body'</span>
+    <span class="ruby-identifier">get_page_body</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">'html_title'</span>
+    <span class="ruby-identifier">get_page_title</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">'html_keyword'</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">site</span>.<span class="ruby-identifier">keyword</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">get_page_keyword</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">keyword</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_html_content-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_html_content-method -->
+
+    
       <div id="method-i-get_page_body" class="method-detail ">
         
         <div class="method-heading">
@@ -180,12 +266,11 @@
 
           
           <div class="method-source-code" id="get_page_body-source">
-            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 87</span>
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_page_body</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
-  <span class="ruby-comment"># page.body</span>
-  <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">nkf</span>(<span class="ruby-string">'-wm0'</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">parser</span>)
+  <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">nkf</span>(<span class="ruby-string">'-wm0'</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">parser</span>) <span class="ruby-operator">||</span> <span class="ruby-string">'no body'</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get_page_body-source -->
           
@@ -213,7 +298,7 @@
 
           
           <div class="method-source-code" id="get_page_keyword-source">
-            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_page_keyword</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">keyword</span>)
   <span class="ruby-identifier">agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
@@ -245,7 +330,7 @@
 
           
           <div class="method-source-code" id="get_page_title-source">
-            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 94</span>
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_page_title</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
@@ -259,6 +344,39 @@
 
         
       </div><!-- get_page_title-method -->
+
+    
+      <div id="method-i-sendmail_alert" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sendmail_alert</span><span
+            class="method-args">(site, response_code, diff_html = '')</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sendmail_alert-source">
+            <pre><span class="ruby-comment"># File app/workers/get_html.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">response_code</span>, <span class="ruby-identifier">diff_html</span> = <span class="ruby-string">''</span>)
+  <span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">users</span>)
+  <span class="ruby-identifier">users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">NoticeMailer</span>.<span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">site</span>, <span class="ruby-identifier">response_code</span>, <span class="ruby-identifier">diff_html</span>).<span class="ruby-identifier">deliver</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sendmail_alert-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sendmail_alert-method -->
 
     
     </section><!-- public-instance-method-details -->
