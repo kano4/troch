@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/sferik/rails_admin.git
-  revision: 8048e7d844c2bcf438037ac793dd9677ed6d4042
+  revision: a2275ea0abf204ffff558ce9d2ef85ee1a28f8f9
   specs:
     rails_admin (0.0.1)
       bbenezech-nested_form (~> 0.0)
@@ -68,7 +68,7 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     daemon-spawn (0.4.2)
-    daemons (1.1.7)
+    daemons (1.1.8)
     database_cleaner (0.7.1)
     devise (2.0.0)
       bcrypt-ruby (~> 3.0)
@@ -124,7 +124,7 @@ GEM
     multi_json (1.0.4)
     mysql2 (0.3.11)
     net-http-digest_auth (1.2)
-    net-http-persistent (2.4.1)
+    net-http-persistent (2.5)
     nokogiri (1.5.0)
     ntlm-http (0.1.1)
     orm_adapter (0.0.6)
@@ -191,13 +191,13 @@ GEM
       rspec (~> 2.8.0)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
-    rubyzip (0.9.5)
+    rubyzip (0.9.6.1)
     sass (3.1.14)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.18.0)
+    selenium-webdriver (2.19.0)
       childprocess (>= 0.2.5)
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
