@@ -5,6 +5,7 @@ gem 'rails', '~> 3.2.0'
 gem 'mysql2'
 
 gem 'unicorn'
+gem 'clockwork'
 
 gem 'therubyracer'
 gem 'hpricot'
@@ -15,7 +16,6 @@ gem 'mechanize'
 gem 'whois'
 gem 'resque'
 gem 'daemon-spawn', :require => 'daemon_spawn'
-gem 'whenever', :require => false
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 gem 'jquery-rails'

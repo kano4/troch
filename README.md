@@ -12,7 +12,6 @@ Troch is a website monitoring tool.
 # Requirements
 - Ruby 1.9.2 or 1.9.3
 - MySQL
-- crontab
 - OpenSSL
 - Redis
 - Bundler
@@ -59,8 +58,7 @@ Troch is a website monitoring tool.
 
     Create database
 
-        $ RAILS_ENV="production" bundle exec rake db:create
-        $ RAILS_ENV="production" bundle exec rake db:migrate
+        $ RAILS_ENV="production" bundle exec rake db:setup
 
 5. Start web server
 
@@ -71,4 +69,5 @@ Troch is a website monitoring tool.
 
 6. Start worker
 
-        $ RAILS_ENV="production" script/troch_server start
+        $ RAILS_ENV=production script/troch_server start
+        $ nohup bundle exec clockwork clock.rb RAILS_ENV=production > log/clock_out.log 2> log/clock_error.log &
