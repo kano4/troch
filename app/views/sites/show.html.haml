@@ -9,7 +9,7 @@
     %td= @site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless @site.watch_logs.last.blank?
   %tr
     %th レスポンスタイム
-    %td= "#{@site.watch_logs.last.response_time} msec" unless @site.watch_logs.last.response_time.blank?
+    %td= "#{@site.watch_logs.last.response_time} msec" unless @site.watch_logs.blank?
   %tr
     %th URL(チェック先)
     %td
@@ -17,10 +17,13 @@
   %tr
     %th 監視方法
     %td
-      = "HTML監視" if @site.watch_method == 'html_body'
-      = "TITLEタグ監視" if @site.watch_method == 'html_title'
-      = "キーワード監視: " if @site.watch_method == 'html_keyword'
-      = @site.keyword if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
+      - if @site.url.blank? || @site.url == "http://"
+        = "(メンテナンス中)"
+      - else
+        = "HTML監視" if @site.watch_method == 'html_body'
+        = "TITLEタグ監視" if @site.watch_method == 'html_title'
+        = "キーワード監視: " if @site.watch_method == 'html_keyword'
+        = @site.keyword if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
   %tr
     %th ドメイン名
     %td= @site.domain_url

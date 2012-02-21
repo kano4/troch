@@ -5,11 +5,14 @@
     %td
       = f.text_field :name
   %tr
-    %th
-      = f.label :url, 'URL（チェック先）'
+    %th{:rowspan => "2"}
+      = f.label :url, "URL（チェック先）"
     %td
       = f.text_field :url, :value => (@site.url || "http://")
       %span.description 例：http://examle.com
+  %tr
+    %td
+      %span.description (URLが入力されていない場合はメンテナンスモードになります。)
   %tr
     %th{:rowspan => "3"}
       = f.label :watch_method, 'チェック方法'

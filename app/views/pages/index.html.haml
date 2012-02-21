@@ -21,7 +21,7 @@
   %tr
     %th サイト名
     %th ドメイン
-    %th 有効期限
+    %th ドメイン有効期限
   - @domain_sites.each do |site|
     %tr
       %td
@@ -29,7 +29,7 @@
       %td
         = site.domain_url unless site.domain_url.blank?
       %td
-        = site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
+        = "#{site.domain_expired.strftime("%Y/%m/%d")} (あと#{(site.domain_expired - Date.today).to_i}日)" unless site.domain_expired.blank?
 
 %br
 %h3 SSL有効期限30日以内
@@ -46,6 +46,6 @@
       %td
         = site.ssl_url unless site.ssl_url.blank?
       %td
-        = site.ssl_expired.strftime("%Y/%m/%d") unless site.ssl_expired.blank?
+        = "#{site.ssl_expired.strftime("%Y/%m/%d")} (あと#{(site.ssl_expired - Date.today).to_i}日)" unless site.ssl_expired.blank?
       %td
         = site.note unless site.note.blank?
