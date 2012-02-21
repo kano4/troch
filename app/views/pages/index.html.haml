@@ -16,13 +16,26 @@
     %td= link_to(@sites.length, site_path)
 
 %br
+%h3 異常サイト
+%table.table
+  %tr
+    %th サイト名
+    %th ステータス
+  - @error_sites.each do |site|
+    %tr
+      %td
+        = link_to site.name, site_path(site) unless site.name.blank?
+      %td
+        = site.watch_logs.last.status unless site.watch_logs.last.status.blank?
+
+%br
 %h3 ドメイン有効期限30日以内
 %table#domain_list
   %tr
     %th サイト名
     %th ドメイン
     %th ドメイン有効期限
-  - @domain_sites.each do |site|
+  - @ssl_sites.each do |site|
     - unless site.domain_url.blank?
       %tr
         %td

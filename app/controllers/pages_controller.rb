@@ -4,6 +4,7 @@ class PagesController < ApplicationController
 
   def index
     @sites = Site.find(:all)
+    @error_sites = []
     @error_num = 0
     @maintenance_num = 0
     @sites.each do |site|
@@ -12,6 +13,7 @@ class PagesController < ApplicationController
           @maintenance_num += 1
         else
           @error_num += 1
+          @error_sites << site
         end
       end
     end
@@ -21,6 +23,7 @@ class PagesController < ApplicationController
     @last_log = WatchLog.last
 
     @cron_status = File.exist?("#{Rails.root}/tmp/cron/cron.on") ? '監視' : '停止'
+
   end
 
   def edit
