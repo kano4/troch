@@ -35,7 +35,7 @@
     %th サイト名
     %th ドメイン
     %th ドメイン有効期限
-  - @ssl_sites.each do |site|
+  - @domain_sites.each do |site|
     - unless site.domain_url.blank?
       %tr
         %td
