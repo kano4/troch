@@ -94,17 +94,17 @@ end
 def get_page_body(url)
   agent = Mechanize.new
   page = agent.get(url)
-  NKF.nkf('-wm0', page.parser) || 'no body'
+  NKF.nkf('-wm0', page.parser.to_s.force_encoding("UTF-8")) || 'no body'
 end
 
 def get_page_title(url)
   agent = Mechanize.new
   page = agent.get(url)
-  NKF.nkf('-wm0', page.title) || 'no title'
+  page.title.to_s.force_encoding("UTF-8") || 'no title'
 end
 
 def get_page_keyword(url, keyword)
   agent = Mechanize.new
   page = agent.get(url)
-  NKF.nkf('-wm0', page.body).to_s.include?(keyword) ? keyword : "There is no keyword '#{keyword}'. #{Time.now}"
+  page.body.to_s.force_encoding("UTF-8").include?(keyword) ? keyword : "There is no keyword '#{keyword}'. #{Time.now}"
 end

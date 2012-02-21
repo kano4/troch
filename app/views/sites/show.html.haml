@@ -11,6 +11,13 @@
     %th レスポンスタイム
     %td= "#{@site.watch_logs.last.response_time} msec" unless @site.watch_logs.blank?
   %tr
+    - if !@site.url.blank? && !(@site.url == "http://") && !(@site.watch_logs.blank?) && @site.watch_method == 'html_body'
+      %th サイトのHTML
+      %td
+        %p.show_hide <詳細表示>
+        - Base64.decode64(@site.watch_logs.last.content).to_s.force_encoding("utf-8").split(/\r?\n/).each do |con|
+          %p.html_content= con
+  %tr
     %th URL(チェック先)
     %td
       =link_to @site.url, @site.url unless @site.url.blank? || @site.url == "http://"
@@ -48,3 +55,12 @@
   = link_to image_tag("devise/icons/cross.png") + " 削除", site_path(@site), :method => "delete", :class => "button", :confirm => "削除してよろしいですか？"
 %br
 = link_to '戻る', sites_path
+
+:javascript
+  $(function(){
+      $("p.html_content").css("display", "none");
+
+      $("p.show_hide").click(function(){
+        $("p.html_content").toggle();
+      });
+  });

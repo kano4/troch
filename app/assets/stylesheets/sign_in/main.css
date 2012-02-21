@@ -11,7 +11,7 @@ h2 {margin:0 0 0 0;}
 #content h5, h6 {font-size:100%;}
 #content table {margin:0 0 10px 0; border-collapse:collapse;}
 #content table.width100 {width:100%;}
-#content table th {text-align:left; vertical-align:middle; font-weight:bold;}
+#content table th {text-align:left; vertical-align:top; font-weight:bold;}
 #content ul {margin:0 0; list-style:none;}
 #content ul li {padding-left:10px;}
 #content .sites_list ul {margin: 0 0 20px;}
