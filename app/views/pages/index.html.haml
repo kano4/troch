@@ -23,13 +23,14 @@
     %th ドメイン
     %th ドメイン有効期限
   - @domain_sites.each do |site|
-    %tr
-      %td
-        = link_to site.name, site_path(site) unless site.name.blank?
-      %td
-        = site.domain_url unless site.domain_url.blank?
-      %td
-        = "#{site.domain_expired.strftime("%Y/%m/%d")} (あと#{(site.domain_expired - Date.today).to_i}日)" unless site.domain_expired.blank?
+    - unless site.domain_url.blank?
+      %tr
+        %td
+          = link_to site.name, site_path(site) unless site.name.blank?
+        %td
+          = site.domain_url unless site.domain_url.blank?
+        %td
+          = "#{site.domain_expired.strftime("%Y/%m/%d")} (あと#{(site.domain_expired - Date.today).to_i}日)" unless site.domain_expired.blank?
 
 %br
 %h3 SSL有効期限30日以内
@@ -40,12 +41,13 @@
     %th SSL有効期限
     %th 備考
   - @ssl_sites.each do |site|
-    %tr
-      %td
-        = link_to site.name, site_path(site) unless site.name.blank?
-      %td
-        = site.ssl_url unless site.ssl_url.blank?
-      %td
-        = "#{site.ssl_expired.strftime("%Y/%m/%d")} (あと#{(site.ssl_expired - Date.today).to_i}日)" unless site.ssl_expired.blank?
-      %td
-        = site.note unless site.note.blank?
+    - unless site.ssl_url.blank?
+      %tr
+        %td
+          = link_to site.name, site_path(site) unless site.name.blank?
+        %td
+          = site.ssl_url unless site.ssl_url.blank?
+        %td
+          = "#{site.ssl_expired.strftime("%Y/%m/%d")} (あと#{(site.ssl_expired - Date.today).to_i}日)" unless site.ssl_expired.blank?
+        %td
+          = site.note unless site.note.blank?
