@@ -8,6 +8,9 @@
     %th 最終チェック日時
     %td= @site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless @site.watch_logs.last.blank?
   %tr
+    %th 登録日時
+    %td= @site.created_at.strftime("%Y/%m/%d %H:%M:%S") unless @site.created_at.blank?
+  %tr
     %th レスポンスタイム
     %td= "#{@site.watch_logs.last.response_time} msec" unless @site.watch_logs.blank?
   %tr
