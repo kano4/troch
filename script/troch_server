@@ -16,6 +16,7 @@ class ResqueWorkerDaemon < DaemonSpawn::Base
 end
 
 ResqueWorkerDaemon.spawn!({
+  :processes => 2,
   :working_dir => Rails.root,
   :pid_file => File.join(Rails.root, 'tmp', 'pids', 'troch_server.pid'),
   :log_file => File.join(Rails.root, 'log', 'troch_server.log'),

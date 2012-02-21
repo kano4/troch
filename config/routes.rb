@@ -3,14 +3,14 @@ Troch::Application.routes.draw do
   mount Resque::Server, at: "/resque"
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
+  devise_for :users
+
   resources :groups
 
   match '/settings/', :to => 'settings#index'
   match '/settings/watch_on_off', :to => 'settings#watch_on_off'
 
   resources :sites
-
-  devise_for :users
 
   root :to => 'pages#index'
   get '/edit', :to => 'pages#edit'
