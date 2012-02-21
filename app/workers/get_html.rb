@@ -84,8 +84,8 @@ def get_diff(old_content, new_content)
   diff_html = ""
   diffs.each do |d|
     if d.old_element != d.new_element
-      diff_html << "-#{d.old_element}\n" if d.old_element
-      diff_html << "+#{d.new_element}\n" if d.new_element
+      diff_html << "- #{d.old_element}\n" if d.old_element
+      diff_html << "+ #{d.new_element}\n" if d.new_element
     end
   end
   diff_html
