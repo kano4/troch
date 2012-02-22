@@ -5,7 +5,8 @@ include Clockwork
 
 ENV['RAILS_ENV'] ||= 'production'
 
-#every(10.seconds, 'site.get_html') { `cd #{Rails.root} && script/rails runner Site.get_html -e #{ENV['RAILS_ENV']} >> log/cron.log 2>> log/error.log` }
+`cd #{Rails.root} && RAILS_ENV=#{ENV['RAILS_ENV']} script/troch_server restart >> log/cron.log 2>> log/error.log`
+
 every(1.hour, 'site.get_html', :at => ['**:00', '**:15', '**:30', '**:45']) { `cd #{Rails.root} && script/rails runner Site.get_html -e #{ENV['RAILS_ENV']} >> log/cron.log 2>> log/error.log` }
 every(1.day, 'site.check_domain', :at => '08:00') { `cd #{Rails.root} && script/rails runner Site.check_domain -e #{ENV['RAILS_ENV']} >> log/cron.log 2>> log/error.log` }
 every(1.day, 'site.check_ssl',    :at => '08:00') { `cd #{Rails.root} && script/rails runner Site.check_ssl    -e #{ENV['RAILS_ENV']} >> log/cron.log 2>> log/error.log` }

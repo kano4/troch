@@ -69,5 +69,4 @@ Troch is a website monitoring tool.
 
 6. Start worker
 
-        $ RAILS_ENV=production script/troch_server start
         $ nohup bundle exec clockwork clock.rb > log/clock_out.log 2> log/clock_error.log &

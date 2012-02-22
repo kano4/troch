@@ -5,20 +5,29 @@
     %td
       = f.text_field :name
   %tr
-    %th{:rowspan => "2"}
+    %th
       = f.label :url, "URL（チェック先）"
     %td
       = f.text_field :url, :value => (@site.url || "http://")
       %span.description 例：http://examle.com
-  %tr
-    %td
+      %br
       %span.description (URLが入力されていない場合はメンテナンスモードになります。)
   %tr
     %th{:rowspan => "3"}
       = f.label :watch_method, 'チェック方法'
     %td
       = f.radio_button :watch_method, 'html_body',  :checked => (@site.watch_method == 'html_body' || @site.watch_method.nil?)
-      HTML監視
+      HTML監視&nbsp;&nbsp;&nbsp;
+      %button{:type => "button", :class => "show_hide"}
+        オプション
+      %p.option
+        無視するHTMLタグ (カンマ区切りで複数設定可能です。)
+        %br
+        = f.text_field :cut_tag
+        %br
+        %span.description= '例：<p class="ads">の場合 p.ads'
+        %br
+        %span.description= '例：<div id="sidebar">の場合 div#sidebar'
   %tr
     %td
       = f.radio_button :watch_method, 'html_title', :checked => (@site.watch_method == 'html_title')
@@ -27,7 +36,9 @@
     %td
       = f.radio_button :watch_method, 'html_keyword', :checked => (@site.watch_method == 'html_keyword')
       キーワード監視
-      %br= f.text_field :keyword
+      %br
+      キーワード:
+      =f.text_field :keyword
   %tr
     %th
       = f.label :domain_url, 'ドメイン名'
@@ -56,3 +67,19 @@
     = image_tag("devise/icons/tick.png")
     保存
   = link_to 'キャンセル', sites_path
+
+:javascript
+  $(function(){
+    $("p.option").css("display", "none");
+
+    //$("p.show_hide").click(function(){
+    //  $("p.option").toggle();
+    //});
+
+    $("button.show_hide").click(function(){
+      $(function(){
+        $(this).toggleClass('on');
+        $("p.option").toggle('fast');
+      });
+    });
+  });

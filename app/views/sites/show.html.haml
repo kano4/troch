@@ -14,13 +14,6 @@
     %th レスポンスタイム
     %td= "#{@site.watch_logs.last.response_time} msec" unless @site.watch_logs.blank?
   %tr
-    - if !@site.url.blank? && !(@site.url == "http://") && !(@site.watch_logs.blank?) && @site.watch_method == 'html_body'
-      %th サイトのHTML
-      %td
-        %p.show_hide <詳細表示>
-        - Base64.decode64(@site.watch_logs.last.content).to_s.force_encoding("utf-8").split(/\r?\n/).each do |con|
-          %p.html_content= con
-  %tr
     %th URL(チェック先)
     %td
       =link_to @site.url, @site.url unless @site.url.blank? || @site.url == "http://"
@@ -31,9 +24,20 @@
         = "(メンテナンス中)"
       - else
         = "HTML監視" if @site.watch_method == 'html_body'
+        = "(無視するHTMLタグ) #{@site.cut_tag}" if @site.watch_method == 'html_body' && !@site.cut_tag.blank?
         = "TITLEタグ監視" if @site.watch_method == 'html_title'
         = "キーワード監視: " if @site.watch_method == 'html_keyword'
         = @site.keyword if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
+  %tr
+    - if !@site.url.blank? && !(@site.url == "http://") && !(@site.watch_logs.blank?) && @site.watch_method == 'html_body'
+      %th サイトのHTML
+      %td
+        %button{:type => "button", :class => "show_hide"}
+          詳細表示
+        %p.html_content
+          - Base64.decode64(@site.watch_logs.last.content).to_s.force_encoding("utf-8").split(/\r?\n/).each do |content|
+            = content
+            %br
   %tr
     %th ドメイン名
     %td= @site.domain_url
@@ -63,7 +67,7 @@
   $(function(){
       $("p.html_content").css("display", "none");
 
-      $("p.show_hide").click(function(){
-        $("p.html_content").toggle();
+      $("button.show_hide").click(function(){
+        $("p.html_content").toggle('fast');
       });
   });
