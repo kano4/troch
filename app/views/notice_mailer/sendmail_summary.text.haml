@@ -2,12 +2,14 @@
 
 ＜ドメイン期限30日以内＞
 - @domain_sites.each_with_index do |site, i|
-  = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
-  = site.domain_url
-  = "#{site.domain_expired.strftime("%Y/%m/%d")} (あと#{(site.domain_expired - Date.today).to_i}日)\n"
+  - unless site.domain_url.blank?
+    = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
+    = site.domain_url
+    = "#{site.domain_expired.strftime("%Y/%m/%d")} (あと#{(site.domain_expired - Date.today).to_i}日)\n"
 
 ＜SSL期限30日以内＞
 - @ssl_sites.each_with_index do |site, i|
-  = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
-  = site.ssl_url
-  = "#{site.ssl_expired.strftime("%Y/%m/%d")} (あと#{(site.ssl_expired - Date.today).to_i}日)\n"
+  - unless site.ssl_url.blank?
+    = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
+    = site.ssl_url
+    = "#{site.ssl_expired.strftime("%Y/%m/%d")} (あと#{(site.ssl_expired - Date.today).to_i}日)\n"
