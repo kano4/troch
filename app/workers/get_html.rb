@@ -91,10 +91,20 @@ def get_diff(old_content, new_content)
   diff_html
 end
 
-def get_page_body(url)
+def get_page_body(url, cut_tag = nil)
   agent = Mechanize.new
   page = agent.get(url)
-  NKF.nkf('-wm0', page.parser).to_s.force_encoding("UTF-8") || 'no body'
+
+  body = NKF.nkf('-wm0', page.parser).to_s.force_encoding("UTF-8") || 'no body'
+
+  if !cut_tag.blank?
+    patterns = page.parser.search(cut_tag)
+    patterns.each do |pattern|
+      body = body.sub(NKF.nkf('-wm0', pattern).to_s.force_encoding("UTF-8"), '')
+    end
+  end
+
+  body
 end
 
 def get_page_title(url)
