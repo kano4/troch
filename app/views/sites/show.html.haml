@@ -36,8 +36,9 @@
           詳細表示
         %p.html_content
           - Base64.decode64(@site.watch_logs.last.content).to_s.force_encoding("utf-8").split(/\r?\n/).each do |content|
-            = content
-            %br
+            - unless content.strip.blank?
+              = content
+              %br
   %tr
     %th ドメイン名
     %td= @site.domain_url

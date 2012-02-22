@@ -15,9 +15,11 @@ class GetHtml
     else
       trials = 0
       begin
+        agent = Mechanize.new
         start_time = Time.now
-        content = get_html_content(site)
+        page = agent.get(site.url)
         end_time = Time.now
+        content = get_html_content(page, site)
       rescue TimeoutError
         trials += 1
         retry if trials < 3
@@ -60,16 +62,6 @@ class GetHtml
   end
 end
 
-def get_html_content(site)
-  if site.watch_method == 'html_body'
-    get_page_body(site.url)
-  elsif site.watch_method == 'html_title'
-    get_page_title(site.url)
-  elsif site.watch_method == 'html_keyword' && !site.keyword.blank?
-    get_page_keyword(site.url, site.keyword)
-  end
-end
-
 def sendmail_alert(site, response_code, diff_html = '')
   users = User.find(site.users)
   users.each do |user|
@@ -91,30 +83,36 @@ def get_diff(old_content, new_content)
   diff_html
 end
 
-def get_page_body(url, cut_tag = nil)
-  agent = Mechanize.new
-  page = agent.get(url)
+def get_html_content(page, site)
+  if site.watch_method == 'html_body'
+    get_page_body(page, site.cut_tag)
+  elsif site.watch_method == 'html_title'
+    get_page_title(page)
+  elsif site.watch_method == 'html_keyword' && !site.keyword.blank?
+    get_page_keyword(page, site.keyword)
+  end
+end
 
+def get_page_body(page, cut_tag = nil)
   body = NKF.nkf('-wm0', page.parser).to_s.force_encoding("UTF-8") || 'no body'
 
   if !cut_tag.blank?
-    patterns = page.parser.search(cut_tag)
-    patterns.each do |pattern|
-      body = body.sub(NKF.nkf('-wm0', pattern).to_s.force_encoding("UTF-8"), '')
+    patterns_with_linebreak = page.parser.search(cut_tag)
+    patterns_with_linebreak.each do |pattern_with_linebreak|
+      patterns = NKF.nkf('-wm0', pattern_with_linebreak).to_s.force_encoding("UTF-8").split(/((?:\r?\n)+)/)
+      patterns.each do |pattern|
+        body = body.sub(NKF.nkf('-wm0', pattern).to_s.force_encoding("UTF-8"), '')
+      end
     end
   end
 
   body
 end
 
-def get_page_title(url)
-  agent = Mechanize.new
-  page = agent.get(url)
+def get_page_title(page)
   page.title.to_s.force_encoding("UTF-8") || 'no title'
 end
 
-def get_page_keyword(url, keyword)
-  agent = Mechanize.new
-  page = agent.get(url)
+def get_page_keyword(page, keyword='')
   page.body.to_s.force_encoding("UTF-8").include?(keyword) ? keyword : "There is no keyword '#{keyword}'. #{Time.now}"
 end
