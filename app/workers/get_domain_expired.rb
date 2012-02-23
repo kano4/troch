@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'whois'
 
-class CheckDomain
+class GetDomainExpired
   @queue = "troch_worker_#{ENV['RAILS_ENV']}"
 
   def self.perform(site_id)

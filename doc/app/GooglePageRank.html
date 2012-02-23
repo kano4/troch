@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module GooglePageRank - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/workers/get_page_rank.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-c2i">::c2i</a>
+    
+    <li><a href="#method-c-checkSum">::checkSum</a>
+    
+    <li><a href="#method-c-get">::get</a>
+    
+    <li><a href="#method-c-m1">::m1</a>
+    
+    <li><a href="#method-c-mix">::mix</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./GetHtml.html">GetHtml</a>
+  
+    <li><a href="./GetPageRank.html">GetPageRank</a>
+  
+    <li><a href="./GetSslExpired.html">GetSslExpired</a>
+  
+    <li><a href="./GooglePageRank.html">GooglePageRank</a>
+  
+    <li><a href="./Group.html">Group</a>
+  
+    <li><a href="./GroupsController.html">GroupsController</a>
+  
+    <li><a href="./GroupsHelper.html">GroupsHelper</a>
+  
+    <li><a href="./NoticeMailer.html">NoticeMailer</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./PagesController.html">PagesController</a>
+  
+    <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./SettingsController.html">SettingsController</a>
+  
+    <li><a href="./SettingsHelper.html">SettingsHelper</a>
+  
+    <li><a href="./Site.html">Site</a>
+  
+    <li><a href="./SitesController.html">SitesController</a>
+  
+    <li><a href="./SitesHelper.html">SitesHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersSite.html">UsersSite</a>
+  
+    <li><a href="./WatchLog.html">WatchLog</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module GooglePageRank</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="M">M
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-c2i" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">c2i</span><span
+            class="method-args">(s="",k=0)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="c2i-source">
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">s</span>=<span class="ruby-string">&quot;&quot;</span>,<span class="ruby-identifier">k</span>=<span class="ruby-value">0</span>)
+  <span class="ruby-comment"># char codes to int. Little Endian</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">'1.9'</span>
+    <span class="ruby-identifier">s2</span> = []
+    <span class="ruby-identifier">s2</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">3</span>] = <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">3</span>].<span class="ruby-identifier">ord</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">3</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">s2</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>] = <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>].<span class="ruby-identifier">ord</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">s2</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>] = <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">ord</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">s2</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">0</span>] = <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">0</span>].<span class="ruby-identifier">ord</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">0</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">s</span> = <span class="ruby-identifier">s2</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> ((<span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>*<span class="ruby-value">0x100</span><span class="ruby-operator">+</span><span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>)*<span class="ruby-value">0x100</span><span class="ruby-operator">+</span><span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>)*<span class="ruby-value">0x100</span><span class="ruby-operator">+</span><span class="ruby-identifier">s</span>[<span class="ruby-identifier">k</span>].<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- c2i-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- c2i-method -->
+
+    
+      <div id="method-c-checkSum" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">checkSum</span><span
+            class="method-args">(url)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="checkSum-source">
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">checkSum</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">a</span>= <span class="ruby-value">0x9E3779B9</span>; <span class="ruby-identifier">b</span>= <span class="ruby-value">0x9E3779B9</span>;
+  <span class="ruby-identifier">c</span>= <span class="ruby-value">0xE6359A60</span>; <span class="ruby-comment"># Google Magic Number</span>
+  <span class="ruby-identifier">iurl</span>=<span class="ruby-string">&quot;info:&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">url</span>; <span class="ruby-identifier">len</span> = <span class="ruby-identifier">iurl</span>.<span class="ruby-identifier">size</span>; <span class="ruby-identifier">k</span>=<span class="ruby-value">0</span>
+  <span class="ruby-keyword">while</span> (<span class="ruby-identifier">len</span><span class="ruby-operator">&gt;=</span><span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">12</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">a</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">iurl</span>,<span class="ruby-identifier">k</span>) ; <span class="ruby-identifier">b</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">iurl</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">4</span>); <span class="ruby-identifier">c</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">iurl</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">8</span>); <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span> = <span class="ruby-identifier">mix</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>)
+    <span class="ruby-identifier">k</span>=<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">12</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">a</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">iurl</span>,<span class="ruby-identifier">k</span>); <span class="ruby-identifier">b</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">iurl</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">4</span>); <span class="ruby-identifier">c</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">iurl</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">8</span>)<span class="ruby-operator">&lt;&lt;</span><span class="ruby-value">8</span>)<span class="ruby-operator">+</span><span class="ruby-identifier">len</span>; <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span> = <span class="ruby-identifier">mix</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">c</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- checkSum-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- checkSum-method -->
+
+    
+      <div id="method-c-get" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get</span><span
+            class="method-args">(url, port=80)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get-source">
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">port</span>=<span class="ruby-value">80</span>)
+  <span class="ruby-identifier">ch</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;6%u&quot;</span>,<span class="ruby-identifier">checkSum</span>(<span class="ruby-identifier">url</span>))
+
+  <span class="ruby-identifier">g_path</span>=<span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;/tbr?client=navclient-auto&amp;features=Rank&amp;q=info:%s&amp;ch=%s&quot;</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">ch</span>)
+
+  <span class="ruby-identifier">p</span>=<span class="ruby-keyword">nil</span> <span class="ruby-comment"># pagerank</span>
+  <span class="ruby-identifier">g_server</span>=<span class="ruby-string">&quot;toolbarqueries.google.com&quot;</span>  <span class="ruby-comment"># toolbarqueries.google.co.jp  www.google.co.jp</span>
+  <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">g_server</span>, <span class="ruby-identifier">port</span>).<span class="ruby-identifier">get</span>(<span class="ruby-identifier">g_path</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">pos</span>=<span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&quot;Rank_1:&quot;</span>)
+    <span class="ruby-keyword">if</span>( <span class="ruby-identifier">pos</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>) <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">n</span>=(<span class="ruby-identifier">line</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-value">7</span>,<span class="ruby-value">1</span>]).<span class="ruby-identifier">to_i</span> <span class="ruby-comment"># digit</span>
+      <span class="ruby-identifier">p</span>=(<span class="ruby-identifier">line</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-value">9</span>,<span class="ruby-identifier">n</span>]).<span class="ruby-identifier">to_i</span> <span class="ruby-comment"># pagerank of n digit</span>
+      <span class="ruby-keyword">break</span>;
+    <span class="ruby-keyword">end</span>;
+  }
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">p</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get-method -->
+
+    
+      <div id="method-c-m1" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">m1</span><span
+            class="method-args">(a,b,c,d)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="m1-source">
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>,<span class="ruby-identifier">d</span>)
+  <span class="ruby-keyword">return</span> (((<span class="ruby-identifier">a</span><span class="ruby-operator">+</span>(<span class="ruby-constant">M</span><span class="ruby-operator">-</span><span class="ruby-identifier">b</span>)<span class="ruby-operator">+</span>(<span class="ruby-constant">M</span><span class="ruby-operator">-</span><span class="ruby-identifier">c</span>))<span class="ruby-operator">%</span><span class="ruby-constant">M</span>)<span class="ruby-operator">^</span>(<span class="ruby-identifier">d</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>))<span class="ruby-operator">%</span><span class="ruby-constant">M</span> <span class="ruby-comment"># mix/power mod</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- m1-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- m1-method -->
+
+    
+      <div id="method-c-mix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">mix</span><span
+            class="method-args">(a,b,c)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="mix-source">
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">mix</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>)
+  <span class="ruby-identifier">a</span>=<span class="ruby-identifier">a</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>; <span class="ruby-identifier">b</span>=<span class="ruby-identifier">b</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>; <span class="ruby-identifier">c</span>=<span class="ruby-identifier">c</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>, <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">13</span>); <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>, <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span>  <span class="ruby-value">8</span>); <span class="ruby-identifier">c</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>, <span class="ruby-identifier">b</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">13</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>, <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">12</span>); <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>, <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">16</span>); <span class="ruby-identifier">c</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>, <span class="ruby-identifier">b</span> <span class="ruby-operator">&gt;&gt;</span>  <span class="ruby-value">5</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>, <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;&gt;</span>  <span class="ruby-value">3</span>); <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>, <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">10</span>); <span class="ruby-identifier">c</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>, <span class="ruby-identifier">b</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">15</span>)
+  <span class="ruby-keyword">return</span> [<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- mix-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- mix-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

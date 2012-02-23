@@ -10,17 +10,17 @@ protected
   require 'whois'
   require 'date/format'
 
-  def self.check_domain
+  def self.get_domain_expired
     sites = self.all
     sites.each do |site|
-      Resque.enqueue(CheckDomain, site.id)
+      Resque.enqueue(GetDomainExpired, site.id)
     end
   end
 
-  def self.check_ssl
+  def self.get_ssl_expired
     sites = self.all
     sites.each do |site|
-      Resque.enqueue(CheckSsl, site.id)
+      Resque.enqueue(GetSslExpired, site.id)
     end
   end
 

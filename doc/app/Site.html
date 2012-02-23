@@ -70,11 +70,13 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-check_domain">::check_domain</a>
-    
-    <li><a href="#method-c-check_ssl">::check_ssl</a>
+    <li><a href="#method-c-get_domain_expired">::get_domain_expired</a>
     
     <li><a href="#method-c-get_html">::get_html</a>
+    
+    <li><a href="#method-c-get_page_rank">::get_page_rank</a>
+    
+    <li><a href="#method-c-get_ssl_expired">::get_ssl_expired</a>
     
     <li><a href="#method-c-send_summary">::send_summary</a>
     
@@ -103,11 +105,13 @@
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
-    <li><a href="./CheckDomain.html">CheckDomain</a>
-  
-    <li><a href="./CheckSsl.html">CheckSsl</a>
-  
     <li><a href="./GetHtml.html">GetHtml</a>
+  
+    <li><a href="./GetPageRank.html">GetPageRank</a>
+  
+    <li><a href="./GetSslExpired.html">GetSslExpired</a>
+  
+    <li><a href="./GooglePageRank.html">GooglePageRank</a>
   
     <li><a href="./Group.html">Group</a>
   
@@ -170,10 +174,10 @@
       <h3 class="section-header">Protected Class Methods</h3>
 
     
-      <div id="method-c-check_domain" class="method-detail ">
+      <div id="method-c-get_domain_expired" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">check_domain</span><span
+          <span class="method-name">get_domain_expired</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -185,55 +189,22 @@
           
 
           
-          <div class="method-source-code" id="check_domain-source">
+          <div class="method-source-code" id="get_domain_expired-source">
             <pre><span class="ruby-comment"># File app/models/site.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">check_domain</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_domain_expired</span>
   <span class="ruby-identifier">sites</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
   <span class="ruby-identifier">sites</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Resque</span>.<span class="ruby-identifier">enqueue</span>(<span class="ruby-constant">CheckDomain</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-constant">Resque</span>.<span class="ruby-identifier">enqueue</span>(<span class="ruby-constant">GetDomainExpired</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">id</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- check_domain-source -->
+          </div><!-- get_domain_expired-source -->
           
         </div>
 
         
 
         
-      </div><!-- check_domain-method -->
-
-    
-      <div id="method-c-check_ssl" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">check_ssl</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="check_ssl-source">
-            <pre><span class="ruby-comment"># File app/models/site.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">check_ssl</span>
-  <span class="ruby-identifier">sites</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
-  <span class="ruby-identifier">sites</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Resque</span>.<span class="ruby-identifier">enqueue</span>(<span class="ruby-constant">CheckSsl</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">id</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- check_ssl-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- check_ssl-method -->
+      </div><!-- get_domain_expired-method -->
 
     
       <div id="method-c-get_html" class="method-detail ">
@@ -252,7 +223,7 @@
 
           
           <div class="method-source-code" id="get_html-source">
-            <pre><span class="ruby-comment"># File app/models/site.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/models/site.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_html</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>)
     <span class="ruby-identifier">sites</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
@@ -271,6 +242,72 @@
       </div><!-- get_html-method -->
 
     
+      <div id="method-c-get_page_rank" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_page_rank</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_page_rank-source">
+            <pre><span class="ruby-comment"># File app/models/site.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_page_rank</span>
+  <span class="ruby-identifier">sites</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">sites</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Resque</span>.<span class="ruby-identifier">enqueue</span>(<span class="ruby-constant">GetPageRank</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_page_rank-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_page_rank-method -->
+
+    
+      <div id="method-c-get_ssl_expired" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_ssl_expired</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_ssl_expired-source">
+            <pre><span class="ruby-comment"># File app/models/site.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_ssl_expired</span>
+  <span class="ruby-identifier">sites</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">sites</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Resque</span>.<span class="ruby-identifier">enqueue</span>(<span class="ruby-constant">GetSslExpired</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_ssl_expired-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_ssl_expired-method -->
+
+    
       <div id="method-c-send_summary" class="method-detail ">
         
         <div class="method-heading">
@@ -287,7 +324,7 @@
 
           
           <div class="method-source-code" id="send_summary-source">
-            <pre><span class="ruby-comment"># File app/models/site.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/site.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">send_summary</span>
   <span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:summary</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>})
   <span class="ruby-identifier">domain_sites</span> = <span class="ruby-constant">Site</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">'domain_expired &lt; ?'</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span> <span class="ruby-operator">+</span> <span class="ruby-value">30</span>], <span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'domain_expired'</span>)
