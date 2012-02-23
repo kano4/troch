@@ -12,6 +12,7 @@
       %th ステータス
       %th ドメイン期限
       %th SSL期限
+      %th PageRank
       %th 監視方法
       %th 更新日
       %th 最終チェック日時
@@ -26,6 +27,7 @@
         %td= site.watch_logs.last.status unless site.watch_logs.last.blank?
         %td= site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
         %td= site.ssl_expired.strftime("%Y/%m/%d") unless site.ssl_expired.blank?
+        %td= site.page_rank unless site.page_rank.blank?
         %td
           = "HTML監視" if site.watch_method == 'html_body'
           = "TITLEタグ監視" if site.watch_method == 'html_title'

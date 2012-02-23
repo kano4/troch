@@ -24,6 +24,13 @@ protected
     end
   end
 
+  def self.get_page_rank
+    sites = self.all
+    sites.each do |site|
+      Resque.enqueue(GetPageRank, site.id)
+    end
+  end
+
   def self.get_html
     if File.exist?("#{Rails.root}/tmp/cron/cron.on")
       sites = self.all
