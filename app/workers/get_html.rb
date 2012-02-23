@@ -63,7 +63,10 @@ class GetHtml
 end
 
 def sendmail_alert(site, response_code, diff_html = '')
-  users = User.find(site.users)
+  users = []
+  site.users.each do |user|
+    users << User.find(user)
+  end
   users.each do |user|
     NoticeMailer.sendmail_alert(user, site, response_code, diff_html).deliver
   end
