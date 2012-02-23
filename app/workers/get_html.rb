@@ -39,7 +39,7 @@ class GetHtml
           if last_log.content == encoded_content || content == site.keyword
             last_log.content = ''
             last_log.save
-            if response_time > 10 * 1000
+            if response_time > 15 * 1000
               site.watch_logs.build(:status => 'delay', :content => encoded_content, :response_time => response_time)
             else
               site.watch_logs.build(:status => 'ok',    :content => encoded_content, :response_time => response_time)
