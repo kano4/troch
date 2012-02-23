@@ -69,8 +69,24 @@ Troch is open source.
 
 6. Start worker
 
-        $ nohup bundle exec clockwork clock.rb > log/clock_out.log 2> log/clock_error.log &
+    Copy startup script.
 
-    Or edit /etc/rc.d/rc.local as below.
+        (Red Hat)
+        # cp ext/troch-worker.redhat /etc/init.d/troch-worker
 
-        cd /path/to/troch && RAILS_ENV=production bundle exec clockwork clock.rb > log/clock_out.log 2> log/clock_error.log &
+        (Ubuntu)
+        # cp ext/troch-worker.ubuntu /etc/init.d/troch-worker
+
+    Edit TROCH_ROOT in /etc/init.d/troch-worker . For example,
+
+        TROCH_ROOT="/srv/troch"
+
+    Add troch-worker into startup script and start troch-worker.
+
+        (Red Hat)
+        # chkconfig --add troch-worker
+        # /etc/init.d/troch-worker start
+
+        (Ubuntu)
+        # sysv-rc-conf troch-worker on
+        # /etc/init.d/troch-worker start

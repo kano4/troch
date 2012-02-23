@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# troch-worker Startup script for the Troch Worker
+#
+# chkconfig: - 99 20
+# description: Troch Worker is background worker for Troch.
+# processname: troch-worker
+
+TROCH_ROOT="/path/to/troch"
+
+start() {
+  echo "Starting troch-worker: "
+  cd $TROCH_ROOT
+  RAILS_ENV=production bundle exec clockwork clock.rb >> log/clock_out.log 2>> log/clock_error.log &
+  return 0
+}
+stop() {
+  echo "Stopping troch-worker: "
+
+  clockwork_pid=`ps auxw | grep clockwork | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  if [ -n "$clockwork_pid" ]; then
+    kill -9 $clockwork_pid
+  fi
+
+  resque_pid=`ps auxw | grep resque | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  if [ -n "$resque_pid" ]; then
+    kill -9 $resque_pid
+  fi
+
+  return 0
+}
+restart() {
+  stop
+  start
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart}"
+    exit 2
+esac
+
+exit $?

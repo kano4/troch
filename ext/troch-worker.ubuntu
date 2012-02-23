@@ -1,0 +1,57 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          troch-worker
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Startup script for the Troch Worker
+# Description:       Troch Worker is background worker for Troch.
+### END INIT INFO
+
+#TROCH_ROOT="/path/to/troch"
+TROCH_ROOT="/home/kanou/troch"
+
+start() {
+  echo "Starting troch-worker: "
+  cd $TROCH_ROOT
+  RAILS_ENV=production bundle exec clockwork clock.rb >> log/clock_out.log 2>> log/clock_error.log &
+  return 0
+}
+stop() {
+  echo "Stopping troch-worker: "
+
+  clockwork_pid=`ps auxw | grep clockwork | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  if [ -n "$clockwork_pid" ]; then
+    kill -9 $clockwork_pid
+  fi
+
+  resque_pid=`ps auxw | grep resque | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  if [ -n "$resque_pid" ]; then
+    kill -9 $resque_pid
+  fi
+
+  return 0
+}
+restart() {
+  stop
+  start
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart}"
+    exit 2
+esac
+
+exit $?
