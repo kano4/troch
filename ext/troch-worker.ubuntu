@@ -38,6 +38,18 @@ restart() {
   stop
   start
 }
+status() {
+  clockwork_pid=`ps auxw | grep clockwork | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  resque_pid=`ps auxw | grep resque | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  status="disable"
+  if [ -n "$clockwork_pid" ]; then
+    if [ -n "$resque_pid" ]; then
+      status="enable"
+    fi
+  fi
+  echo $status
+  return 0
+}
 
 case "$1" in
   start)
@@ -49,8 +61,11 @@ case "$1" in
   restart)
     restart
     ;;
+  status)
+    status
+    ;;
   *)
-    echo $"Usage: $0 {start|stop|restart}"
+    echo $"Usage: $0 {start|stop|restart|status}"
     exit 2
 esac
 
