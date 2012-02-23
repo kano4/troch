@@ -51,6 +51,9 @@
     %th SSL有効期限
     %td= @site.ssl_expired
   %tr
+    %th PageRank
+    %td= @site.page_rank
+  %tr
     %th グループ
     %td= link_to(@site.group.name, site_path(@site.group)) unless @site.group.blank?
   %tr
