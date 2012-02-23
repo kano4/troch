@@ -5,7 +5,7 @@ require 'diff/lcs'
 require 'nkf'
 
 class GetHtml
-  @queue = :troch_worker
+  @queue = "troch_worker_#{ENV['RAILS_ENV']}"
 
   def self.perform(site_id)
     site = Site.find(site_id)

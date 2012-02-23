@@ -3,9 +3,11 @@
 require File.expand_path('../../config/application', __FILE__)
 Rails.application.require_environment!
 
+ENV['RAILS_ENV'] ||= 'production'
+
 class ResqueWorkerDaemon < DaemonSpawn::Base
   def start(args)
-    @worker = Resque::Worker.new('troch_worker')
+    @worker = Resque::Worker.new("troch_worker_#{ENV['RAILS_ENV']}")
     @worker.verbose = true
     @worker.work
   end
@@ -18,8 +20,8 @@ end
 ResqueWorkerDaemon.spawn!({
   :processes => 1,
   :working_dir => Rails.root,
-  :pid_file => File.join(Rails.root, 'tmp', 'pids', 'troch_server.pid'),
-  :log_file => File.join(Rails.root, 'log', 'troch_server.log'),
+  :pid_file => File.join(Rails.root, 'tmp', 'pids', "troch_worker_#{ENV['RAILS_ENV']}.pid"),
+  :log_file => File.join(Rails.root, 'log', "troch_worker_#{ENV['RAILS_ENV']}.log"),
   :sync_log => true,
   :singleton => true
 })
