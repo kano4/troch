@@ -2,7 +2,7 @@
 require 'date'
 
 class CheckSsl
-  @queue = :troch_worker
+  @queue = "troch_worker_#{ENV['RAILS_ENV']}"
 
   def self.perform(site_id)
     site = Site.find(site_id)

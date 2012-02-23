@@ -73,4 +73,4 @@ Troch is open source.
 
     Or edit /etc/rc.d/rc.local as below.
 
-        cd /path/to/troch && bundle exec clockwork clock.rb > log/clock_out.log 2> log/clock_error.log &
+        cd /path/to/troch && RAILS_ENV=production bundle exec clockwork clock.rb > log/clock_out.log 2> log/clock_error.log &
