@@ -64,7 +64,17 @@
 </nav>
 
     
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
     
+    <li><a href="#method-c-delete_old_logs">::delete_old_logs</a>
+    
+  </ul>
+</nav>
+
   </div>
 
   <div id="project-metadata">
@@ -150,6 +160,42 @@
 
     <!-- Methods -->
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-delete_old_logs" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_old_logs</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_old_logs-source">
+            <pre><span class="ruby-comment"># File app/models/watch_log.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_old_logs</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_all</span>([<span class="ruby-string">&quot;created_at &lt; ?&quot;</span>, <span class="ruby-value">1</span>.<span class="ruby-identifier">month</span>.<span class="ruby-identifier">ago</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_old_logs-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_old_logs-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->

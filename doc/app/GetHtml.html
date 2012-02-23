@@ -189,9 +189,11 @@
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">trials</span> = <span class="ruby-value">0</span>
     <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>
       <span class="ruby-identifier">start_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
-      <span class="ruby-identifier">content</span> = <span class="ruby-identifier">get_html_content</span>(<span class="ruby-identifier">site</span>)
+      <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>)
       <span class="ruby-identifier">end_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+      <span class="ruby-identifier">content</span> = <span class="ruby-identifier">get_html_content</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span>)
     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">TimeoutError</span>
       <span class="ruby-identifier">trials</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
       <span class="ruby-keyword">retry</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">trials</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>

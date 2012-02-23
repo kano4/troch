@@ -188,7 +188,7 @@
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">ssl_expired</span> = <span class="ruby-node">%xecho | openssl s_client -connect #{site.ssl_url}:443 -showcerts | openssl x509 -dates -noout | grep notAfter | cut -c 10-33`</span>
       <span class="ruby-identifier">ary</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">_parse</span>(<span class="ruby-identifier">ssl_expired</span>)
-      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">ssl_expired</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">local</span>(<span class="ruby-identifier">ary</span>[<span class="ruby-value">:year</span>], <span class="ruby-identifier">ary</span>[<span class="ruby-value">:mon</span>], <span class="ruby-identifier">ary</span>[<span class="ruby-value">:day</span>]).<span class="ruby-identifier">strftime</span>(<span class="ruby-string">'%Y-%m-%d'</span>)
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">ssl_expired</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">local</span>(<span class="ruby-identifier">ary</span>[<span class="ruby-value">:year</span>], <span class="ruby-identifier">ary</span>[<span class="ruby-value">:mon</span>], <span class="ruby-identifier">ary</span>[<span class="ruby-value">:mday</span>]).<span class="ruby-identifier">strftime</span>(<span class="ruby-string">'%Y-%m-%d'</span>)
     <span class="ruby-keyword">rescue</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>

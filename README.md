@@ -1,7 +1,8 @@
 # Troch [![Build Status](https://secure.travis-ci.org/kano4/troch.png)](http://travis-ci.org/kano4/troch)
 Troch is a website monitoring tool.
+Troch is open source.
 
-# Functions
+# Features
 - Watching Site Status
   - body
   - title
@@ -14,7 +15,6 @@ Troch is a website monitoring tool.
 - MySQL
 - OpenSSL
 - Redis
-- Bundler
 
 # Installation
 
@@ -70,3 +70,7 @@ Troch is a website monitoring tool.
 6. Start worker
 
         $ nohup bundle exec clockwork clock.rb > log/clock_out.log 2> log/clock_error.log &
+
+    Or edit /etc/rc.d/rc.local as below.
+
+        cd /path/to/troch && bundle exec clockwork clock.rb > log/clock_out.log 2> log/clock_error.log &
