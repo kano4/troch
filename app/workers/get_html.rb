@@ -93,6 +93,14 @@ def get_html_content(page, site)
   end
 end
 
+def strip_whiteline(str_with_whiteline)
+  str_without_whiteline = ''
+  str_with_whiteline.split(/((?:\r?\n)+)/).each do |str|
+    str_without_whiteline += "#{str}\n" unless str.blank?
+  end
+  str_without_whiteline
+end
+
 def get_page_body(page, cut_tag = nil)
   body = NKF.nkf('-wm0', page.parser).to_s.force_encoding("UTF-8") || 'no body'
 
@@ -106,7 +114,7 @@ def get_page_body(page, cut_tag = nil)
     end
   end
 
-  body
+  strip_whiteline(body)
 end
 
 def get_page_title(page)
