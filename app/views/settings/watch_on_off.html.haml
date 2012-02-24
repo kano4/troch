@@ -12,7 +12,7 @@
         = radio_button_tag :on_off, true, @cron_on
         = label_tag "ON(監視)"
         = radio_button_tag :on_off, false, !@cron_on
-        = label_tag 'OFF(停止)'
+        = label_tag 'OFF(メンテナンス)'
         = submit_tag '設定保存'
       %br
       = link_to "戻る", :back

@@ -41,6 +41,7 @@ class GetHtml
             last_log.save
             if response_time > 15 * 1000
               site.watch_logs.build(:status => 'delay', :content => encoded_content, :response_time => response_time)
+              sendmail_alert(site, 'delay')
             else
               site.watch_logs.build(:status => 'ok',    :content => encoded_content, :response_time => response_time)
             end
