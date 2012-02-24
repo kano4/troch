@@ -9,6 +9,7 @@
 TROCH_ROOT="/path/to/troch"
 
 RAILS_ENV="production"
+export PATH=$PATH:/usr/local/bin
 
 start() {
   echo "Starting troch-worker: "

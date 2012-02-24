@@ -13,10 +13,13 @@
 #TROCH_ROOT="/path/to/troch"
 TROCH_ROOT="/home/kanou/troch"
 
+RAILS_ENV="production"
+export PATH=$PATH:/usr/local/bin
+
 start() {
   echo "Starting troch-worker: "
   cd $TROCH_ROOT
-  RAILS_ENV=production bundle exec clockwork clock.rb >> log/clock_out.log 2>> log/clock_error.log &
+  RAILS_ENV="$RAILS_ENV" bundle exec clockwork clock.rb >> log/clock_out.log 2>> log/clock_error.log &
   return 0
 }
 stop() {
