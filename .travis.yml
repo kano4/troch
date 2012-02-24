@@ -9,7 +9,7 @@ env:
 
 before_script:
   - "script/db_setup"
-  - "mv config/email.example.yml config/email.yml"
+  - "mv config/settings.example.yml config/settings.yml"
 
 script:
   - "bundle exec rake db:create db:migrate db:test:prepare spec"
