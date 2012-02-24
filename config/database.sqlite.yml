@@ -1,0 +1,22 @@
+production:
+  adapter: sqlite3
+  database: db/troch.sqlite3
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+
+# for development
+development:
+  adapter: sqlite3
+  database: db/troch_development.sqlite3
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/troch_test.sqlite3
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+

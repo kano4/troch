@@ -2,8 +2,12 @@ rvm:
   - "1.9.2"
   - "1.9.3"
 
+env:
+  - DB=mysql
+  - DB=sqlite
+
 before_script:
-  - "mv config/database.example.yml config/database.yml"
+  - "mv config/database.#{ENV{'DB']}.yml config/database.yml"
   - "mv config/email.example.yml config/email.yml"
 
 script:
