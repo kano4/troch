@@ -29,17 +29,17 @@ Troch is open source.
 
 3. Set up smtp
 
-        $ cp config/email.example.yml config/email.yml
+        $ cp config/settings.example.yml config/settings.yml
 
-    Edit config/email.yml . For example,
+    Edit config/settings.yml . For example,
 
         default:
-          from: 'troch@example.jp'
+          from: 'troch@example.com'
 
         settings:
-          address: 'smtp.example.jp'
+          address: 'smtp.example.com'
           port: 25
-          domain: 'example.jp'
+          domain: 'example.com'
 
 4. Set up database
 
