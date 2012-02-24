@@ -6,18 +6,23 @@ class GetPageRank
   def self.perform(site_id)
     site = Site.find(site_id)
 
-    unless site.url.nil?
+    if site.url.blank? || site.url == "http://"
+      page_rank = nil
+    else
+      url = site.url.scan(/(http:\/\/(\w|\.|!\/)+)/)
+      url = (url.nil? || url[0].nil?) ? nil : url[0][0]
+
       trials = 0
       begin
-        page_rank = GooglePageRank.get(site.url)
+        page_rank = GooglePageRank.get(url)
       rescue
         trials += 1
         retry if trials < 3
-      else
-        site.page_rank = page_rank
-        site.save
       end
     end
+    site.page_rank_old = site.page_rank
+    site.page_rank = page_rank
+    site.save
   end
 end
 
@@ -62,7 +67,7 @@ module GooglePageRank
 
     g_path=sprintf("/tbr?client=navclient-auto&features=Rank&q=info:%s&ch=%s", url, ch)
 
-    p=nil # pagerank
+    p=-1 # pagerank
     g_server="toolbarqueries.google.com"  # toolbarqueries.google.co.jp  www.google.co.jp
     Net::HTTP.new(g_server, port).get(g_path){|line|
       pos=line.index("Rank_1:")

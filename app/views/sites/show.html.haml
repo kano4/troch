@@ -52,7 +52,7 @@
     %td= @site.ssl_expired
   %tr
     %th PageRank(ドメイン)
-    %td= @site.page_rank.blank? ? "-無し-" : @site.page_rank
+    %td= (@site.page_rank.blank? || @site.page_rank == -1) ? "-無し-" : @site.page_rank
   %tr
     %th グループ
     %td= link_to(@site.group.name, site_path(@site.group)) unless @site.group.blank?

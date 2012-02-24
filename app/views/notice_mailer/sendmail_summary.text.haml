@@ -1,15 +1,27 @@
-= "ステータス: #{@cron_status}\n"
+= "監視ステータス: #{@cron_status}\n"
 
-＜ドメイン期限30日以内＞
-- @domain_sites.each_with_index do |site, i|
-  - unless site.domain_url.blank?
+- unless @rank_sites.blank?
+  ＜PageRank変更＞
+  - @rank_sites.each_with_index do |site, i|
     = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
-    = site.domain_url
-    = "#{site.domain_expired.strftime("%Y/%m/%d")} (あと#{(site.domain_expired - Date.today).to_i}日)\n"
+    - url = site.url.scan(/(http:\/\/(\w|\.|!\/)+)/)
+    - url = (url.nil? || url[0].nil?) ? "" : url[0][0]
+    = "#{url}"
+    = "PageRank #{(site.page_rank_old.blank? || site.page_rank_old == -1) ? '無し' : site.page_rank_old} → #{(site.page_rank.blank? || site.page_rank == -1) ? '無し' : site.page_rank}\n"
 
-＜SSL期限30日以内＞
-- @ssl_sites.each_with_index do |site, i|
-  - unless site.ssl_url.blank?
-    = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
-    = site.ssl_url
-    = "#{site.ssl_expired.strftime("%Y/%m/%d")} (あと#{(site.ssl_expired - Date.today).to_i}日)\n"
+
+- unless @domain_sites.blank?
+  ＜ドメイン期限30日以内＞
+  - @domain_sites.each_with_index do |site, i|
+    - unless site.domain_url.blank?
+      = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
+      = site.domain_url
+      = "#{site.domain_expired.strftime("%Y/%m/%d")} (あと#{(site.domain_expired - Date.today).to_i}日)\n"
+
+- unless @ssl_sites.blank?
+  ＜SSL期限30日以内＞
+  - @ssl_sites.each_with_index do |site, i|
+    - unless site.ssl_url.blank?
+      = "#{i+1} : #{site.name.force_encoding("UTF-8")}"
+      = site.ssl_url
+      = "#{site.ssl_expired.strftime("%Y/%m/%d")} (あと#{(site.ssl_expired - Date.today).to_i}日)\n"

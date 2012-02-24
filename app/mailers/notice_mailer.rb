@@ -16,8 +16,9 @@ class NoticeMailer < ActionMailer::Base
          subject: "[Troch]#{@status}:#{@site_name}"
   end
 
-  def sendmail_summary(user, domain_sites, ssl_sites)
+  def sendmail_summary(user, rank_sites, domain_sites, ssl_sites)
     @cron_status = File.exist?("#{Rails.root}/tmp/cron/cron.on") ? '監視' : '停止'
+    @rank_sites   = rank_sites
     @domain_sites = domain_sites
     @ssl_sites    = ssl_sites
     mail to: user.email,

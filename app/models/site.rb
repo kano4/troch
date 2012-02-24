@@ -44,8 +44,9 @@ protected
     users = User.find(:all, :conditions => {:summary => true})
     domain_sites = Site.find(:all, :conditions => ['domain_expired < ?', Date.today + 30], :order => 'domain_expired')
     ssl_sites    = Site.find(:all, :conditions => ['ssl_expired < ?', Date.today + 30], :order => 'ssl_expired')
+    rank_sites   = Site.find(:all, :conditions => ['page_rank <> page_rank_old'])
     users.each do |user|
-      NoticeMailer.sendmail_summary(user, domain_sites, ssl_sites).deliver
+      NoticeMailer.sendmail_summary(user, rank_sites, domain_sites, ssl_sites).deliver
     end
   end
 
