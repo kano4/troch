@@ -5,6 +5,7 @@ production:
   pool: 5
   username: troch
   password: troch
+  min_messages: WARNING
 
 # for development
 development:
@@ -14,6 +15,7 @@ development:
   pool: 5
   username: postgres
   password:
+  min_messages: WARNING
 
 test:
   adapter: postgresql
@@ -22,4 +24,4 @@ test:
   pool: 5
   username: postgres
   password:
-
+  min_messages: WARNING

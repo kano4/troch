@@ -12,7 +12,7 @@ Troch is open source.
 
 # Requirements
 - Ruby 1.9.2 or 1.9.3
-- MySQL
+- MySQL, PostgreSQL or SQLite3
 - OpenSSL
 - Redis
 
@@ -43,7 +43,7 @@ Troch is open source.
 
 4. Set up database
 
-        $ cp config/database.example.yml config/database.yml
+        $ cp config/database.mysql.yml config/database.yml
 
     Edit config/database.yml . For example,
 
