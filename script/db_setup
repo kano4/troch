@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+puts "cp config/database.#{ENV['DB'] || 'mysql'}.yml config/database.yml"
+FileUtils.cp "config/database.#{ENV['DB'] || 'mysql'}.yml", 'config/database.yml'

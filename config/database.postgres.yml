@@ -1,0 +1,25 @@
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: troch
+  pool: 5
+  username: troch
+  password: troch
+
+# for development
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: troch_development
+  pool: 5
+  username: postgres
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: troch_test
+  pool: 5
+  username: postgres
+  password:
+

@@ -4,10 +4,11 @@ rvm:
 
 env:
   - DB=mysql
+  - DB=postgres
   - DB=sqlite
 
 before_script:
-  - "mv config/database.#{ENV{'DB']}.yml config/database.yml"
+  - "script/db_setup"
   - "mv config/email.example.yml config/email.yml"
 
 script:

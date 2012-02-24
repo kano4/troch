@@ -130,6 +130,7 @@ GEM
     nokogiri (1.5.0)
     ntlm-http (0.1.1)
     orm_adapter (0.0.6)
+    pg (0.13.2)
     pjax-rails (0.1.4)
       jquery-rails
     polyglot (0.3.3)
@@ -263,6 +264,7 @@ DEPENDENCIES
   jquery-rails
   mechanize
   mysql2
+  pg
   pjax-rails
   prefetch-rspec
   rails (~> 3.2.0)
