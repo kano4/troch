@@ -2,9 +2,15 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.0'
 
-gem 'mysql2'
-gem 'pg'
-gem 'sqlite3'
+case ENV['DB']
+when "mysql";    gem "mysql2"
+when "postgres"; gem "pg"
+when "sqlite";   gem "sqlite3"
+else
+  gem "mysql2"
+  gem "pg"
+  gem "sqlite3"
+end
 
 gem 'unicorn'
 gem 'clockwork'
