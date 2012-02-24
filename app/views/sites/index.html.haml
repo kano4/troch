@@ -29,7 +29,7 @@
         %td= site.domain_expired.strftime("%Y/%m/%d") unless site.domain_expired.blank?
         %td= site.ssl_expired.strftime("%Y/%m/%d") unless site.ssl_expired.blank?
         %td= (site.page_rank.blank? || site.page_rank == -1) ? "-無し-" : site.page_rank
-        %td{:align=> "center"}= "#{site.watch_logs.last.response_time} msec" unless site.watch_logs.blank?
+        %td{:align=> "right"}= "#{site.watch_logs.last.response_time} msec" unless site.watch_logs.blank?
         %td
           = "HTML監視" if site.watch_method == 'html_body'
           = "TITLEタグ監視" if site.watch_method == 'html_title'
