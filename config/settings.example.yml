@@ -5,7 +5,7 @@ email:
   address:        'smtp.example.com'
   port:           25
   domain:         'example.com'
-  user_name:      'troch@example.com',
+  user_name:      'troch@example.com'
   password:       'password'
 
 health_check:
