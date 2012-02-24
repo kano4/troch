@@ -16,4 +16,5 @@ every(1.day, 'site.send_summary',  :at => '10:00') { `cd #{Rails.root} && script
 every(1.day, 'watch_log.delete_old_logs', :at => '12:00') { `cd #{Rails.root} && script/rails runner WatchLog.delete_old_logs -e #{ENV['RAILS_ENV']} >> log/cron.log 2>> log/error.log` }
 every(1.day, 'log_clear', :at => '12:00') { `cd #{Rails.root} && bundle exec rake log:clear --silent >> log/cron.log 2>> log/error.log` }
 every(1.day, 'tmp_clear', :at => '12:00') { `cd #{Rails.root} && bundle exec rake tmp:clear --silent >> log/cron.log 2>> log/error.log` }
-every(1.day, 'restart_worker', :at => '12:00') { `cd #{Rails.root} && RAILS_ENV=#{ENV['RAILS_ENV']} script/troch_worker restart >> log/cron.log 2>> log/error.log` }
+
+every(1.hour, 'health_check', :at => '**:00') { `cd #{Rails.root} && RAILS_ENV=#{ENV['RAILS_ENV']} script/rails runner "Resque.enqueue(HealthCheck)" >> log/cron.log 2>> log/error.log` }

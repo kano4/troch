@@ -1,6 +1,6 @@
 # coding: utf-8
 class NoticeMailer < ActionMailer::Base
-  @@data = YAML.load_file("#{Rails.root}/config/email.yml")
+  @@data = YAML.load_file("#{Rails.root}/config/settings.yml")
   default :from => @@data["default"]["from"]
 
   def sendmail_alert(user, site, status, diff_html = '')
@@ -23,5 +23,11 @@ class NoticeMailer < ActionMailer::Base
     @ssl_sites    = ssl_sites
     mail to: user.email,
          subject: '[Troch]Summary'
+  end
+
+  def sendmail_health_check(user, target_url)
+    @target_url = target_url
+    mail to: user.email,
+         subject: '[Troch]Health Check Alert'
   end
 end
