@@ -12,8 +12,8 @@
     %td= @last_log.created_at.strftime("%Y/%m/%d %H:%M:%S")  unless @last_log.blank?
     %td= @normal_num
     %td= link_to(@error_num, alert_path)
-    %td= link_to(@maintenance_num, site_path)
-    %td= link_to(@sites.length, site_path)
+    %td= link_to(@maintenance_num, sites_path)
+    %td= link_to(@sites.length, sites_path)
 
 %br
 %h3 異常サイト
