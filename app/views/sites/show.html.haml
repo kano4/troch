@@ -23,11 +23,11 @@
       - if @site.url.blank? || @site.url == "http://"
         = "(メンテナンス中)"
       - else
-        = "HTML監視" if @site.watch_method == 'html_body'
+        = html_body if @site.watch_method == 'html_body'
         = "(無視するHTMLタグ) #{@site.cut_tag}" if @site.watch_method == 'html_body' && !@site.cut_tag.blank?
-        = "TITLEタグ監視" if @site.watch_method == 'html_title'
-        = "キーワード監視: " if @site.watch_method == 'html_keyword'
-        = @site.keyword if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
+        = html_title if @site.watch_method == 'html_title'
+        = html_keyword if @site.watch_method == 'html_keyword'
+        = "キーワード: " + @site.keyword if @site.watch_method == 'html_keyword' && !@site.keyword.blank?
   %tr
     - if !@site.url.blank? && !(@site.url == "http://") && !(@site.watch_logs.blank?) && @site.watch_method == 'html_body'
       %th サイトのHTML

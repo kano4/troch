@@ -3,12 +3,13 @@ Troch is a website monitoring tool.
 Troch is open source.
 
 # Features
-- Watching Site Status
-  - body
-  - title
-  - keyword
-- Watching Domain Expired Date
-- Watching SSL Expired Date
+- Watch Site
+  - check difference between current html body and old html body
+  - check difference between current title and old title
+  - determine whether keyword is present
+- Get Domain Expired Date
+- Get SSL Expired Date
+- Get Google PageRank
 
 # Requirements
 - Ruby 1.9.2 or 1.9.3
@@ -17,7 +18,6 @@ Troch is open source.
 - Redis
 
 # Installation
-
 1. Download
 
         $ git clone https://github.com/kano4/troch.git troch

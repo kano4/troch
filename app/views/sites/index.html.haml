@@ -31,9 +31,9 @@
         %td= (site.page_rank.blank? || site.page_rank == -1) ? "-無し-" : site.page_rank
         %td{:align=> "right"}= "#{site.watch_logs.last.response_time.to_s.rjust(5, "0")} msec" unless site.watch_logs.blank?
         %td
-          = "HTML監視" if site.watch_method == 'html_body'
-          = "TITLEタグ監視" if site.watch_method == 'html_title'
-          = "キーワード監視: " if site.watch_method == 'html_keyword'
+          = html_body if site.watch_method == 'html_body'
+          = html_title if site.watch_method == 'html_title'
+          = html_keyword if site.watch_method == 'html_keyword'
           = site.keyword if site.watch_method == 'html_keyword' && !site.keyword.blank?
         %td= site.updated_at.strftime("%Y/%m/%d")
         %td= site.watch_logs.last.created_at.strftime("%Y/%m/%d %H:%M:%S") unless site.watch_logs.last.blank?
