@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :user, :class => User do
-    email 'test@exapmle.com'
+  factory :user do
+    email 'user@test.com'
     password 'passwd'
   end
 
@@ -20,7 +20,7 @@ FactoryGirl.define do
     }
   end
 
-  factory :site, :class => Site do
+  factory :site do
     name "Test Site"
     url "http://www.test.com"
     watch_method 'html_body'
