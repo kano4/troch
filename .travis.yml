@@ -12,7 +12,7 @@ before_script:
   - "mv config/settings.example.yml config/settings.yml"
 
 script:
-  - "bundle exec rake db:create db:migrate db:test:prepare spec"
+  - "COVERAGE=on bundle exec rake db:create db:migrate db:test:prepare spec"
 
 branches:
   only:
