@@ -11,4 +11,5 @@ vendor/cache
 config/settings.yml
 config/database.yml
 public/record_time
+coverage/
 .rvmrc

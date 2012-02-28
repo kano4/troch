@@ -41,6 +41,7 @@ group :development, :test do
   gem 'thin'
   gem 'prefetch-rspec'
   gem 'rspec-rails'
+  gem 'simplecov'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
