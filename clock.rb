@@ -5,6 +5,7 @@ include Clockwork
 
 ENV['RAILS_ENV'] ||= 'production'
 
+`cd #{Rails.root} && RAILS_ENV=#{ENV['RAILS_ENV']} script/troch_worker restart >> log/cron.log 2>> log/error.log`
 every(10.minutes, 'record_time') { `cd #{Rails.root} && RAILS_ENV=#{ENV['RAILS_ENV']} script/rails runner "Resque.enqueue(RecordTime)" >> log/cron.log 2>> log/error.log` }
 
 every(15.minutes, 'site.get_html') { `cd #{Rails.root} && script/rails runner Site.get_html -e #{ENV['RAILS_ENV']} >> log/cron.log 2>> log/error.log` }
