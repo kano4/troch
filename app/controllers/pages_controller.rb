@@ -32,6 +32,7 @@ class PagesController < ApplicationController
         flash[:error] = "バックグラウンドジョブが停止中です。管理者に連絡してください。"
       end
     end
+    file.close
   end
 
   def edit
