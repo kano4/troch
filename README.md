@@ -91,7 +91,7 @@ Troch is open source.
         # sysv-rc-conf troch-worker on
         # /etc/init.d/troch-worker start
 
-(option) Health check
+7. Health check (option)
 
     Copy startup script.
 

@@ -29,4 +29,16 @@ describe NoticeMailer do
       mail.subject.should eq("[Troch]Summary")
     end
   end
+
+  describe "sendmail_health_check" do
+    before(:each) do
+      @user = Factory(:user)
+    end
+
+    let(:mail) { NoticeMailer.sendmail_health_check(@user) }
+
+    it "renders the headers" do
+      mail.subject.should eq("[Troch]Health Check Alert")
+    end
+  end
 end
