@@ -17,4 +17,16 @@ describe GetHtml do
       title.should_not == "Google"
     end
   end
+
+  describe "get_page_keyword" do
+    it "はurlにキーワードが含まれることを確認すること" do
+      keyword = get_page_keyword(@page, 'Yahoo!')
+      keyword.should == "Yahoo!"
+    end
+
+    it "はurlにキーワードが含まれないことを確認すること" do
+      keyword = get_page_keyword(@page, 'Wrong Keyword!!!')
+      keyword.should_not == "Wrong Keyword!!!"
+    end
+  end
 end
