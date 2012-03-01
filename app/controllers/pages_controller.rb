@@ -1,4 +1,5 @@
 # coding: utf-8
+require 'time'
 class PagesController < ApplicationController
   before_filter :authenticate_user!
 
@@ -24,6 +25,13 @@ class PagesController < ApplicationController
 
     @cron_status = File.exist?("#{Rails.root}/tmp/cron/cron.on") ? '監視' : 'メンテナンス'
 
+    if File.exist?("#{Rails.root}/public/record_time")
+      file = open("#{Rails.root}/public/record_time")
+      record_time = file.first
+      unless !record_time.nil? && within_1hour?(record_time)
+        flash[:error] = "バックグラウンドジョブが停止中です。管理者に連絡してください。"
+      end
+    end
   end
 
   def edit
@@ -64,5 +72,12 @@ class PagesController < ApplicationController
       end
     end
   end
+end
 
+def within_1hour?(record_time)
+  if Time.parse(record_time) < Time.now - 1 * 60 * 60
+    false
+  else
+    true
+  end
 end
