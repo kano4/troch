@@ -114,3 +114,6 @@ Troch is open source.
         (Ubuntu)
         # sysv-rc-conf troch-health-checker on
         # /etc/init.d/troch-health-checker start
+
+# Copyright
+Copyright 2012 Shinji Kano. See LICENSE for details.
