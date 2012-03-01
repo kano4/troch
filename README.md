@@ -90,3 +90,27 @@ Troch is open source.
         (Ubuntu)
         # sysv-rc-conf troch-worker on
         # /etc/init.d/troch-worker start
+
+(option) Health check
+
+    Copy startup script.
+
+        (Red Hat)
+        # cp ext/troch-health-checker.redhat /etc/init.d/troch-health-checker
+
+        (Ubuntu)
+        # cp ext/troch-health-checker.ubuntu /etc/init.d/troch-health-checker
+
+    Edit TROCH_ROOT in /etc/init.d/troch-health-checker . For example,
+
+        TROCH_ROOT="/srv/troch"
+
+    Add troch-health-checker into startup script and start troch-health-checker.
+
+        (Red Hat)
+        # chkconfig --add troch-health-checker
+        # /etc/init.d/troch-health-checker start
+
+        (Ubuntu)
+        # sysv-rc-conf troch-health-checker on
+        # /etc/init.d/troch-health-checker start
