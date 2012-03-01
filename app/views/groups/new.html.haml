@@ -3,5 +3,5 @@
     %h2 グループ登録
     %br
     .inner
-      = form_for :site, :url => sites_path, :html => { :class => :form } do |f|
+      = form_for :group, :url => groups_path, :html => { :class => :form } do |f|
         = render :partial => "form", :locals => {:f => f}
