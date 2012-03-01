@@ -31,8 +31,8 @@ class PagesController < ApplicationController
       unless !record_time.nil? && within_1hour?(record_time)
         flash[:error] = "バックグラウンドジョブが停止中です。管理者に連絡してください。"
       end
+      file.close
     end
-    file.close
   end
 
   def edit
