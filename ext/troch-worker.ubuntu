@@ -11,7 +11,7 @@
 ### END INIT INFO
 
 #TROCH_ROOT="/path/to/troch"
-TROCH_ROOT="/home/kanou/troch"
+TROCH_ROOT="/path/to/troch"
 
 RAILS_ENV="production"
 export PATH=$PATH:/usr/local/bin

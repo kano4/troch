@@ -7,7 +7,3 @@ email:
   domain:         'example.com'
   user_name:      'troch@example.com'
   password:       'password'
-
-health_check:
-  target_url: ''
-#  target_url: 'http://health_check.com'

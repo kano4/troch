@@ -25,9 +25,9 @@ class NoticeMailer < ActionMailer::Base
          subject: '[Troch]Summary'
   end
 
-  def sendmail_health_check(user, target_url)
-    @target_url = target_url
-    mail to: user.email,
+  def sendmail_health_check(user)
+    @email = user.email
+    mail to: @email,
          subject: '[Troch]Health Check Alert'
   end
 end

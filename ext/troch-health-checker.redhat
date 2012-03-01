@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# troch-health-checker Health checke script for the Troch Worker
+#
+# chkconfig: - 99 20
+# description: Troch Health Checker is health checker for troch-worker.
+# processname: troch-health-checker
+
+TROCH_ROOT="/path/to/troch"
+
+RAILS_ENV="production"
+export PATH=$PATH:/usr/local/bin
+
+start() {
+  echo "Starting troch-health-checker: "
+  cd $TROCH_ROOT
+  RAILS_ENV="$RAILS_ENV" script/health_checker >> log/clock_out.log 2>> log/clock_error.log &
+  return 0
+}
+stop() {
+  echo "Stopping troch-health-checker: "
+
+  healthcheck_pid=`ps auxw | grep health_checker | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  if [ -n "$healthcheck_pid" ]; then
+    kill -9 $healthcheck_pid
+  fi
+
+  return 0
+}
+restart() {
+  stop
+  start
+}
+status() {
+  healthcheck_pid=`ps auxw | grep health_checker | egrep -v grep | egrep -v rotatelogs2 | awk '{print $2}'`
+  status="disable"
+  if [ -n "$healthcheck_pid" ]; then
+    status="enable"
+  fi
+  echo $status
+  return 0
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  status)
+    status
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|status}"
+    exit 2
+esac
+
+exit $?

@@ -9,7 +9,12 @@ ActionMailer::Base.raise_delivery_errors = true
 ActionMailer::Base.smtp_settings = {
   :address              => s["address"],
   :port                 => s["port"],
-  :domain               => s["domain"],
-  :user_name            => s["user_name"],
-  :password             => s["password"]
+  :domain               => s["domain"]
 }
+
+unless s["user_name"].blank? && s["password"].blank?
+  ActionMailer::Base.smtp_settings = {
+    :user_name          => s["user_name"],
+    :password           => s["password"]
+  }
+end

@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../../config/application', __FILE__)
+Rails.application.require_environment!
+
+require 'time'
+
+def within_1hour?(record_time)
+  if Time.parse(record_time) < Time.now - 1 * 60 * 60
+    false
+  else
+    true
+  end
+end
+
+users = User.find(:all, :conditions => {:summary => true})
+
+unless users.blank?
+  while true
+    sleep 60 * 60
+
+    begin
+      file = open("#{Rails.root}/public/record_time")
+      record_time = file.first
+      if !record_time.nil? && within_1hour?(record_time)
+        puts "Troch is running normally. #{Time.now}"
+      else
+        puts "Troch has broken down! #{Time.now}"
+
+        users.each do |user|
+          NoticeMailer.sendmail_health_check(user).deliver
+        end
+      end
+      file.close
+    rescue
+    end
+  end
+end

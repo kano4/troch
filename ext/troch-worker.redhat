@@ -2,7 +2,7 @@
 #
 # troch-worker Startup script for the Troch Worker
 #
-# chkconfig: - 99 20
+# chkconfig: - 98 20
 # description: Troch Worker is background worker for Troch.
 # processname: troch-worker
 
