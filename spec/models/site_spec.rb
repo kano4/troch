@@ -30,24 +30,52 @@ describe Site do
   end
 
   context 'class method' do
-    it '.get_domain_expiredを持つこと' do
-      Site.should respond_to(:get_domain_expired)
+    before(:each) do
+      @site = Factory(:site)
+      @site.save
+      @expected = [Site.first]
+
+      @user = Factory(:user)
+      @user.save
+      @expected_user = [User.first]
     end
 
-    it '.get_ssl_expiredを持つこと' do
-      Site.should respond_to(:get_ssl_expired)
+    it '.get_domain_expiredは各Siteごとに実行されること' do
+      Site.get_domain_expired.should == @expected
     end
 
-    it '.get_page_rankを持つこと' do
-      Site.should respond_to(:get_page_rank)
+    it '.get_ssl_expiredは各Siteごとに実行されること' do
+      Site.get_ssl_expired.should == @expected
     end
 
-    it '.get_htmlを持つこと' do
-      Site.should respond_to(:get_html)
+    it '.get_page_rankは各Siteごとに実行されること' do
+      Site.get_page_rank.should == @expected
     end
 
-    it '.send_summaryを持つこと' do
-      Site.should respond_to(:send_summary)
+    describe '.get_html' do
+      it 'はtmp/cron/cron.onが存在する場合は各Siteごとに実行されること' do
+        if File.exist?("#{Rails.root}/tmp/cron/cron.on")
+          Site.get_html.should == @expected
+        else
+          File.write("#{Rails.root}/tmp/cron/cron.on", '')
+          Site.get_html.should == @expected
+          File.delete("#{Rails.root}/tmp/cron/cron.on")
+        end
+      end
+
+      it 'はtmp/cron/cron.onが存在しない場合は何もしないこと' do
+        if File.exist?("#{Rails.root}/tmp/cron/cron.on")
+          File.delete("#{Rails.root}/tmp/cron/cron.on")
+          Site.get_html.should == nil
+          File.write("#{Rails.root}/tmp/cron/cron.on", '')
+        else
+          Site.get_html.should == nil
+        end
+      end
+    end
+
+    it '.send_summaryは各Userごとに実行されること' do
+      Site.send_summary.should == @expected_user
     end
   end
 end
