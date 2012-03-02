@@ -59,7 +59,8 @@ describe Site do
           Site.get_html.should == @expected
         else
           FileUtils.mkdir_p("#{Rails.root}/tmp/cron")
-          File.write("#{Rails.root}/tmp/cron/cron.on", '')
+          File.open("#{Rails.root}/tmp/cron/cron.on", "w") { |f| f << '' }
+          File.close
           Site.get_html.should == @expected
           File.delete("#{Rails.root}/tmp/cron/cron.on")
         end
@@ -69,7 +70,8 @@ describe Site do
         if File.exist?("#{Rails.root}/tmp/cron/cron.on")
           File.delete("#{Rails.root}/tmp/cron/cron.on")
           Site.get_html.should == nil
-          File.write("#{Rails.root}/tmp/cron/cron.on", '')
+          File.open("#{Rails.root}/tmp/cron/cron.on", "w") { |f| f << '' }
+          File.close
         else
           Site.get_html.should == nil
         end
