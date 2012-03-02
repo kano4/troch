@@ -12,7 +12,6 @@ env:
 before_script:
   - "script/db_setup"
   - "mv config/settings.example.yml config/settings.yml"
-  - "DB=ENV['DB'] bundle install"
 
 script:
   - "COVERAGE=on bundle exec rake db:create db:migrate db:test:prepare spec"

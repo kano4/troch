@@ -60,7 +60,6 @@ describe Site do
         else
           FileUtils.mkdir_p("#{Rails.root}/tmp/cron")
           File.open("#{Rails.root}/tmp/cron/cron.on", "w") { |f| f << '' }
-          File.close
           Site.get_html.should == @expected
           File.delete("#{Rails.root}/tmp/cron/cron.on")
         end
@@ -71,7 +70,6 @@ describe Site do
           File.delete("#{Rails.root}/tmp/cron/cron.on")
           Site.get_html.should == nil
           File.open("#{Rails.root}/tmp/cron/cron.on", "w") { |f| f << '' }
-          File.close
         else
           Site.get_html.should == nil
         end
