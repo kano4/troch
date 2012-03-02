@@ -49,6 +49,12 @@ class SitesController < ApplicationController
 
     respond_to do |format|
       if @site.save
+        site_id = Site.last.id
+        Resque.enqueue(GetDomainExpired, site_id)
+        Resque.enqueue(GetSslExpired, site_id)
+        Resque.enqueue(GetPageRank, site_id)
+        Resque.enqueue(GetHtml, site_id)
+
         format.html { redirect_to @site, notice: 'サイトは正常に登録されました。' }
         format.json { render json: @site, status: :created, location: @site }
       else
