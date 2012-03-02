@@ -1,6 +1,8 @@
 rvm:
   - "1.9.2"
   - "1.9.3"
+  - "jruby-19mode"
+  - "rbx-19mode"
 
 env:
   - DB=mysql
@@ -10,6 +12,7 @@ env:
 before_script:
   - "script/db_setup"
   - "mv config/settings.example.yml config/settings.yml"
+  - "DB=ENV['DB'] bundle install"
 
 script:
   - "COVERAGE=on bundle exec rake db:create db:migrate db:test:prepare spec"
