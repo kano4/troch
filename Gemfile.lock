@@ -265,6 +265,7 @@ DEPENDENCIES
   daemon-spawn
   database_cleaner
   devise
+  diff-lcs
   factory_girl_rails
   forgery
   haml-rails
