@@ -5,7 +5,6 @@ rvm:
 env:
   - DB=mysql
   - DB=postgres
-  - DB=sqlite
 
 before_script:
   - "script/db_setup"

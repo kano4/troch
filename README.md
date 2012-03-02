@@ -13,7 +13,7 @@ Troch is open source.
 
 # Requirements
 - Ruby 1.9.2 or 1.9.3
-- MySQL, PostgreSQL or SQLite3
+- MySQL or PostgreSQL
 - OpenSSL
 - Redis
 
