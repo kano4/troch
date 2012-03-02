@@ -62,9 +62,9 @@ Troch is open source.
 
 5. Start web server
 
-        $ bundle exec rails server -d -e production
+        $ bundle exec unicorn_rails -E production -D
 
-    View at: http://localhost:3000/
+    View at: http://localhost:8080/
     Or install passenger and edit apache or nginx config.
 
 6. Start worker
