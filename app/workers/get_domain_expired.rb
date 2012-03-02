@@ -7,7 +7,9 @@ class GetDomainExpired
   def self.perform(site_id)
     site = Site.find(site_id)
 
-    unless site.domain_url.blank?
+    if site.domain_url.blank?
+      site.domain_expired = nil
+    else
       trials = 0
       begin
         client = Whois.query(site.domain_url)
@@ -15,9 +17,9 @@ class GetDomainExpired
         trials += 1
         retry if trials < 3
       else
-        site.domain_expired = client.expires_on
-        site.save
+        site.domain_expired = client.expires_on unless client.expires_on.nil?
       end
     end
+    site.save
   end
 end
