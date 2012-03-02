@@ -13,6 +13,14 @@ def within_1hour?(record_time)
   end
 end
 
+def get_record_time
+  file = open("#{Rails.root}/public/record_time")
+  record_time = file.first
+  file.close
+
+  record_time
+end
+
 users = User.find(:all, :conditions => {:summary => true})
 
 unless users.blank?
@@ -20,15 +28,24 @@ unless users.blank?
     sleep 60 * 60
 
     begin
-      file = open("#{Rails.root}/public/record_time")
-      record_time = file.first
+      record_time = get_record_time
       if !record_time.nil? && within_1hour?(record_time)
-        puts "Troch is running normally. #{Time.now}"
+        puts "Troch-worker is running normally. #{Time.now}"
       else
-        puts "Troch has broken down! #{Time.now}"
+        puts "Troch-worker has broken down! #{Time.now}"
 
-        users.each do |user|
-          NoticeMailer.sendmail_health_check(user).deliver
+        puts 'Restart troch-worker.'
+        `/etc/init.d/troch-worker restart`
+        sleep 10 * 60
+
+        record_time = get_record_time
+        if !record_time.nil? && within_1hour?(record_time)
+          puts "Troch-worker is restarted normally #{Time.now}"
+        else
+          puts "Troch-worker cannot be restarted! #{Time.now}"
+          users.each do |user|
+            NoticeMailer.sendmail_health_check(user).deliver
+          end
         end
       end
       file.close
