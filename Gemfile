@@ -12,6 +12,7 @@ else
   gem "sqlite3"
 end
 
+gem 'passenger'
 gem 'unicorn'
 gem 'clockwork'
 

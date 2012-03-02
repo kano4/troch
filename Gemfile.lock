@@ -68,6 +68,7 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     daemon-spawn (0.4.2)
+    daemon_controller (1.0.0)
     daemons (1.1.8)
     database_cleaner (0.7.1)
     devise (2.0.4)
@@ -87,6 +88,7 @@ GEM
     factory_girl_rails (1.7.0)
       factory_girl (~> 2.6.0)
       railties (>= 3.0.0)
+    fastthread (1.0.7)
     ffi (1.0.11)
     forgery (0.5.0)
     haml (3.1.4)
@@ -129,6 +131,11 @@ GEM
     nokogiri (1.5.0)
     ntlm-http (0.1.1)
     orm_adapter (0.0.6)
+    passenger (3.0.11)
+      daemon_controller (>= 0.2.5)
+      fastthread (>= 1.0.1)
+      rack
+      rake (>= 0.8.1)
     pg (0.13.2)
     pjax-rails (0.1.4)
       jquery-rails
@@ -267,6 +274,7 @@ DEPENDENCIES
   jquery-rails
   mechanize
   mysql2
+  passenger
   pg
   pjax-rails
   prefetch-rspec
