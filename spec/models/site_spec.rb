@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'spec_helper'
+require 'fileutils'
 
 describe Site do
   before(:each) do
@@ -57,6 +58,7 @@ describe Site do
         if File.exist?("#{Rails.root}/tmp/cron/cron.on")
           Site.get_html.should == @expected
         else
+          FileUtils.mkdir_p("#{Rails.root}/tmp/cron")
           File.write("#{Rails.root}/tmp/cron/cron.on", '')
           Site.get_html.should == @expected
           File.delete("#{Rails.root}/tmp/cron/cron.on")
