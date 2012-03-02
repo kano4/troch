@@ -129,6 +129,8 @@ describe SitesController do
   describe "DELETE destroy" do
     it "destroys the requested site" do
       site = Site.create! valid_attributes
+      site.watch_logs.build(:status => 'ok')
+      site.save
       expect {
         delete :destroy, :id => site.id.to_s
       }.to change(Site, :count).by(-1)
@@ -136,6 +138,8 @@ describe SitesController do
 
     it "redirects to the sites list" do
       site = Site.create! valid_attributes
+      site.watch_logs.build(:status => 'ok')
+      site.save
       delete :destroy, :id => site.id.to_s
       response.should redirect_to(sites_url)
     end

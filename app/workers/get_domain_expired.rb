@@ -11,21 +11,23 @@ class GetDomainExpired
     if site.domain_url.blank?
       site.domain_expired = nil
     else
-      trials = 0
-      begin
-        client = Whois.query(site.domain_url)
-      rescue
-        trials += 1
-        retry if trials < 3
-      else
-        if client.expires_on.nil?
-          reg = Regexp.new('(Connected \((.*)\))')
-          state = reg.match(client.to_s)
-          expired_date = Date.strptime(state[2], "%Y/%m/%d") unless state.blank?
-          site.domain_expired = expired_date unless expired_date.blank?
+      same_domain_sites = Site.find(:all, :conditions => ['id < ? AND domain_url = ?', site.id, site.domain_url])
+      if same_domain_sites.blank?
+        begin
+          client = Whois.query(site.domain_url)
+        rescue
         else
-          site.domain_expired = client.expires_on unless client.expires_on.nil?
+          if client.expires_on.nil?
+            reg = Regexp.new('(Connected \((.*)\))')
+            state = reg.match(client.to_s)
+            expired_date = Date.strptime(state[2], "%Y/%m/%d") unless state.blank?
+            site.domain_expired = expired_date unless expired_date.blank?
+          else
+            site.domain_expired = client.expires_on unless client.expires_on.nil?
+          end
         end
+      else
+        site.domain_expired = same_domain_sites.first.domain_expired
       end
     end
     site.save
