@@ -3,7 +3,6 @@ require 'spec_helper'
 
 describe Site do
   before(:each) do
-    @user = Factory(:user)
     @name = 'Sample site'
     @watch_method = 'html_body'
   end
@@ -31,29 +30,24 @@ describe Site do
   end
 
   context 'class method' do
-    before(:each) do
-      @site = Factory(:site)
-      @site.save
-    end
-
     it '.get_domain_expiredを持つこと' do
-      Site.get_domain_expired.should be_true
+      Site.should respond_to(:get_domain_expired)
     end
 
     it '.get_ssl_expiredを持つこと' do
-      Site.get_ssl_expired.should be_true
+      Site.should respond_to(:get_ssl_expired)
     end
 
     it '.get_page_rankを持つこと' do
-      Site.get_page_rank.should be_true
+      Site.should respond_to(:get_page_rank)
     end
 
     it '.get_htmlを持つこと' do
-      Site.get_html.should be_true
+      Site.should respond_to(:get_html)
     end
 
     it '.send_summaryを持つこと' do
-      Site.send_summary.should be_true
+      Site.should respond_to(:send_summary)
     end
   end
 end
