@@ -72,6 +72,8 @@
     
     <li><a href="#method-i-sendmail_alert">#sendmail_alert</a>
     
+    <li><a href="#method-i-sendmail_health_check">#sendmail_health_check</a>
+    
     <li><a href="#method-i-sendmail_summary">#sendmail_summary</a>
     
   </ul>
@@ -99,6 +101,8 @@
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
+    <li><a href="./GetDomainExpired.html">GetDomainExpired</a>
+  
     <li><a href="./GetHtml.html">GetHtml</a>
   
     <li><a href="./GetPageRank.html">GetPageRank</a>
@@ -120,6 +124,8 @@
     <li><a href="./PagesController.html">PagesController</a>
   
     <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./RecordTime.html">RecordTime</a>
   
     <li><a href="./SettingsController.html">SettingsController</a>
   
@@ -207,11 +213,43 @@
       </div><!-- sendmail_alert-method -->
 
     
+      <div id="method-i-sendmail_health_check" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sendmail_health_check</span><span
+            class="method-args">(user)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sendmail_health_check-source">
+            <pre><span class="ruby-comment"># File app/mailers/notice_mailer.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sendmail_health_check</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-ivar">@email</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>
+  <span class="ruby-identifier">mail</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@email</span>,
+       <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">'[Troch]Health Check Alert'</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sendmail_health_check-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sendmail_health_check-method -->
+
+    
       <div id="method-i-sendmail_summary" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">sendmail_summary</span><span
-            class="method-args">(user, domain_sites, ssl_sites)</span>
+            class="method-args">(user, rank_sites, domain_sites, ssl_sites)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -224,8 +262,9 @@
           
           <div class="method-source-code" id="sendmail_summary-source">
             <pre><span class="ruby-comment"># File app/mailers/notice_mailer.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sendmail_summary</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">domain_sites</span>, <span class="ruby-identifier">ssl_sites</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sendmail_summary</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">rank_sites</span>, <span class="ruby-identifier">domain_sites</span>, <span class="ruby-identifier">ssl_sites</span>)
   <span class="ruby-ivar">@cron_status</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-string">'監視'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'停止'</span>
+  <span class="ruby-ivar">@rank_sites</span>   = <span class="ruby-identifier">rank_sites</span>
   <span class="ruby-ivar">@domain_sites</span> = <span class="ruby-identifier">domain_sites</span>
   <span class="ruby-ivar">@ssl_sites</span>    = <span class="ruby-identifier">ssl_sites</span>
   <span class="ruby-identifier">mail</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>,

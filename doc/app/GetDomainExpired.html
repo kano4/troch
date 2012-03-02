@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class GetPageRank - Rails Application Documentation</title>
+<title>class GetDomainExpired - Rails Application Documentation</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>app/workers/get_page_rank.rb
+    <li>app/workers/get_domain_expired.rb
   </ul>
 </nav>
 
@@ -146,7 +146,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class GetPageRank</h1>
+  <h1 class="class">class GetDomainExpired</h1>
 
   <div id="description" class="description">
     
@@ -186,26 +186,30 @@
 
           
           <div class="method-source-code" id="perform-source">
-            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/workers/get_domain_expired.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">perform</span>(<span class="ruby-identifier">site_id</span>)
   <span class="ruby-identifier">site</span> = <span class="ruby-constant">Site</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">site_id</span>)
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;http://&quot;</span>
-    <span class="ruby-identifier">page_rank</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">domain_url</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">domain_expired</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">url</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%r(http:\/\/(\w|\.|!\/)+)/</span>)
-    <span class="ruby-identifier">url</span> = (<span class="ruby-identifier">url</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">url</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">url</span>[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
-
     <span class="ruby-identifier">trials</span> = <span class="ruby-value">0</span>
     <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">page_rank</span> = <span class="ruby-constant">GooglePageRank</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
+      <span class="ruby-identifier">client</span> = <span class="ruby-constant">Whois</span>.<span class="ruby-identifier">query</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">domain_url</span>)
     <span class="ruby-keyword">rescue</span>
       <span class="ruby-identifier">trials</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
       <span class="ruby-keyword">retry</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">trials</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">client</span>.<span class="ruby-identifier">expires_on</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">reg</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">'(Connected \((.*)\))'</span>)
+        <span class="ruby-identifier">state</span> = <span class="ruby-identifier">reg</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">client</span>.<span class="ruby-identifier">to_s</span>)
+        <span class="ruby-identifier">expired_date</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">strptime</span>(<span class="ruby-identifier">state</span>[<span class="ruby-value">2</span>], <span class="ruby-string">&quot;%Y/%m/%d&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">state</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-identifier">site</span>.<span class="ruby-identifier">domain_expired</span> = <span class="ruby-identifier">expired_date</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">expired_date</span>.<span class="ruby-identifier">blank?</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">site</span>.<span class="ruby-identifier">domain_expired</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">expires_on</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">client</span>.<span class="ruby-identifier">expires_on</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">page_rank_old</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">page_rank</span>
-  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">page_rank</span> = <span class="ruby-identifier">page_rank</span>
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">save</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- perform-source -->

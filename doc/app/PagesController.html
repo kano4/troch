@@ -105,6 +105,8 @@
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
+    <li><a href="./GetDomainExpired.html">GetDomainExpired</a>
+  
     <li><a href="./GetHtml.html">GetHtml</a>
   
     <li><a href="./GetPageRank.html">GetPageRank</a>
@@ -126,6 +128,8 @@
     <li><a href="./PagesController.html">PagesController</a>
   
     <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./RecordTime.html">RecordTime</a>
   
     <li><a href="./SettingsController.html">SettingsController</a>
   
@@ -190,7 +194,7 @@
 
           
           <div class="method-source-code" id="alert-source">
-            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 55</span>
+            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">alert</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;alert&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;X-PJAX&quot;</span>]
 
@@ -228,7 +232,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
   <span class="ruby-ivar">@groups</span> = <span class="ruby-constant">Group</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>)
@@ -263,7 +267,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@sites</span> = <span class="ruby-constant">Site</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>)
   <span class="ruby-ivar">@error_sites</span> = []
@@ -284,8 +288,16 @@
   <span class="ruby-ivar">@ssl_sites</span> = <span class="ruby-constant">Site</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">'ssl_expired &lt; ?'</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span> <span class="ruby-operator">+</span> <span class="ruby-value">30</span>], <span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ssl_expired'</span>)
   <span class="ruby-ivar">@last_log</span> = <span class="ruby-constant">WatchLog</span>.<span class="ruby-identifier">last</span>
 
-  <span class="ruby-ivar">@cron_status</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-string">'監視'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'停止'</span>
+  <span class="ruby-ivar">@cron_status</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/tmp/cron/cron.on&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-string">'監視'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'メンテナンス'</span>
 
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{Rails.root}/public/record_time&quot;</span>)
+    <span class="ruby-identifier">file</span> = <span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{Rails.root}/public/record_time&quot;</span>)
+    <span class="ruby-identifier">record_time</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-operator">!</span><span class="ruby-identifier">record_time</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">within_1hour?</span>(<span class="ruby-identifier">record_time</span>)
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;バックグラウンドジョブが停止中です。管理者に連絡してください。&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- index-source -->
           
@@ -313,7 +325,7 @@
 
           
           <div class="method-source-code" id="log-source">
-            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">log</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;log&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;X-PJAX&quot;</span>]
 
@@ -345,7 +357,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/controllers/pages_controller.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>][<span class="ruby-value">:site_ids</span>] <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@sites</span> = <span class="ruby-constant">Site</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sites</span>.<span class="ruby-identifier">nil?</span>

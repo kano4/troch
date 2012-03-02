@@ -25,7 +25,7 @@ Troch is open source.
 2. Install gems
 
         $ cd troch
-        $ DB=mysql bundle install --without development test
+        $ DB=mysql bundle install --without development test --deployment
 
 3. Set up smtp
 

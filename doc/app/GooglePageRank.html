@@ -99,6 +99,8 @@
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
+    <li><a href="./GetDomainExpired.html">GetDomainExpired</a>
+  
     <li><a href="./GetHtml.html">GetHtml</a>
   
     <li><a href="./GetPageRank.html">GetPageRank</a>
@@ -120,6 +122,8 @@
     <li><a href="./PagesController.html">PagesController</a>
   
     <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./RecordTime.html">RecordTime</a>
   
     <li><a href="./SettingsController.html">SettingsController</a>
   
@@ -197,7 +201,7 @@
 
           
           <div class="method-source-code" id="c2i-source">
-            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">c2i</span>(<span class="ruby-identifier">s</span>=<span class="ruby-string">&quot;&quot;</span>,<span class="ruby-identifier">k</span>=<span class="ruby-value">0</span>)
   <span class="ruby-comment"># char codes to int. Little Endian</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">'1.9'</span>
@@ -236,7 +240,7 @@
 
           
           <div class="method-source-code" id="checkSum-source">
-            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkSum</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">a</span>= <span class="ruby-value">0x9E3779B9</span>; <span class="ruby-identifier">b</span>= <span class="ruby-value">0x9E3779B9</span>;
   <span class="ruby-identifier">c</span>= <span class="ruby-value">0xE6359A60</span>; <span class="ruby-comment"># Google Magic Number</span>
@@ -274,13 +278,13 @@
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">port</span>=<span class="ruby-value">80</span>)
   <span class="ruby-identifier">ch</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;6%u&quot;</span>,<span class="ruby-identifier">checkSum</span>(<span class="ruby-identifier">url</span>))
 
   <span class="ruby-identifier">g_path</span>=<span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;/tbr?client=navclient-auto&amp;features=Rank&amp;q=info:%s&amp;ch=%s&quot;</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">ch</span>)
 
-  <span class="ruby-identifier">p</span>=<span class="ruby-keyword">nil</span> <span class="ruby-comment"># pagerank</span>
+  <span class="ruby-identifier">p</span>=<span class="ruby-value">-1</span> <span class="ruby-comment"># pagerank</span>
   <span class="ruby-identifier">g_server</span>=<span class="ruby-string">&quot;toolbarqueries.google.com&quot;</span>  <span class="ruby-comment"># toolbarqueries.google.co.jp  www.google.co.jp</span>
   <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">g_server</span>, <span class="ruby-identifier">port</span>).<span class="ruby-identifier">get</span>(<span class="ruby-identifier">g_path</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">pos</span>=<span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&quot;Rank_1:&quot;</span>)
@@ -318,7 +322,7 @@
 
           
           <div class="method-source-code" id="m1-source">
-            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>,<span class="ruby-identifier">d</span>)
   <span class="ruby-keyword">return</span> (((<span class="ruby-identifier">a</span><span class="ruby-operator">+</span>(<span class="ruby-constant">M</span><span class="ruby-operator">-</span><span class="ruby-identifier">b</span>)<span class="ruby-operator">+</span>(<span class="ruby-constant">M</span><span class="ruby-operator">-</span><span class="ruby-identifier">c</span>))<span class="ruby-operator">%</span><span class="ruby-constant">M</span>)<span class="ruby-operator">^</span>(<span class="ruby-identifier">d</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>))<span class="ruby-operator">%</span><span class="ruby-constant">M</span> <span class="ruby-comment"># mix/power mod</span>
 <span class="ruby-keyword">end</span></pre>
@@ -348,7 +352,7 @@
 
           
           <div class="method-source-code" id="mix-source">
-            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/workers/get_page_rank.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mix</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">a</span>=<span class="ruby-identifier">a</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>; <span class="ruby-identifier">b</span>=<span class="ruby-identifier">b</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>; <span class="ruby-identifier">c</span>=<span class="ruby-identifier">c</span><span class="ruby-operator">%</span><span class="ruby-constant">M</span>
   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>, <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">13</span>); <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>, <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span>  <span class="ruby-value">8</span>); <span class="ruby-identifier">c</span> = <span class="ruby-identifier">m1</span>(<span class="ruby-identifier">c</span>,<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>, <span class="ruby-identifier">b</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">13</span>)

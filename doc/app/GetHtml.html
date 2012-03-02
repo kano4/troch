@@ -97,6 +97,8 @@
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
+    <li><a href="./GetDomainExpired.html">GetDomainExpired</a>
+  
     <li><a href="./GetHtml.html">GetHtml</a>
   
     <li><a href="./GetPageRank.html">GetPageRank</a>
@@ -118,6 +120,8 @@
     <li><a href="./PagesController.html">PagesController</a>
   
     <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./RecordTime.html">RecordTime</a>
   
     <li><a href="./SettingsController.html">SettingsController</a>
   
@@ -217,6 +221,7 @@
           <span class="ruby-identifier">last_log</span>.<span class="ruby-identifier">save</span>
           <span class="ruby-keyword">if</span> <span class="ruby-identifier">response_time</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">15</span> * <span class="ruby-value">1000</span>
             <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'delay'</span>, <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encoded_content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
+            <span class="ruby-identifier">sendmail_alert</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">'delay'</span>)
           <span class="ruby-keyword">else</span>
             <span class="ruby-identifier">site</span>.<span class="ruby-identifier">watch_logs</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ok'</span>,    <span class="ruby-value">:content</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encoded_content</span>, <span class="ruby-value">:response_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response_time</span>)
           <span class="ruby-keyword">end</span>
