@@ -20,7 +20,8 @@ class GetDomainExpired
       else
         if client.expires_on.nil?
           reg = Regexp.new('(Connected \((.*)\))')
-          expired_date = Date.strptime(reg.match(client.to_s)[2], "%Y/%m/%d")
+          state = reg.match(client.to_s)
+          expired_date = Date.strptime(state[2], "%Y/%m/%d") unless state.blank?
           site.domain_expired = expired_date unless expired_date.blank?
         else
           site.domain_expired = client.expires_on unless client.expires_on.nil?
