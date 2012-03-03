@@ -10,8 +10,7 @@
 # Description:       Troch Worker is background worker for Troch.
 ### END INIT INFO
 
-#TROCH_ROOT="/path/to/troch"
-TROCH_ROOT="/path/to/troch"
+TROCH_ROOT="/srv/troch"
 
 RAILS_ENV="production"
 export PATH=$PATH:/usr/local/bin

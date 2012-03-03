@@ -136,6 +136,7 @@ GEM
       fastthread (>= 1.0.1)
       rack
       rake (>= 0.8.1)
+    pg (0.13.2)
     pjax-rails (0.1.4)
       jquery-rails
     polyglot (0.3.3)
@@ -274,6 +275,7 @@ DEPENDENCIES
   mechanize
   mysql2
   passenger
+  pg
   pjax-rails
   prefetch-rspec
   rails (~> 3.2.0)

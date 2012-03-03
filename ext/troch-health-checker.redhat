@@ -6,7 +6,7 @@
 # description: Troch Health Checker is health checker for troch-worker.
 # processname: troch-health-checker
 
-TROCH_ROOT="/path/to/troch"
+TROCH_ROOT="/srv/troch"
 
 RAILS_ENV="production"
 export PATH=$PATH:/usr/local/bin

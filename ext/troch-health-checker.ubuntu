@@ -8,10 +8,9 @@
 # Default-Stop:      0 1 6
 # Short-Description: Health checke script for the Troch Worker
 # Description:       Troch Health Checker is health checker for troch-worker.
-
 ### END INIT INFO
 
-TROCH_ROOT="/path/to/troch"
+TROCH_ROOT="/srv/troch"
 
 RAILS_ENV="production"
 export PATH=$PATH:/usr/local/bin
