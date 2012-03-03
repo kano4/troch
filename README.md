@@ -54,7 +54,6 @@ Troch is open source.
           password: troch
           encoding: utf8
           host: localhost
-          socket: /var/run/mysqld/mysqld.sock
 
     Create database
 
