@@ -1,9 +1,18 @@
-default:
-  from: 'troch@example.com'
-
 email:
+  from:           'troch@example.com'
   address:        'smtp.example.com'
   port:           25
   domain:         'example.com'
   user_name:      'troch@example.com'
   password:       'password'
+
+schedule:
+  record_time:        10      # minutes
+  get_html:           15      # minutes
+  get_domain_expired: "06:00" # 1.day
+  get_ssl_expired:    "07:00" # 1.day
+  get_page_rank:      "08:00" # 1.day
+  send_summary:       "10:00" # 1.day
+  delete_old_logs:    "12:00" # 1.day
+  log_clear:          "12:00" # 1.day
+  tmp_clear:          "12:00" # 1.day

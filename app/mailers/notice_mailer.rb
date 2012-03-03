@@ -1,7 +1,7 @@
 # coding: utf-8
 class NoticeMailer < ActionMailer::Base
   @@data = YAML.load_file("#{Rails.root}/config/settings.yml")
-  default :from => @@data["default"]["from"]
+  default :from => @@data["email"]["from"]
 
   def sendmail_alert(user, site, status, diff_html = '')
     @user_email = user.email.force_encoding("UTF-8")
