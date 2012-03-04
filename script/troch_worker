@@ -1,9 +1,12 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
 require File.expand_path('../../config/application', __FILE__)
 Rails.application.require_environment!
 
 ENV['RAILS_ENV'] ||= 'production'
+
+FileUtils.mkdir_p("#{Rails.root}/tmp/pids") unless File.exist?("#{Rails.root}/tmp/pids")
 
 class ResqueWorkerDaemon < DaemonSpawn::Base
   def start(args)
