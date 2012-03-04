@@ -1,0 +1,2 @@
+# redis-server sysconfig
+REDIS_CONF_FILE="/etc/redis/redis.conf"

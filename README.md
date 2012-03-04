@@ -68,10 +68,10 @@ Troch is open source.
     Copy startup script.
 
         (Red Hat)
-        # cp ext/troch-worker.redhat /etc/init.d/troch-worker
+        # cp ext/troch/troch-worker.redhat /etc/init.d/troch-worker
 
         (Ubuntu)
-        # cp ext/troch-worker.ubuntu /etc/init.d/troch-worker
+        # cp ext/troch/troch-worker.ubuntu /etc/init.d/troch-worker
 
     Edit TROCH_ROOT in /etc/init.d/troch-worker . For example,
 
@@ -92,10 +92,10 @@ Troch is open source.
     Copy startup script.
 
         (Red Hat)
-        # cp ext/troch-health-checker.redhat /etc/init.d/troch-health-checker
+        # cp ext/troch/troch-health-checker.redhat /etc/init.d/troch-health-checker
 
         (Ubuntu)
-        # cp ext/troch-health-checker.ubuntu /etc/init.d/troch-health-checker
+        # cp ext/troch/troch-health-checker.ubuntu /etc/init.d/troch-health-checker
 
     Edit TROCH_ROOT in /etc/init.d/troch-health-checker . For example,
 
