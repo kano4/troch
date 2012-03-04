@@ -59,7 +59,7 @@ class PagesController < ApplicationController
   def log
     redirect_to action: "log" if request.headers["X-PJAX"]
 
-    @watch_logs = WatchLog.find(:all, :conditions => ['status != "ok"'], :limit => 200, :order => "updated_at DESC")
+    @watch_logs = WatchLog.find(:all, :conditions => ['status != ?', "ok"], :limit => 200, :order => "updated_at DESC")
   end
 
   def alert
