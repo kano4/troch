@@ -1,10 +1,10 @@
 email:
-  from:           'troch@example.com'
-  address:        'smtp.example.com'
-  port:           25
-  domain:         'example.com'
-  user_name:      'troch@example.com'
-  password:       'password'
+  from:                 'troch@example.com'
+  address:              'smtp.example.com'
+  domain:               'example.com'
+  port:                 25
+  #user_name:            'troch@example.com'
+  #password:             'password'
 
 schedule:
   record_time:        10      # minutes

@@ -33,10 +33,10 @@ Troch is open source.
     Edit config/settings.yml . For example,
 
         email:
-          from: 'troch@example.com'
+          from:    'troch@example.com'
           address: 'smtp.example.com'
-          port: 25
-          domain: 'example.com'
+          domain:  'example.com'
+          port:    25
 
 4. Set up database
 

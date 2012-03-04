@@ -10,6 +10,7 @@
       %br
       管理
       %ul
+        %li= link_to "設定情報", :action => 'info'
         %li= link_to "サイト監視の起動/停止", :action => 'watch_on_off'
         %li= link_to "サイト管理（Rails Admin）", :rails_admin
         %li= link_to "バックグラウンドジョブ管理（Resque）", "resque"

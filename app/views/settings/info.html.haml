@@ -1,0 +1,38 @@
+.block
+  .content
+    %h2.title
+      設定情報
+    .inner
+      %table
+        %tr
+          %th 監視ステータス
+          %td= @watch_status
+        %tr
+          %th ワーカーステータス
+          %td= @worker_status
+        %tr
+          %th 監視間隔
+          %td= "#{@schedule["get_html"]} minutes"
+        %tr
+          %th ドメイン有効期限取得時刻
+          %td= @schedule["get_domain_expired"]
+        %tr
+          %th SSL有効期限取得時刻
+          %td= @schedule["get_ssl_expired"]
+        %tr
+          %th ページランク取得時刻
+          %td= @schedule["get_page_rank"]
+        %tr
+          %th サマリーメール送信時刻
+          %td= @schedule["send_summary"]
+        %tr
+          %th SMTPアドレス
+          %td= @email["address"]
+        %tr
+          %th SMTPドメイン
+          %td= @email["domain"]
+        %tr
+          %th SMTPポート
+          %td= @email["port"]
+      %br
+      = link_to "戻る", :back

@@ -8,14 +8,15 @@ Troch::Application.routes.draw do
   resources :sites
   resources :groups
 
-  match '/settings/', :to => 'settings#index'
+  match '/settings/',             :to => 'settings#index'
   match '/settings/watch_on_off', :to => 'settings#watch_on_off'
+  match '/settings/info',         :to => 'settings#info'
 
-  get '/edit', :to => 'pages#edit'
+  get '/edit',   :to => 'pages#edit'
   put '/update', :to => 'pages#update'
-  get '/log', :to => 'pages#log'
-  get '/alert', :to => 'pages#alert'
-  root :to => 'pages#index'
+  get '/alert',  :to => 'pages#alert'
+  get '/log',    :to => 'pages#log'
+  root           :to => 'pages#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
