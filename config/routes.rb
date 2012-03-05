@@ -1,6 +1,6 @@
 require 'resque/server'
 Troch::Application.routes.draw do
-  mount Resque::Server, at: "/resque"
+  mount Resque::Server.new, at: "/resque"
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
