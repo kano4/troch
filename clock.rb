@@ -7,7 +7,7 @@ ENV['RAILS_ENV'] ||= 'production'
 data = YAML.load_file("#{Rails.root}/config/settings.yml")
 schedule = data["schedule"]
 
-`cd #{Rails.root} && RAILS_ENV=#{ENV['RAILS_ENV']} script/troch_worker restart >> log/cron.log 2>> log/error.log`
+`cd #{Rails.root} && RAILS_ENV=#{ENV['RAILS_ENV']} script/resque_troch_worker restart >> log/cron.log 2>> log/error.log`
 
 every(schedule["record_time"].minutes, 'record_time')                           { `cd #{Rails.root} && script/rails runner "Resque.enqueue(RecordTime)" -e #{ENV['RAILS_ENV']} >> log/cron.log 2>> log/error.log` }
 

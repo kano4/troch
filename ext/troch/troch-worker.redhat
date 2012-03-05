@@ -30,6 +30,9 @@ stop() {
     kill -9 $resque_pid
   fi
 
+  cd $TROCH_ROOT
+  RAILS_ENV="$RAILS_ENV" script/clean_worker >> log/clock_out.log 2>> log/clock_error.log
+
   return 0
 }
 restart() {
