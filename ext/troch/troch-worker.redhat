@@ -15,6 +15,7 @@ start() {
   echo "Starting troch-worker: "
   cd $TROCH_ROOT
   RAILS_ENV="$RAILS_ENV" bundle exec clockwork clock.rb >> log/clock_out.log 2>> log/clock_error.log &
+  /etc/init.d/redis-server restart
   return 0
 }
 stop() {
