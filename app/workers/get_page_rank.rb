@@ -69,7 +69,8 @@ module GooglePageRank
 
     p=-1 # pagerank
     g_server="toolbarqueries.google.com"  # toolbarqueries.google.co.jp  www.google.co.jp
-    Net::HTTP.new(g_server, port).get(g_path){|line|
+    user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.4b) Gecko/20030516 Mozilla Firebird/0.6'
+    Net::HTTP.new(g_server, port).get(g_path, 'User-Agent' => user_agent){|line|
       pos=line.index("Rank_1:")
       if( pos != nil) then
         n=(line[pos+7,1]).to_i # digit

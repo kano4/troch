@@ -16,6 +16,7 @@ class GetHtml
       trials = 0
       begin
         agent = Mechanize.new
+        agent.user_agent_alias = 'Windows Mozilla'
         start_time = Time.now
         page = agent.get(site.url)
         end_time = Time.now
