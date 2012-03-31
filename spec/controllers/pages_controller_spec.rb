@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PagesController do
   describe "GET 'index'" do
     it "should be successful" do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
       sign_in @user
       get :index
       response.should be_success
@@ -17,7 +17,7 @@ describe PagesController do
 
   describe "GET 'edit'" do
     it "should be successful" do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
       sign_in @user
       get :edit
       response.should be_success
@@ -31,7 +31,7 @@ describe PagesController do
 
   describe "GET 'log'" do
     it "should be successful" do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
       sign_in @user
       get :log
       response.should be_success
@@ -45,7 +45,7 @@ describe PagesController do
 
   describe "GET 'alert'" do
     it "should be successful" do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
       sign_in @user
       get :alert
       response.should be_success

@@ -32,11 +32,11 @@ describe Site do
 
   context 'class method' do
     before(:each) do
-      @site = Factory(:site)
+      @site = FactoryGirl.create(:site)
       @site.save
       @expected = [Site.first]
 
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
       @user.save
       @expected_user = [User.first]
     end

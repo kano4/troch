@@ -9,7 +9,7 @@ FactoryGirl.define do
     email 'alice@exapmle.com'
     password 'passwd'
     sites {
-      [Factory(:yahoo), Factory(:google)]
+      [FactoryGirl.create(:yahoo), FactoryGirl.create(:google)]
     }
   end
 
@@ -17,7 +17,7 @@ FactoryGirl.define do
     email 'bob@exapmle.com'
     password 'passwd'
     sites {
-      [Factory(:yahoo)]
+      [FactoryGirl.create(:yahoo)]
     }
   end
 

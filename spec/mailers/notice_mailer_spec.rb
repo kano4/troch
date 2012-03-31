@@ -3,8 +3,8 @@ require "spec_helper"
 describe NoticeMailer do
   describe "sendmail_alert" do
     before(:each) do
-      @user = Factory(:user)
-      @site = Factory(:site)
+      @user = FactoryGirl.create(:user)
+      @site = FactoryGirl.create(:site)
       @status = 'status'
     end
 
@@ -17,10 +17,10 @@ describe NoticeMailer do
 
   describe "sendmail_summary" do
     before(:each) do
-      @user = Factory(:user)
-      @domain_sites = [Factory(:site)]
-      @ssl_sites    = [Factory(:site)]
-      @rank_sites   = [Factory(:site)]
+      @user = FactoryGirl.create(:user)
+      @domain_sites = [FactoryGirl.create(:site)]
+      @ssl_sites    = [FactoryGirl.create(:site)]
+      @rank_sites   = [FactoryGirl.create(:site)]
     end
 
     let(:mail) { NoticeMailer.sendmail_summary(@user, @rank_sites, @domain_sites, @ssl_sites) }
@@ -32,7 +32,7 @@ describe NoticeMailer do
 
   describe "sendmail_health_check" do
     before(:each) do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
     end
 
     let(:mail) { NoticeMailer.sendmail_health_check(@user) }

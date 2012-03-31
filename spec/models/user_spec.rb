@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
   end
 
   context "はユーザ登録する場合" do
@@ -25,11 +25,11 @@ describe User do
   end
 
   it "アリスはSiteを2つ持っていること" do
-    @alice = Factory(:alice)
+    @alice = FactoryGirl.create(:alice)
     @alice.should have(2).sites
   end
   it "ボブはSiteを1つ持っていること" do
-    @bob = Factory(:bob)
+    @bob = FactoryGirl.create(:bob)
     @bob.should have(1).sites
   end
 end
