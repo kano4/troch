@@ -17,7 +17,8 @@
       = f.label :watch_method, 'チェック方法'
     %td
       = f.radio_button :watch_method, 'html_body',  :checked => (@site.watch_method == 'html_body' || @site.watch_method.nil?)
-      HTML監視&nbsp;&nbsp;&nbsp;
+      = html_body
+      &nbsp;&nbsp;&nbsp;
       %button{:type => "button", :class => "show_hide"}
         オプション
       %p.option
@@ -31,11 +32,11 @@
   %tr
     %td
       = f.radio_button :watch_method, 'html_title', :checked => (@site.watch_method == 'html_title')
-      TITLEタグ監視
+      = html_title
   %tr
     %td
       = f.radio_button :watch_method, 'html_keyword', :checked => (@site.watch_method == 'html_keyword')
-      キーワード監視
+      = html_keyword
       %br
       キーワード:
       =f.text_field :keyword
