@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @group = Group.find(params[:id])
+    @group = get_group(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
-    @group = Group.find(params[:id])
+    @group = get_group(params[:id])
   end
 
   # POST /groups
@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.json
   def update
-    @group = Group.find(params[:id])
+    @group = get_group(params[:id])
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
@@ -74,12 +74,17 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
-    @group = Group.find(params[:id])
+    @group = get_group(params[:id])
     @group.destroy
 
     respond_to do |format|
       format.html { redirect_to groups_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def get_group(group_id)
+    Group.find(params[:id])
   end
 end
